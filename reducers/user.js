@@ -1,9 +1,8 @@
 import produce from '../util/produce';
 import axios from 'axios';
 export const initialState = {
-  
-  accessToken : null,
-  refreshToken : null,
+  accessToken: null,
+  refreshToken: null,
   logInLoading: false, // 로그인 시도중
   logInDone: false,
   logInError: null,
@@ -17,9 +16,9 @@ export const initialState = {
   userInfoDone: false,
   userInfoError: null,
   user: null,
-  me : null,
+  me: null,
   signUpData: {},
-  loginData: {}, 
+  loginData: {},
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -38,21 +37,17 @@ export const USERINFO_REQUEST = 'USERINFO_REQUEST';
 export const USERINFO_SUCCESS = 'USERINFO_SUCCES';
 export const USERINFO_FAILURE = 'USERINFO_FAILURE';
 
+const dummyUser = (data) => ({
+  ...data,
+  nickname: '이요르',
+  id: 1,
+  Posts: [{ id: 1 }],
+});
 
-
-
-
-// const dummyUser = (data) => ({
-//   // ...data,
-//   // nickname: '이요르',
-//   // id: 1,
-//   // Posts: [{ id: 1 }],
-  
-// });
 const dummyUser1 = (data) => {
-  console.log(data,"dummydata")
-}
-  
+  console.log(data, 'dummydata');
+};
+
 const loginToken = (data) => ({
   ...data,
   nickname: '이요르',
@@ -65,6 +60,11 @@ export const loginRequestAction = (data) => ({
   data,
 });
 
+export const loginSuccessAction = (data) => ({
+  type: LOG_IN_SUCCESS,
+  data,
+});
+
 export const logoutRequestAction = () => ({
   type: LOG_OUT_REQUEST,
 });
@@ -74,78 +74,88 @@ export const signUpRequestAction = (formdata) => ({
   formdata,
 });
 
+export const signupSuccessAction = (formdata) => ({
+  type: SIGN_UP_SUCCESS,
+  formdata,
+});
+
 export const userInfoRequestAction = (formdata) => ({
   type: USERINFO_REQUEST,
   formdata,
 });
 
-const reducer = (state = initialState, action) => produce(state, (draft) => {
-  switch (action.type) {
-    
-    case USERINFO_REQUEST:
-      draft.userInfoLoading = true;
-      draft.userInfoError = null;
-      draft.userInfoDone = false;
-      break;
-    case USERINFO_SUCCESS:
-      {console.log(action,"test-userInfoSuccess");}
-      draft.userInfoLoading = false;
-      draft.userInfoDone = true;
-      draft.me = action;
-      break;
-    case USERINFO_FAILURE:
-      draft.userInfoLoading = false;
-      break;
-    case LOG_IN_REQUEST:
-      // {console.log(action,"test-loginRequest");}
-      draft.logInLoading = true;
-      draft.logInError = null;
-      draft.logInDone = false;
-      break;
-    case LOG_IN_SUCCESS:
-      
-      {console.log(action.data,"test-loginSuccess");}
-      draft.logInLoading = false;
-      draft.logInDone = true;
-      draft.accessToken = action.data["access_token"];
-      draft.refreshToken = action.data["refresh_token"];
-      draft.user = action.data["user"];
-      
-      // draft.me = dummyUser(action.data);
-      break;
-    case LOG_IN_FAILURE:
-      draft.logInLoading = false;
-      // draft.logInError = action.error;
-      break;
-    case LOG_OUT_REQUEST:
-      draft.logOutLoading = true;
-      draft.logOutError = null;
-      draft.logOutDone = false;
-      break;
-    case LOG_OUT_SUCCESS:
-      console.log(action,"test-logoutSuccess");
-      draft.logOutLoading = false;
-      draft.logOutDone = true;
-      draft.user = null;
-      break;
-    case LOG_OUT_FAILURE:
-      draft.logOutLoading = false;
-      draft.logOutError = action.error;
-      break;
-    case SIGN_UP_REQUEST:
-      draft.signUpLoading = true;
-      draft.signUpError = null;
-      draft.signUpDone = false;
-      break;
-    case SIGN_UP_SUCCESS:
-      draft.signUpLoading = false;
-      draft.signUpDone = true;
-      break;
-    case SIGN_UP_FAILURE:
-      draft.signUpLoading = false;
-      draft.signUpError = action.error;
-      break;
-  }
-});
+const reducer = (state = initialState, action) =>
+  produce(state, (draft) => {
+    switch (action.type) {
+      case USERINFO_REQUEST:
+        draft.userInfoLoading = true;
+        draft.userInfoError = null;
+        draft.userInfoDone = false;
+        break;
+      case USERINFO_SUCCESS:
+        {
+          console.log(action, 'test-userInfoSuccess');
+        }
+        draft.userInfoLoading = false;
+        draft.userInfoDone = true;
+        draft.me = action;
+        break;
+      case USERINFO_FAILURE:
+        draft.userInfoLoading = false;
+        break;
+      case LOG_IN_REQUEST:
+        // {console.log(action,"test-loginRequest");}
+        draft.logInLoading = true;
+        draft.logInError = null;
+        draft.logInDone = false;
+        break;
+      case LOG_IN_SUCCESS:
+        {
+          console.log(action.data, 'test-loginSuccess');
+        }
+        draft.logInLoading = false;
+        draft.logInDone = true;
+        draft.accessToken = action.data['access_token'];
+        draft.refreshToken = action.data['refresh_token'];
+        draft.user = action.data['email'];
+
+        draft.me = action.data;
+        console.log('USER TEST:::', draft.me);
+        // draft.me = dummyUser(action.data);
+        break;
+      case LOG_IN_FAILURE:
+        draft.logInLoading = false;
+        // draft.logInError = action.error;
+        break;
+      case LOG_OUT_REQUEST:
+        draft.logOutLoading = true;
+        draft.logOutError = null;
+        draft.logOutDone = false;
+        break;
+      case LOG_OUT_SUCCESS:
+        console.log(action, 'test-logoutSuccess');
+        draft.logOutLoading = false;
+        draft.logOutDone = true;
+        draft.user = null;
+        break;
+      case LOG_OUT_FAILURE:
+        draft.logOutLoading = false;
+        draft.logOutError = action.error;
+        break;
+      case SIGN_UP_REQUEST:
+        draft.signUpLoading = true;
+        draft.signUpError = null;
+        draft.signUpDone = false;
+        break;
+      case SIGN_UP_SUCCESS:
+        draft.signUpLoading = false;
+        draft.signUpDone = true;
+        break;
+      case SIGN_UP_FAILURE:
+        draft.signUpLoading = false;
+        draft.signUpError = action.error;
+        break;
+    }
+  });
 
 export default reducer;

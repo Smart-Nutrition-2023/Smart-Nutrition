@@ -1,42 +1,43 @@
 const express = require('express');
-//const bodyParser = require('body-parser');
-const mysql = require('../config/database');
+const session = require('express-session');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
-//const formidable = require('formidable');
+const fs = require('fs');
+
+const mysql = require('../config/database');
+const sessionOption = require('../config/sessionOption');
+const mysqlStore = require('express-mysql-session')(session);
+const sessionStore = new mysqlStore(sessionOption);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');
+    cb(null, 'profile/');
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    cb(null, `${Date.now()}${file.originalname}`);
   },
 });
 const upload = multer({ storage: storage });
 
 const router = express.Router();
+// router.use('/image', express.static('uploads'));
+
+router.use(
+  session({
+    key: 'session_cookie_name',
+    secret: '~',
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
 
 router.post('/signup', upload.single('profile_img'), async (req, res) => {
-  console.log('왜안댐?');
-  console.log(req.file);
-
   const { email, password1, password2, name, nickname, phonenumber, taste } =
     req.body;
+  const filename = req.file.path;
   const sendData = { isSuccess: '' };
-
-  console.log(email);
-  console.log(password1);
-  console.log(password2);
-  console.log(name);
-  console.log(nickname);
-  console.log(phonenumber);
-  console.log(taste);
-
-  console.log('---------------------');
-  // 여기까지됨
-
   const conn = await mysql.getConnection(async (conn) => conn);
 
   if (email && password1 && password2 && nickname && phonenumber && req.file) {
@@ -47,14 +48,13 @@ router.post('/signup', upload.single('profile_img'), async (req, res) => {
     if (rows.length <= 0 && password1 === password2) {
       const hPassword = bcrypt.hashSync(password1, 10);
       const [results, flds] = await conn.query(
-        'INSERT INTO userTable VALUES (?,?,?,?,?,?)',
-        [email, hPassword, name, nickname, phonenumber, taste],
+        'INSERT INTO userTable VALUES (?,?,?,?,?,?,?)',
+        [email, hPassword, name, nickname, phonenumber, taste, filename],
       );
-      // 세션
-      //   req.session.save(() => {
-      //     sendData.isSuccess = "True";
-      //     res.send(sendData);
-      //   });
+      req.session.save(() => {
+        sendData.isSuccess = 'True';
+        res.send(sendData);
+      });
     } else if (password1 != password2) {
       sendData.isSuccess = '비밀번호가 일치하지 않습니다.';
       res.send(sendData);
@@ -73,9 +73,15 @@ router.post('/signup', upload.single('profile_img'), async (req, res) => {
 router.post('/login', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const sendData = { isLogin: '' };
-
-  console.log(email, password);
+  const sendData = {
+    isLogin: '',
+    email: email,
+    name: '',
+    nickname: '',
+    phonenumber: '',
+    taste: '',
+    profileImg: null,
+  };
 
   const conn = await mysql.getConnection(async (conn) => conn);
 
@@ -89,11 +95,26 @@ router.post('/login', async (req, res) => {
       const result = await bcrypt.compare(password, results[0].password);
 
       if (result === true) {
-        // 비밀번호 일치하면 세션 정보 갱신
-        // 하고 클라이언트에
-        //sendData.isSuccess = "True";
-        //     res.send(sendData);
-        // 보내기
+        req.session.is_logined = true;
+        req.session.email = email;
+
+        const [r, f] = await conn.query(
+          'SELECT name, nickname, phonenumber, taste, profile_img FROM userTable WHERE email = ?',
+          [email],
+        );
+        req.session.save(function () {
+          sendData.isLogin = 'True';
+          sendData.name = r[0].name;
+          sendData.nickname = r[0].nickname;
+          sendData.phonenumber = r[0].phonenumber;
+          sendData.taste = r[0].taste;
+          fs.readFile(r[0].profile_img, (err, data) => {
+            //sendData.profileImg = data;
+            sendData.profileImg = r[0].profile_img;
+            res.send(sendData);
+            console.log('@@@', sendData);
+          });
+        });
       } else {
         sendData.isLogin = '로그인 정보가 일치하지 않습니다.';
         res.send(sendData);
@@ -106,7 +127,7 @@ router.post('/login', async (req, res) => {
     sendData.isLogin = '아이디와 비밀번호를 입력하세요!';
     res.send(sendData);
   }
-
+  console.log(req.session); ///test
   conn.release();
 });
 

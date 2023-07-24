@@ -1,27 +1,33 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { signUpRequestAction } from '../../../reducers/user';
+import {
+  signUpRequestAction,
+  signupSuccessAction,
+} from '../../../reducers/user';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import ReactLoading from 'react-loading';
 import lottie from 'lottie-web';
-
-function postSignUp(input) {
-  fetch('http://localhost:5000/auth/signup', {
-    method: 'post',
-    body: input,
-  })
-    .then((res) => res.json())
-    .then((json) => {
-      if (json.isSuccss === 'True') {
-        alert('회원가입을 환영합니다!');
-      } else {
-        alert(json.isSuccess);
-      }
-    });
-}
+import Home from '../../../pages/main';
+import { redirect } from 'next/dist/server/api-utils';
 
 const SignUpModal = ({ isSetSignUpModal }) => {
+  function postSignUp(input) {
+    fetch('http://localhost:5000/auth/signup', {
+      method: 'post',
+      body: input,
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isSuccess === 'True') {
+          //alert('회원가입을 환영합니다!');
+          dispatch(signupSuccessAction(formData));
+        } else {
+          alert(json.isSuccess);
+        }
+      });
+  }
+
   const checkAnimation = useRef(null);
   const dispatch = useDispatch();
   const { signUpError, signUpDone } = useSelector((state) => state.user);
@@ -62,16 +68,10 @@ const SignUpModal = ({ isSetSignUpModal }) => {
   const [imageFile, setImageFile] = useState(null);
   const handleImage = (event) => setImageFile(event.target.files[0]);
 
+  const formData = new FormData();
+
   const submitFuction = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    // const jsonData = JSON.stringify(inputValue);
-    // formData.append(
-    //   'request',
-    //   new Blob([jsonData], { type: 'application/json' }),
-    // );
-    // formData.append('imgfile', imageFile);
 
     formData.append('email', inputValue['email']);
     formData.append('password1', inputValue['password1']);
@@ -122,6 +122,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
       ...data,
     }));
   }, [signUpError]);
+
   return (
     <div
       onClick={(e) => {

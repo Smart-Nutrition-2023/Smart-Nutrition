@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import LoginLinks from './loginLinks';
 import { useDispatch } from 'react-redux';
-import { loginRequestAction } from '../../reducers/user';
+import { loginRequestAction, loginSuccessAction } from '../../reducers/user';
 import { userInfoRequestAction } from '../../reducers/user';
 import useInput from '../../hooks/useInput';
 import { useSelector } from 'react-redux';
@@ -9,31 +9,49 @@ import FontTitle from '../font/fontTitle';
 import TopNav from './topnav';
 import LoginForm from './loginform';
 import { useRouter } from 'next/router';
+import Home from '../../pages/main';
 import axios from 'axios';
 
-const postLogin = (email, password) => {
-  fetch('http://localhost:5000/auth/login', {
-    method: 'post',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  })
-    .then((res) => res.json())
-    .then((json) => {
-      if (json.isLogin === 'True') {
-        alert('안녕하세요!');
-      } else {
-        alert(json.isLogin);
-      }
-    });
-};
-
 export default function LoginNavbar() {
+  const postLogin = (email, password) => {
+    fetch('http://localhost:5000/auth/login', {
+      method: 'post',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isLogin === 'True') {
+          //alert('안녕하세요!');
+          const userName = json.name;
+          const userNickName = json.nickname;
+          const userPhonenumber = json.phonenumber;
+          const userTaste = json.taste;
+          const userProfileImg = json.profileImg;
+          dispatch(
+            loginSuccessAction({
+              email: email,
+              name: userName,
+              nickname: userNickName,
+              phonenumber: userPhonenumber,
+              taste: userTaste,
+              profile_img: userProfileImg,
+            }),
+          );
+        } else {
+          alert(json.isLogin);
+        }
+      });
+  };
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
+  const { logInError, logInDone } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const { accessToken, me } = useSelector((state) => state.user);
   const router = useRouter();
   const onSubmit = useCallback(() => {
@@ -41,6 +59,12 @@ export default function LoginNavbar() {
     dispatch(loginRequestAction({ email, password }));
     postLogin(email, password);
   }, [password, email]);
+
+  // useEffect(() => {
+  //   if (logInDone) {
+  //     router.push('/main');
+  //   }
+  // }, [logInDone]);
 
   useEffect(() => {
     console.log('userinfo - dispatch', accessToken);
@@ -50,6 +74,10 @@ export default function LoginNavbar() {
   useEffect(() => {
     if (me != null) router.push('/main');
   }, [me]);
+
+  useEffect(() => {
+    if (user != null) router.push('/main');
+  }, [user]);
 
   return (
     <div>

@@ -3,7 +3,6 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
 
 const mysql = require('../config/database');
 const sessionOption = require('../config/sessionOption');
@@ -21,7 +20,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const router = express.Router();
-// router.use('/image', express.static('uploads'));
 
 router.use(
   session({
@@ -108,12 +106,8 @@ router.post('/login', async (req, res) => {
           sendData.nickname = r[0].nickname;
           sendData.phonenumber = r[0].phonenumber;
           sendData.taste = r[0].taste;
-          fs.readFile(r[0].profile_img, (err, data) => {
-            //sendData.profileImg = data;
-            sendData.profileImg = r[0].profile_img;
-            res.send(sendData);
-            console.log('@@@', sendData);
-          });
+          sendData.profileImg = r[0].profile_img;
+          res.send(sendData);
         });
       } else {
         sendData.isLogin = '로그인 정보가 일치하지 않습니다.';
@@ -127,7 +121,7 @@ router.post('/login', async (req, res) => {
     sendData.isLogin = '아이디와 비밀번호를 입력하세요!';
     res.send(sendData);
   }
-  console.log(req.session); ///test
+  console.log(req.session); ///session 확인
   conn.release();
 });
 

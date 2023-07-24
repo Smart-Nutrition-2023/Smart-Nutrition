@@ -80,16 +80,11 @@ export default function Home({}) {
               <div className="flex justify-end  items-center">
                 안녕하세요 &nbsp;
                 <div className=" rounded-3xl relative w-[30px] h-[30px]">
-                  <img
-                    className="rounded-3x1"
+                  <Image
+                    className=" rounded-3xl"
                     src={`http://localhost:5000/${me['profile_img']}`}
                     layout={'fill'}
                   />
-                  {/* <Image
-                    className=" rounded-3xl"
-                    src={require(`../back/uploads/${me['profile_img']}`)}
-                    layout={'fill'}
-                  /> */}
                 </div>
               </div>
               <div className="flex justify-end ">

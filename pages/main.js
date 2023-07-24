@@ -37,8 +37,7 @@ export default function Home({}) {
       .toISOString()
       .split('T')[0];
     const fetchDate = () => {
-      console.log('MMEE', me);
-      postMain(me['email']);
+      postMain(me['email'], nowDate);
       // fetch("http://localhost:5000/main", {
       // })
       // axios({
@@ -56,13 +55,13 @@ export default function Home({}) {
     }
   }, []);
 
-  function postMain(input) {
+  function postMain(e, t) {
     fetch('http://localhost:5000/main', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: input }),
+      body: JSON.stringify({ email: e, today: t }),
     })
       .then((res) => res.json())
       .then((json) => setTodayFoodInfo(json));

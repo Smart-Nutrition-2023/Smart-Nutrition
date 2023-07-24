@@ -14,6 +14,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
+app.use('/profile', express.static('profile'));
+app.use('/uploads', express.static('uploads'));
 app.use('/auth', authRoutes);
 app.use('/main', mainRoutes);
 app.use('/foodinfo', foodinfoRoutes);

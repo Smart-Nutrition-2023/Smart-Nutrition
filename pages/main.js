@@ -82,8 +82,7 @@ export default function Home({}) {
                 <div className=" rounded-3xl relative w-[30px] h-[30px]">
                   <img
                     className="rounded-3x1"
-                    src={'../back/uploads/16901197978271678453193.jpg'}
-                    // src={`../back/uploads/${me['profile_img']}`}
+                    src={`http://localhost:5000/${me['profile_img']}`}
                     layout={'fill'}
                   />
                   {/* <Image

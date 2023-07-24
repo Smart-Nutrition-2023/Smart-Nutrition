@@ -23,13 +23,10 @@ router.post('/', async (req, res) => {
   const today_string = `${today}%`;
   const conn = await mysql.getConnection(async (conn) => conn);
 
-  // 오늘것만 가져오게 하기
   const [rows, fields] = await conn.query(
     'SELECT food_name, image, date, memo FROM todayFood WHERE email = ? and date like ?',
     [email, today_string],
   );
-  console.log('ROWS', rows);
-  console.log('ROWS.LENGTH', rows.length);
 
   res.json(rows);
 

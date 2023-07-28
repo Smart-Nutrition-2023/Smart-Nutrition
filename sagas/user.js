@@ -16,94 +16,95 @@ import {
   USERINFO_FAILURE,
 } from '../reducers/user';
 
-
 function userInfoAPI(acToken) {
-  console.log('test 유저 정보 API')
-  return axios.get("http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/user/info", { 
-    headers: {
-      Authorization: `Bearer ${acToken}`
-    }
-  })
-  .then((res)=>{
-    console.log(res,'유저 정보 받아오는 API success')
-    return [res.status, res.data];
-  })
-  .catch(error => {
-    console.log(error.response,'유저 정보 받아오는 API ERROR')
-    return error.response.data;
-  });
+  console.log('test 유저 정보 API');
+  return axios
+    .get(
+      'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/user/info',
+      {
+        headers: {
+          Authorization: `Bearer ${acToken}`,
+        },
+      },
+    )
+    .then((res) => {
+      console.log(res, '유저 정보 받아오는 API success');
+      return [res.status, res.data];
+    })
+    .catch((error) => {
+      console.log(error.response, '유저 정보 받아오는 API ERROR');
+      return error.response.data;
+    });
 }
 
 function* userInfo(action) {
   try {
-    console.log('saga userInfo',action.formdata);
-    const result = yield call( userInfoAPI, action.formdata );
-    console.log(result[1],"token")
-    if(result[0] != 200 ){
+    console.log('saga userInfo', action.formdata);
+    const result = yield call(userInfoAPI, action.formdata);
+    console.log(result[1], 'token');
+    if (result[0] != 200) {
       yield put({
         type: USERINFO_FAILURE,
         error: result[1],
-      });  
-    }else{
+      });
+    } else {
       yield put({
         type: USERINFO_SUCCESS,
-        data: result[1]
-      });  
+        data: result[1],
+      });
     }
   } catch (err) {
     console.error(err);
   }
 }
 
-
-
 async function logInAPI(data) {
-  
-  const loginResponse = await axios.post("http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/user/login/", data)
-  const test =  await userInfoAPI(loginResponse.data["access_token"])
-  return [loginResponse.status, loginResponse.data]
+  const loginResponse = await axios.post(
+    'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/user/login/',
+    data,
+  );
+  const test = await userInfoAPI(loginResponse.data['access_token']);
+  return [loginResponse.status, loginResponse.data];
 
   // return [loginResponse.status, loginResponse.data, test[1]["email"]]
   // return test[1]["email"]
-  
-  
   // .then((test)=>{
   //   console.log(test," promise 객체 알까기")
   //   return test[1]["email"]
   // })
-  // .catch((error)=>console.log(error,"eerrrr"))       
-                // .then((res)=>{
-                // const userData = test(res.data["access_token"])
-                // console.log("saga loginAPI", res.data)
-                // const test =  userInfoAPI(res.data["access_token"])
-                //               .then((test)=>{
-                //                 console.log(test," promise 객체 알까기")
-                //                 return test[1]["email"]
-                //               })
-                //               .catch((error)=>console.log(error,"eerrrr"))
-              //   return [res.status, res.data, test]
-              // })
-              // .catch((res)=>{
-              //   console.log(res.response,"ere")
-              //   return [res.response.status,res.respons];
-              // });
+  // .catch((error)=>console.log(error,"eerrrr"))
+  // .then((res)=>{
+  // const userData = test(res.data["access_token"])
+  // console.log("saga loginAPI", res.data)
+  // const test =  userInfoAPI(res.data["access_token"])
+  //               .then((test)=>{
+  //                 console.log(test," promise 객체 알까기")
+  //                 return test[1]["email"]
+  //               })
+  //               .catch((error)=>console.log(error,"eerrrr"))
+  //   return [res.status, res.data, test]
+  // })
+  // .catch((res)=>{
+  //   console.log(res.response,"ere")
+  //   return [res.response.status,res.respons];
+  // });
 }
 
 function* logIn(action) {
-  try { 
+  try {
     console.log('saga logIn');
-    const result = yield call( logInAPI, action.data );
-    console.log(result[1],result[2],"token")
-    if(result[0] != 200 ){
+    const result = yield call(logInAPI, action.data);
+    console.log(result[1], result[2], 'token');
+    if (result[0] != 200) {
       yield put({
         type: LOG_IN_FAILURE,
         error: result[1],
-      });  
-    }else{
+      });
+    } else {
       yield put({
         type: LOG_IN_SUCCESS,
-        data: result[1]//
-      });  
+        data: result[1], //
+      });
     }
   } catch (err) {
     console.error(err);
@@ -132,35 +133,33 @@ function* logOut() {
 
 function signUpAPI(formdata) {
   return axios({
-        method: "post",
-        url: "http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/user/signup/",
-        data: formdata,
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((res)=>{
-        console.log(res)
-        return res.status;
-        
-      })
-      .catch(error => {
-        console.log(error.response.data)
-        return error.response.data;
-      });
-  }
+    method: 'post',
+    url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/user/signup/',
+    data: formdata,
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+    .then((res) => {
+      console.log(res);
+      return res.status;
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+      return error.response.data;
+    });
+}
 
 function* signUp(action) {
   try {
-    
-    const result = yield call( signUpAPI, action.formdata );
-    if(result != 201){
+    const result = yield call(signUpAPI, action.formdata);
+    if (result != 201) {
       yield put({
         type: SIGN_UP_FAILURE,
         error: result,
-      });  
-    }else{
+      });
+    } else {
       yield put({
         type: SIGN_UP_SUCCESS,
-      });  
+      });
     }
   } catch (err) {
     console.error(err);
@@ -191,7 +190,6 @@ function* follow(action) {
     });
   }
 }
-
 
 function* unfollow(action) {
   try {

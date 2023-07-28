@@ -1,9 +1,7 @@
 const express = require('express');
-const session = require('express-session');
 const multer = require('multer');
 const path = require('path');
 const mysql = require('../config/database');
-const { RiceBowlSharp } = require('@mui/icons-material');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -18,18 +16,35 @@ const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const email = req.body.email;
-  const today = req.body.today;
-  const today_string = `${today}%`;
   const conn = await mysql.getConnection(async (conn) => conn);
 
+  const email = req.session.email;
+  const today = req.body.today;
+  const today_string = `${today}%`;
+
+  const [r, f] = await conn.query(
+    'SELECT name, nickname, phonenumber, taste, profile_img FROM userTable WHERE email = ?',
+    [email],
+  );
   const [rows, fields] = await conn.query(
     'SELECT food_name, image, date, memo FROM todayFood WHERE email = ? and date like ?',
     [email, today_string],
   );
 
   res.json(rows);
+  conn.release();
+});
 
+router.post('/calendar', async (req, res) => {
+  const email = req.body.email;
+  const conn = await mysql.getConnection(async (conn) => conn);
+
+  const [rows, fields] = await conn.query(
+    'SELECT date FROM todayFood WHERE email = ?',
+    [email],
+  );
+
+  res.json(rows);
   conn.release();
 });
 

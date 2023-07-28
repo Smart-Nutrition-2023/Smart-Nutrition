@@ -16,6 +16,7 @@ export default function LoginNavbar() {
   const postLogin = (email, password) => {
     fetch('http://localhost:5000/auth/login', {
       method: 'post',
+      credentials: 'include',
       headers: {
         'content-type': 'application/json',
       },

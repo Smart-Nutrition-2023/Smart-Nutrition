@@ -1,13 +1,14 @@
 const express = require('express');
-const session = require('express-session');
+// const session = require('express-session');
+// const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
 
 const mysql = require('../config/database');
-const sessionOption = require('../config/sessionOption');
-const mysqlStore = require('express-mysql-session')(session);
-const sessionStore = new mysqlStore(sessionOption);
+// const sessionOption = require('../config/sessionOption');
+// const mysqlStore = require('express-mysql-session')(session);
+// const sessionStore = new mysqlStore(sessionOption);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -21,15 +22,29 @@ const upload = multer({ storage: storage });
 
 const router = express.Router();
 
-router.use(
-  session({
-    key: 'session_cookie_name',
-    secret: '~',
-    store: sessionStore,
-    resave: false,
-    saveUninitialized: false,
-  }),
-);
+router.get('/', (req, res) => {
+  const sendData = {
+    isLogin: '',
+    email: '',
+    name: '',
+    nickname: '',
+    phonenumber: '',
+    taste: '',
+    profile_img: '',
+  };
+  if (req.session.is_logined) {
+    sendData.isLogin = 'True';
+    sendData.email = req.session.email;
+    sendData.name = req.session.name;
+    sendData.nickname = req.session.nickname;
+    sendData.phonenumber = req.session.phonenumber;
+    sendData.taste = req.session.taste;
+    sendData.profile_img = req.session.profile_img;
+  } else {
+    sendData.isLogin = 'False';
+  }
+  res.send(sendData);
+});
 
 router.post('/signup', upload.single('profile_img'), async (req, res) => {
   const { email, password1, password2, name, nickname, phonenumber, taste } =
@@ -95,18 +110,23 @@ router.post('/login', async (req, res) => {
       if (result === true) {
         req.session.is_logined = true;
         req.session.email = email;
-
         const [r, f] = await conn.query(
           'SELECT name, nickname, phonenumber, taste, profile_img FROM userTable WHERE email = ?',
           [email],
         );
+        req.session.name = r[0].name;
+        req.session.nickname = r[0].nickname;
+        req.session.phonenumber = r[0].phonenumber;
+        req.session.taste = r[0].taste;
+        req.session.profile_img = r[0].profile_img;
+
+        sendData.isLogin = 'True';
+        sendData.name = r[0].name;
+        sendData.nickname = r[0].nickname;
+        sendData.phonenumber = r[0].phonenumber;
+        sendData.taste = r[0].taste;
+        sendData.profileImg = r[0].profile_img;
         req.session.save(function () {
-          sendData.isLogin = 'True';
-          sendData.name = r[0].name;
-          sendData.nickname = r[0].nickname;
-          sendData.phonenumber = r[0].phonenumber;
-          sendData.taste = r[0].taste;
-          sendData.profileImg = r[0].profile_img;
           res.send(sendData);
         });
       } else {

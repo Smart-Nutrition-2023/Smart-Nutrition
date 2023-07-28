@@ -4,6 +4,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TodayEatFood from '../components/todayeatfood/todayeatfood';
 import TodayEatFoodNull from '../components/todayeatfood/todayeatfoodnull';
 import { useSelector, useDispatch } from 'react-redux'; // ***
+import { loginSuccessAction } from '../reducers/user';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useState, useEffect } from 'react';
@@ -13,11 +14,8 @@ import Image from 'next/image';
 export default function Home({}) {
   const router = useRouter();
   const { accessToken, me } = useSelector((state) => state.user); // ***
+  const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log('WHWHWHWHWH', me);
-  }, []);
 
   const moveCapture = () => {
     if (me == null) {
@@ -33,52 +31,83 @@ export default function Home({}) {
   const [todayFoodInfo, setTodayFoodInfo] = useState();
 
   useEffect(() => {
-    const nowDate = new Date(+new Date() + 3240 * 10000)
-      .toISOString()
-      .split('T')[0];
-    const fetchDate = () => {
-      postMain(me['email'], nowDate);
-      // fetch("http://localhost:5000/main", {
-      // })
-      // axios({
-      //   method: 'get',
-      //   url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
-      //   params: { date: nowDate },
-      //   headers: { Authorization: `Bearer ${accessToken}` },
-      // }).then((response) => {
-      //   response.data.shift();
-      //   setTodayFoodInfo(response.data.flat());
-      // });
-    };
-    if (me !== null) {
-      fetchDate();
-    }
+    console.log('로그인햇는지 검사', isLogined);
+    getAuth();
+    // const fetchDate = () => {
+    //   fetch("http://localhost:5000/main", {
+    //   })
+    //   axios({
+    //     method: 'get',
+    //     url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
+    //     params: { date: nowDate },
+    //     headers: { Authorization: `Bearer ${accessToken}` },
+    //   }).then((response) => {
+    //     response.data.shift();
+    //     setTodayFoodInfo(response.data.flat());
+    //   });
+    // };
   }, []);
 
-  function postMain(e, t) {
+  useEffect(() => {
+    if (isLogined === true) {
+      const nowDate = new Date(+new Date() + 3240 * 10000)
+        .toISOString()
+        .split('T')[0];
+      postMain(nowDate);
+    }
+  }, [isLogined]);
+
+  function postMain(t) {
     fetch('http://localhost:5000/main', {
       method: 'post',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: e, today: t }),
+      body: JSON.stringify({ today: t }),
     })
       .then((res) => res.json())
-      .then((json) => setTodayFoodInfo(json));
+      .then((json) => {
+        setTodayFoodInfo(json);
+      });
+  }
+
+  function getAuth() {
+    fetch('http://localhost:5000/auth', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isLogin === 'True') {
+          dispatch(
+            loginSuccessAction({
+              email: json.email,
+              name: json.name,
+              nickname: json.nickname,
+              phonenumber: json.phonenumber,
+              taste: json.taste,
+              profile_img: json.profile_img,
+            }),
+          );
+          setIsLogined(true);
+        } else {
+          setIsLogined(false);
+        }
+      });
   }
 
   return (
     <>
       <div className="container mx-auto lg:w-[500px] h-full bg-slate-50 rounded-3xl">
         <div className=" h-40 p-8  text-left w-full ">
-          {me == null ? (
+          {isLogined == false ? (
             <span className=" flex justify-end font-bold text-3xl text-main ">
               안녕하세요. --- 님
             </span>
           ) : (
             <div className=" w-full font-bold text-3xl text-yellow1 ">
               <div className="flex justify-end  items-center">
-                안녕하세요 &nbsp;
+                안녕하세요? &nbsp;
                 <div className=" rounded-3xl relative w-[30px] h-[30px]">
                   <Image
                     className=" rounded-3xl"

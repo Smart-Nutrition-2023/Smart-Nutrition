@@ -31,7 +31,6 @@ export default function Home({}) {
   const [todayFoodInfo, setTodayFoodInfo] = useState();
 
   useEffect(() => {
-    console.log('로그인햇는지 검사', isLogined);
     getAuth();
     // const fetchDate = () => {
     //   fetch("http://localhost:5000/main", {

@@ -48,4 +48,30 @@ router.post('/calendar', async (req, res) => {
   conn.release();
 });
 
+router.get('/calendar', async (req, res) => {
+  const email = req.session.email;
+  const days = [];
+
+  const conn = await mysql.getConnection(async (conn) => conn);
+  const [rows, fields] = await conn.query(
+    'SELECT date FROM todayFood WHERE email = ?',
+    [email],
+  );
+
+  for (const row in rows) {
+    const numDay = parseInt(rows[row].date.substr(8, 2), 10);
+    let dayTest = 0;
+    days.forEach(function (day) {
+      if (day == numDay) dayTest = 1;
+    });
+    if (dayTest == 0) {
+      days.push(numDay);
+    }
+    //console.log('day array', days);
+  }
+
+  res.json(days);
+  conn.release();
+});
+
 module.exports = router;

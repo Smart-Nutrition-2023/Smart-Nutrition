@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const mysql = require('../config/database');
+const { DataThresholdingOutlined } = require('@mui/icons-material');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -50,7 +51,7 @@ router.post('/calendar', async (req, res) => {
 
 router.get('/calendar', async (req, res) => {
   const email = req.session.email;
-  const days = [];
+  const dates = [];
 
   const conn = await mysql.getConnection(async (conn) => conn);
   const [rows, fields] = await conn.query(
@@ -59,18 +60,19 @@ router.get('/calendar', async (req, res) => {
   );
 
   for (const row in rows) {
-    const numDay = parseInt(rows[row].date.substr(8, 2), 10);
+    const dateMonth = parseInt(rows[row].date.substr(5, 6), 10);
+    const dateDay = parseInt(rows[row].date.substr(8, 2), 10);
     let dayTest = 0;
-    days.forEach(function (day) {
-      if (day == numDay) dayTest = 1;
+    dates.forEach(function (date) {
+      if (date.month === dateMonth && date.day === dateDay) dayTest = 1;
     });
-    if (dayTest == 0) {
-      days.push(numDay);
+    if (dayTest === 0) {
+      dates.push({ month: dateMonth, day: dateDay });
     }
-    //console.log('day array', days);
+    //console.log('day array', dates);
   }
 
-  res.json(days);
+  res.json(dates);
   conn.release();
 });
 

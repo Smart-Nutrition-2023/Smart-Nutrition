@@ -28,6 +28,18 @@ export default function Home({}) {
     }
   };
 
+  const clickLogout = () => {
+    fetch('http://localhost:5000/auth/logout', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.refresh === true) {
+          location.reload(true);
+        }
+      });
+  };
+
   const [todayFoodInfo, setTodayFoodInfo] = useState();
 
   useEffect(() => {
@@ -106,7 +118,7 @@ export default function Home({}) {
           ) : (
             <div className=" w-full font-bold text-3xl text-yellow1 ">
               <div className="flex justify-end  items-center">
-                안녕하세요? &nbsp;
+                안녕하세요 &nbsp;
                 <div className=" rounded-3xl relative w-[30px] h-[30px]">
                   <Image
                     className=" rounded-3xl"
@@ -147,6 +159,14 @@ export default function Home({}) {
         <div className="font-bold px-8 pt-8 text-xl">달력</div>
         <div className="mt-0">
           <Calendar className="mt-0" />
+        </div>
+
+        <div className="flex flex-col items-center">
+          {isLogined ? (
+            <button className="text-gray-400 pt-8" onClick={clickLogout}>
+              로그아웃
+            </button>
+          ) : null}
         </div>
       </div>
     </>

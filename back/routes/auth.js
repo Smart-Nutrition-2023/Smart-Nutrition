@@ -141,8 +141,15 @@ router.post('/login', async (req, res) => {
     sendData.isLogin = '아이디와 비밀번호를 입력하세요!';
     res.send(sendData);
   }
-  //console.log(req.session); ///session 확인
+
   conn.release();
+});
+
+router.get('/logout', async (req, res) => {
+  req.session.destroy(function () {
+    const sendData = { refresh: true };
+    res.json(sendData);
+  });
 });
 
 module.exports = router;

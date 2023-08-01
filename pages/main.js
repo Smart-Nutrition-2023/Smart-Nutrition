@@ -28,6 +28,17 @@ export default function Home({}) {
     }
   };
 
+  const moveMyInfo = () => {
+    if (me == null) {
+      router.push({
+        pathname: '/login',
+        query: { url: '/myInfo' },
+      });
+    } else {
+      router.push('/myInfo');
+    }
+  };
+
   const clickLogout = () => {
     fetch('http://localhost:5000/auth/logout', {
       credentials: 'include',
@@ -124,6 +135,7 @@ export default function Home({}) {
                     className=" rounded-3xl"
                     src={`http://localhost:5000/${me['profile_img']}`}
                     layout={'fill'}
+                    onClick={moveMyInfo}
                   />
                 </div>
               </div>

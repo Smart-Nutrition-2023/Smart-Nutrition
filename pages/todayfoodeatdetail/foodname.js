@@ -7,10 +7,16 @@ import 'moment/locale/ko';
 import { useRouter, withRouter } from 'next/router';
 import axios from 'axios';
 import Router from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccessAction } from '../../reducers/user';
 // withRouter 사용법 알아 둘 것!!
 
-function FoodInFoFoodName({ router: { query } }) {
+function FoodInFoFoodName({ response }) {
   const router = useRouter();
+
+  const { accessToken, me } = useSelector((state) => state.user); // ***
+  const [isLogined, setIsLogined] = useState(false);
+  const dispatch = useDispatch();
   const [tanDanGi, setTanDanGi] = useState({
     calorie: '',
     carb: '',
@@ -22,7 +28,8 @@ function FoodInFoFoodName({ router: { query } }) {
     datasets: [],
   });
 
-  const nowTime = moment(`${query.date.substr(0, 10)}`, 'YYYY-MM-DD').format(
+  const nowTimeDay = router.query.date + '';
+  const nowTime = moment(`${nowTimeDay.substr(0, 10)}`, 'YYYY-MM-DD').format(
     'YYYY년 MM월 DD일',
   );
 
@@ -34,7 +41,7 @@ function FoodInFoFoodName({ router: { query } }) {
     // console.log(testData,"wewewew", e.currentTarget.id)
     Router.push({
       pathname: `/todayfoodeatdetail/modify`,
-      query: { ...query },
+      query: { ...router.query },
     });
   };
 
@@ -71,6 +78,37 @@ function FoodInFoFoodName({ router: { query } }) {
   //   .catch((error)=> console.log(error, "error 탄단지 1개"))
   // }, []);
 
+  function getAuth() {
+    fetch('http://localhost:5000/auth', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isLogin === 'True') {
+          dispatch(
+            loginSuccessAction({
+              email: json.email,
+              name: json.name,
+              nickname: json.nickname,
+              phonenumber: json.phonenumber,
+              taste: json.taste,
+              profile_img: json.profile_img,
+            }),
+          );
+          setIsLogined(true);
+        } else {
+          setIsLogined(false);
+          router.push({
+            pathname: '/main',
+          });
+        }
+      });
+  }
+
+  useEffect(() => {
+    getAuth();
+  }, []);
+
   useEffect(() => {
     if (tanDanGi['carb'] != '') {
       setData({
@@ -91,8 +129,6 @@ function FoodInFoFoodName({ router: { query } }) {
       });
     }
   }, [tanDanGi]);
-
-  console.log('@@@@@@QUERY@@@@@@', query);
 
   return (
     <div>
@@ -135,7 +171,7 @@ function FoodInFoFoodName({ router: { query } }) {
           <div className="w-[250px] h-[250px] relative">
             <Image
               className={'rounded-2xl shadow-2xl'}
-              src={`http://localhost:5000/${query.img}`}
+              src={`http://localhost:5000/${router.query.img}`}
               layout="fill"
             />
           </div>
@@ -158,7 +194,7 @@ function FoodInFoFoodName({ router: { query } }) {
           📌 Ya---M 일기
         </div>
         <div className="my-7 items-center justify-center flex">
-          {query['memo']}
+          {router.query['memo']}
         </div>
       </div>
     </div>

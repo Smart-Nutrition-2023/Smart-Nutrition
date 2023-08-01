@@ -31,7 +31,6 @@ function foodinfo(props) {
   useEffect(() => {
     const Image = localStorage.getItem('image');
     setFoodImage(Image);
-
     async function fetchData() {
       const dataURLtoFile = (dataurl, fileName) => {
         var arr = dataurl.split(','),
@@ -39,7 +38,6 @@ function foodinfo(props) {
           bstr = atob(arr[1]),
           n = bstr.length,
           u8arr = new Uint8Array(n);
-
         while (n--) {
           u8arr[n] = bstr.charCodeAt(n);
         }
@@ -47,18 +45,15 @@ function foodinfo(props) {
       };
       var testfile = dataURLtoFile(Image, 'food.png');
       setFoodImageFile(testfile);
-
       const formData = new FormData();
-
       formData.append('image', testfile);
-
-      axios({
-        method: 'post',
-        url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/distinction',
-        data: formData,
-      }).then((response) => {
-        setFoodName(response.data.food_name);
-      });
+      // axios({
+      //   method: 'post',
+      //   url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/distinction',
+      //   data: formData,
+      // }).then((response) => {
+      //   setFoodName(response.data.food_name);
+      // });
     }
     fetchData();
   }, []);

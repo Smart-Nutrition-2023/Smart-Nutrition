@@ -1,14 +1,18 @@
 import TopNav from '../../components/login/topnav';
 // import BoardImage from '../community/board/BoardImage';
-import { withRouter, useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useRouter, withRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccessAction } from '../../reducers/user';
 import Image from 'next/image';
 import axios from 'axios';
 
 const Modify = (props) => {
   const router = useRouter();
-  console.log('ROUTER QUERY', router.query);
+  console.log('ROUTER QUERY', router.query); //
+
+  const [isLogined, setIsLogined] = useState(false);
+  const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user); // ***
   const [inputValue, setInputValue] = useState({
     id: router.query['id'],
@@ -52,6 +56,37 @@ const Modify = (props) => {
     //   })
     //   .catch((error) => console.log(error));
   };
+
+  function getAuth() {
+    fetch('http://localhost:5000/auth', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isLogin === 'True') {
+          dispatch(
+            loginSuccessAction({
+              email: json.email,
+              name: json.name,
+              nickname: json.nickname,
+              phonenumber: json.phonenumber,
+              taste: json.taste,
+              profile_img: json.profile_img,
+            }),
+          );
+          setIsLogined(true);
+        } else {
+          setIsLogined(false);
+          router.push({
+            pathname: '/main',
+          });
+        }
+      });
+  }
+
+  useEffect(() => {
+    getAuth();
+  }, []);
 
   return (
     <div className="">

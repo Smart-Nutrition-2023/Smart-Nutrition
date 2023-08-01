@@ -40,6 +40,8 @@ const TodayEatFood = ({ todayFoodInfo }) => {
     }
   };
 
+  console.log('TodayFoodInfo list test', todayFoodInfo);
+
   return (
     <div className="">
       <div className="font-bold px-8 pt-6 pb-2 mt-6 text-xl animate-pulse  ">

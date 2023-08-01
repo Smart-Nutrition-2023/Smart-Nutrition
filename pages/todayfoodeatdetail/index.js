@@ -7,9 +7,15 @@ import axios from 'axios';
 import ReactLoading from 'react-loading';
 import TopNav from '../../components/login/topnav';
 import { useRouter, withRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccessAction } from '../../reducers/user';
 
 function FoodInFo({ response }) {
   const router = useRouter();
+  const { accessToken, me } = useSelector((state) => state.user); // ***
+  const [isLogined, setIsLogined] = useState(false);
+  const dispatch = useDispatch();
+
   const { year, month, date } = router.query;
   const nowTime = moment(`${year}.${month}.${date}`, 'YYYY.MM.DD').format(
     'YYYY년 MM월 DD일',
@@ -25,6 +31,37 @@ function FoodInFo({ response }) {
     fat: '',
     protein: '',
   });
+
+  function getAuth() {
+    fetch('http://localhost:5000/auth', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isLogin === 'True') {
+          dispatch(
+            loginSuccessAction({
+              email: json.email,
+              name: json.name,
+              nickname: json.nickname,
+              phonenumber: json.phonenumber,
+              taste: json.taste,
+              profile_img: json.profile_img,
+            }),
+          );
+          setIsLogined(true);
+        } else {
+          setIsLogined(false);
+          router.push({
+            pathname: '/main',
+          });
+        }
+      });
+  }
+
+  useEffect(() => {
+    getAuth();
+  }, []);
 
   useEffect(() => {
     fetch('http://localhost:5000/fooddetail/todayeatfood', {

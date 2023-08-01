@@ -9,8 +9,9 @@ import Link from 'next/link';
 import moment from 'moment';
 import ReactLoading from 'react-loading';
 import Router from 'next/router';
+
 const settings = {
-  className: ' w-full h-5/6  pt-1',
+  className: 'w-full h-5/6  pt-1',
   centerMode: true,
   infinite: true,
   centerPadding: '5px',
@@ -119,8 +120,3 @@ const FoodItemm = ({ foodData, testData }) => {
 };
 
 export default FoodItemm;
-
-// onClick={(e)=>(router.push({
-//   pathname: '/todayfoodeatdetail',
-//   query: { "img" : test["img"], "name" : test["name"], "memo" : test["memo"], "date" : test["date"]  },
-// }))}

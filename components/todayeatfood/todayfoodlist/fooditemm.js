@@ -84,21 +84,20 @@ const FoodItemm = ({ foodData, testData }) => {
           </div>
 
           {/* 여기 슬라이더 css 살짝 안맞음 수정할 것*/}
-          <div className="w-4/6 flex justify-end mt-2  ">
-            <div className="  rounded-2xl w-4/6 min-h-[200px] h-full  flex items-center justify-center ">
+          <div className="w-4/6 flex justify-end mt-2">
+            <div className="rounded-2xl w-4/6 min-h-[200px] h-full mx-16 flex items-center justify-center">
               {
                 <Slider {...settings}>
                   {testData.map((test, i) => (
                     <div
                       onClick={routeFoodname}
-                      className="w-[100px] h-[160px] relative "
+                      className="w-[100px] h-[160px] relative"
                       key={i}
                       id={i}
                     >
                       <Image
-                        className={' rounded-2xl shadow-2xl'}
+                        className={'rounded-2xl shadow-2xl'}
                         src={`http://localhost:5000/${test['image']}`}
-                        // src={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${test['image']}`}
                         layout="fill"
                       />
                       <div className=" absolute w-full bottom-0 px-2 bg-yellow1 rounded-b-2xl bg-opacity-90">

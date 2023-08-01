@@ -107,8 +107,6 @@ export default function Home({}) {
       });
   }
 
-  console.log('TODAY FOOD ??????????????', todayFoodInfo);
-
   return (
     <>
       <div className="container mx-auto lg:w-[500px] h-full bg-slate-50 rounded-3xl">

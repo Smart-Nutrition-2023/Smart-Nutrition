@@ -6,8 +6,14 @@ import moment from 'moment';
 import axios from 'axios';
 import ReactLoading from 'react-loading';
 import TopNav from '../../components/login/topnav';
+import { useRouter, withRouter } from 'next/router';
+
 function FoodInFo({ response }) {
-  const nowTime = moment().format('YYYY년 MM월 DD일');
+  const router = useRouter();
+  const { year, month, date } = router.query;
+  const nowTime = moment(`${year}.${month}.${date}`, 'YYYY.MM.DD').format(
+    'YYYY년 MM월 DD일',
+  );
   const nowTimeAPI = moment().format('YYYY-MM-DD');
   const [dataNull, setDataNull] = useState(false);
   const [eatFoodData, setEatFoodData] = useState([]);
@@ -19,6 +25,23 @@ function FoodInFo({ response }) {
     fat: '',
     protein: '',
   });
+
+  useEffect(() => {
+    fetch('http://localhost:5000/fooddetail/todayeatfood', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ year, month, date }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log('DETAIL FOOD LIST', json);
+        setEatFoodData(json);
+      });
+  }, []);
+
   // useEffect(()=>{
   //   axios.get(`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten?date=${nowTimeAPI}`)
   //   // axios.get("http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten?date=2021-03-11")
@@ -41,7 +64,8 @@ function FoodInFo({ response }) {
   //     setDataNull(true);
   //   })
   // },[]);
-  console.log(response, 'getserverside Props');
+  //console.log(response, 'getserverside Props');
+
   return (
     <div>
       <TopNav />

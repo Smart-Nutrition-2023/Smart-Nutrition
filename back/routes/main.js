@@ -2,7 +2,6 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const mysql = require('../config/database');
-const { DataThresholdingOutlined } = require('@mui/icons-material');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

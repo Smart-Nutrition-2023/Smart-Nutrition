@@ -1,3 +1,4 @@
+import { LinkOff } from '@mui/icons-material';
 import Link from 'next/link';
 
 // API 로 수정 할 것 30일 데이터에서 해당 날짜 색칠
@@ -7,7 +8,7 @@ let currentMonth = 0;
 let totalDay = [];
 let checkFinish = true;
 
-const getFoodEatDay = () => {
+const getTotalFoodEatDay = () => {
   fetch('http://localhost:5000/main/calendar', {
     credentials: 'include',
   })
@@ -45,7 +46,7 @@ export default function renderDay(day) {
     }
   }
 
-  getFoodEatDay();
+  getTotalFoodEatDay();
 
   let currentMonthDay = [];
   totalDay.forEach(function (date) {
@@ -63,7 +64,7 @@ export default function renderDay(day) {
           key={date}
           href={{
             pathname: '/todayfoodeatdetail/',
-            query: {},
+            query: { year: year, month: currentMonth, date: date },
           }}
         >
           <a key={date}>

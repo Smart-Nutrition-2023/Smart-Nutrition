@@ -29,7 +29,14 @@ const TodayEatFood = ({ todayFoodInfo }) => {
         query: { url: '/todayfoodeatdetail' },
       });
     } else {
-      router.push('/todayfoodeatdetail');
+      router.push({
+        pathname: '/todayfoodeatdetail',
+        query: {
+          year: new Date().getFullYear(),
+          month: new Date().getMonth() + 1,
+          date: new Date().getDate(),
+        },
+      });
     }
   };
 

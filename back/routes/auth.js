@@ -1,14 +1,9 @@
 const express = require('express');
-// const session = require('express-session');
-// const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
 
 const mysql = require('../config/database');
-// const sessionOption = require('../config/sessionOption');
-// const mysqlStore = require('express-mysql-session')(session);
-// const sessionStore = new mysqlStore(sessionOption);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

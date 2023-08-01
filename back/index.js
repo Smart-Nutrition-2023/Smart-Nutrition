@@ -11,6 +11,7 @@ const sessionStore = new mysqlStore(sessionOption);
 const authRoutes = require('./routes/auth');
 const mainRoutes = require('./routes/main');
 const foodinfoRoutes = require('./routes/foodinfo');
+const fooddetailRoutes = require('./routes/fooddetail');
 
 const app = express();
 const corsOptions = {
@@ -43,6 +44,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/auth', authRoutes);
 app.use('/main', mainRoutes);
 app.use('/foodinfo', foodinfoRoutes);
+app.use('/fooddetail', fooddetailRoutes);
 
 app.listen('5000', () => {
   console.log('Listening...');

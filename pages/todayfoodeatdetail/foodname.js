@@ -157,7 +157,7 @@ function FoodInFoFoodName({ router: { query } }) {
         <div className='items-center justify-center flex font-["Jalnan"]'>
           📌 Ya---M 일기
         </div>
-        <div className="mt-7 items-center justify-center flex">
+        <div className="my-7 items-center justify-center flex">
           {query['memo']}
         </div>
       </div>

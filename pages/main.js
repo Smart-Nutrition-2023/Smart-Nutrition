@@ -107,6 +107,8 @@ export default function Home({}) {
       });
   }
 
+  console.log('TODAY FOOD ??????????????', todayFoodInfo);
+
   return (
     <>
       <div className="container mx-auto lg:w-[500px] h-full bg-slate-50 rounded-3xl">
@@ -151,7 +153,7 @@ export default function Home({}) {
             </div>
           </button>
         </div>
-        {true ? (
+        {todayFoodInfo ? (
           <TodayEatFood todayFoodInfo={todayFoodInfo} />
         ) : (
           <TodayEatFoodNull />
@@ -163,7 +165,7 @@ export default function Home({}) {
 
         <div className="flex flex-col items-center">
           {isLogined ? (
-            <button className="text-gray-400 pt-8" onClick={clickLogout}>
+            <button className="text-gray-400 py-8" onClick={clickLogout}>
               로그아웃
             </button>
           ) : null}

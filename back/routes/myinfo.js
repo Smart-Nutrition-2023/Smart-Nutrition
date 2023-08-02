@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const mysql = require('../config/database');
 
 const storage = multer.diskStorage({
@@ -27,6 +28,16 @@ router.post('/modify', upload.single('profile_img'), async (req, res) => {
     const filename = req.file.path;
     if (password1 === password2) {
       const hPassword = bcrypt.hashSync(password1, 10);
+
+      const [r, f] = await conn.query(
+        'SELECT profile_img FROM userTable WHERE email = ?',
+        [email],
+      );
+      fs.unlink(r[0].profile_img, function (err) {
+        if (err) throw err;
+        console.log('successfully deleted image file.');
+      });
+
       const [results, flds] = await conn.query(
         'UPDATE userTable SET password = ?, name = ?, nickname = ?, phonenumber = ?, taste = ?, profile_img = ?  WHERE email = ?',
         [hPassword, name, nickname, phonenumber, taste, filename, email],

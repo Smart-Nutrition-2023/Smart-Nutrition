@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('../config/database');
+const fs = require('fs');
 
 const router = express.Router();
 
@@ -35,6 +36,16 @@ router.post('/modify', async (req, res) => {
 router.post('/delete', async (req, res) => {
   const id = req.body.id;
   const conn = await mysql.getConnection(async (conn) => conn);
+
+  const [r, f] = await conn.query('SELECT image FROM todayFood WHERE id = ?', [
+    id,
+  ]);
+
+  fs.unlink(r[0].image, function (err) {
+    if (err) throw err;
+    console.log('successfully deleted image file.');
+  });
+
   const [rows, fields] = await conn.query(
     'DELETE FROM todayFood WHERE id = ?',
     [id],

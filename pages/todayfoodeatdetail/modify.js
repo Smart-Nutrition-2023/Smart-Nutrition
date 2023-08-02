@@ -111,6 +111,7 @@ const Modify = (props) => {
           </div>
         </div>
       )}
+      {/* <img src={`http://localhost:5000/${router.query.img}`} /> */}
       {/* <BoardImage imageUrl={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${router.query["img"]}`} /> */}
 
       <div className="flex  mt-7 mb-[-20px] ml-5 mr-5 gap-4 ">
@@ -155,7 +156,7 @@ const Modify = (props) => {
         ></textarea>
       </div>
 
-      <div className="flex items-center justify-center mt-10 ml-5 mr-5 bg-yellow1 rounded-md">
+      <div className="flex items-center justify-center my-10 ml-5 mr-5 bg-yellow1 rounded-md">
         <button
           onClick={submitFuction}
           className="bg-yellow1 w-full active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

@@ -46,14 +46,14 @@ function FoodInFoFoodName({ response }) {
   };
 
   const handleDeleteClick = () => {
-    console.log('delete', query.id);
+    console.log('delete', router.query.id);
     fetch('http://localhost:5000/fooddetail/delete', {
       method: 'post',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id: query.id }),
+      body: JSON.stringify({ id: router.query.id }),
     })
       .then((res) => res.json())
       .then((json) => {

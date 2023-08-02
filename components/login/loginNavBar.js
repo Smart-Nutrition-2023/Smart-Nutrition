@@ -25,7 +25,6 @@ export default function LoginNavbar() {
       .then((res) => res.json())
       .then((json) => {
         if (json.isLogin === 'True') {
-          //alert('안녕하세요!');
           const userName = json.name;
           const userNickName = json.nickname;
           const userPhonenumber = json.phonenumber;

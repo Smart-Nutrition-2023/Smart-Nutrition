@@ -20,7 +20,6 @@ const SignUpModal = ({ isSetSignUpModal }) => {
       .then((res) => res.json())
       .then((json) => {
         if (json.isSuccess === 'True') {
-          //alert('회원가입을 환영합니다!');
           dispatch(signupSuccessAction(formData));
         } else {
           alert(json.isSuccess);
@@ -40,24 +39,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
     phonenumber: '',
     taste: '',
   });
-  const initErrorMessage = {
-    emailToggle: false,
-    password1Toggle: false,
-    password2Toggle: false,
-    nicknameToggle: false,
-    phonenumberToggle: false,
-    profile_imgToggle: false,
-    non_field_errorsToggle: false,
-    email: 'email error',
-    password1: '',
-    password2: '',
-    nickname: '',
-    phonenumber: '',
-    profile_img: '',
-    non_field_errors: '',
-  };
-  const [signUpErrorMessage, setSignUpErrorMessage] =
-    useState(initErrorMessage);
+
   const onChange = (e) => {
     setInputValue({
       ...inputValue,
@@ -105,24 +87,6 @@ const SignUpModal = ({ isSetSignUpModal }) => {
     });
   }, []);
 
-  useEffect(() => {
-    // error message useState에 넣는 함수
-    console.log(signUpError, 'signup-errorr');
-    let value = '';
-    let data = {};
-    setSignUpErrorMessage(initErrorMessage);
-    for (value in signUpError) {
-      // console.log(value);
-      // console.log(signUpError[value][0]);
-      data[value + 'Toggle'] = true;
-      data[value] = signUpError[value][0];
-    }
-    setSignUpErrorMessage((prevState) => ({
-      ...prevState,
-      ...data,
-    }));
-  }, [signUpError]);
-
   return (
     <div
       onClick={(e) => {
@@ -154,12 +118,6 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             type="text"
             placeholder="yammm@gmail.com"
           ></input>
-          {signUpErrorMessage['emailToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['email']}{' '}
-            </p>
-          )}
         </div>
 
         <div className="mb-4">
@@ -177,18 +135,6 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             type="password"
             placeholder="******************"
           ></input>
-          {signUpErrorMessage['password1Toggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['password1']}{' '}
-            </p>
-          )}
-          {signUpErrorMessage['non_field_errorsToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['non_field_errors']}{' '}
-            </p>
-          )}
         </div>
 
         <div className="mb-4">
@@ -206,12 +152,6 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             type="password"
             placeholder="******************"
           ></input>
-          {signUpErrorMessage['password2Toggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['password2']}{' '}
-            </p>
-          )}
         </div>
 
         <div className="mb-4">
@@ -246,12 +186,6 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             type="text"
             placeholder="nickname"
           ></input>
-          {signUpErrorMessage['nicknameToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['nickname']}{' '}
-            </p>
-          )}
         </div>
 
         <div className="mb-4">
@@ -269,12 +203,6 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             type="file"
             placeholder="사진을 입력해 주세요"
           ></input>
-          {signUpErrorMessage['profile_imgToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['profile_img']}{' '}
-            </p>
-          )}
         </div>
 
         <div className="mb-4">
@@ -309,12 +237,6 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             type="text"
             placeholder="000-0000-0000"
           ></input>
-          {signUpErrorMessage['phonenumberToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['phonenumber']}{' '}
-            </p>
-          )}
         </div>
 
         <div className="flex items-center justify-center ">

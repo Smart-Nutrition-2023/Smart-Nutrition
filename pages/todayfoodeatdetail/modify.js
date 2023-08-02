@@ -127,7 +127,7 @@ const Modify = (props) => {
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
             id="date"
             type="text"
-            placeholder="YYYY-MM-DD"
+            placeholder={`${router.query.date.substr(0, 10)}`}
           ></input>
         </div>
         <div className="mb-4">
@@ -142,7 +142,7 @@ const Modify = (props) => {
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
             id="food_name"
             type="text"
-            placeholder="음식이름"
+            placeholder={`${router.query.name}`}
           ></input>
         </div>
       </div>
@@ -152,7 +152,7 @@ const Modify = (props) => {
           onChange={onChange}
           id="memo"
           className="h-[100px] focus:h-[170px] bg-white p-3 break-words w-11/12 placeholder:italic placeholder:text-center placeholder:text-slate-400 "
-          placeholder="올리실 글을 작성해 주세요!"
+          placeholder={`${router.query.memo}`}
         ></textarea>
       </div>
 

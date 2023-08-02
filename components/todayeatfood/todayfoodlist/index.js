@@ -27,8 +27,7 @@ const TodayFoodList = ({ eatFoodData }) => {
           <div className="bg-yellow1 pt-[1px] bg-opacity-50"></div>
         </div>
         {/* {eatFoodData.map((item, i) => {
-          if (eatFoodData.length != 0)
-            // 원래는 if (i != 0) 였음
+          if (i != 0)
             return (
               <div className=" rounded-2xl ">
                 <FoodItemm key={i} testData={eatFoodData[i]} />

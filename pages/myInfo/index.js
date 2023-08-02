@@ -51,24 +51,28 @@ export default function MyInfo() {
   return (
     <div className="container mx-auto pb-8 lg:w-[500px] h-full bg-slate-50 rounded-3xl">
       <TopNav />
-      <div className="h-40 p-8  text-left w-full">
+      <div className="p-8 text-left w-full">
         {isLogined === false ? null : (
           <div className=" w-full font-bold text-3xl text-yellow1 ">
             <div className="flex justify-end  items-center">
               "<span className='font-["Jalnan"] '>{me['nickname']}</span>" 님
-              &nbsp;
-              <div className=" rounded-3xl relative w-[30px] h-[30px]">
-                <Image
-                  className=" rounded-3xl"
-                  src={`http://localhost:5000/${me['profile_img']}`}
-                  layout={'fill'}
-                />
-              </div>
             </div>
           </div>
         )}
         <div className="flex justify-end text-gray-400 font-bold mt-2">
           마이페이지
+        </div>
+      </div>
+
+      <div className="flex justify-center">
+        <div className="w-[200px] h-[200px] relative">
+          {me == null ? null : (
+            <Image
+              className="rounded-3xl"
+              src={`http://localhost:5000/${me['profile_img']}`}
+              layout="fill"
+            />
+          )}
         </div>
       </div>
 

@@ -9,6 +9,7 @@ import axios from 'axios';
 import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccessAction } from '../../reducers/user';
+import TopNav from '../../components/login/topnav';
 // withRouter 사용법 알아 둘 것!!
 
 function FoodInFoFoodName({ response }) {
@@ -132,37 +133,24 @@ function FoodInFoFoodName({ response }) {
 
   return (
     <div>
-      <div className="flex justify-between m-5">
+      <TopNav />
+      <div className="flex justify-end mx-5 mt-8">
         <div
-          onClick={(e) => {
-            routeBackFuntion();
-          }}
-          className="w-[30px] h-[30px]"
+          onClick={routeFoodname}
+          className="rounded-2xl w-[60px] mr-1 flex justify-center items-center bg-red-600 text-white"
+          id="testForm"
         >
-          <Image src="/Arrow2.svg" width="100%" height="100%" />
+          수정
         </div>
-        <div className="mt-1 text-2xl font-bold">
-          <FontTitle marginTop="" textSize="text-xl" />
-        </div>
-
-        <div>
-          <div
-            onClick={routeFoodname}
-            className="rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white"
-            id="testForm"
-          >
-            수정
-          </div>
-          <div
-            onClick={handleDeleteClick}
-            className="rounded-2xl w-[60px] mt-1 flex justify-center items-center bg-red-600 text-white"
-          >
-            삭제
-          </div>
+        <div
+          onClick={handleDeleteClick}
+          className="rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white"
+        >
+          삭제
         </div>
       </div>
 
-      <div className='mt-12 mr-5 ml-5 flex justify-end font-["Jalnan"] text-xs'>
+      <div className='mt-5 mr-5 ml-5 flex justify-end font-["Jalnan"] text-xs'>
         {nowTime}
       </div>
 

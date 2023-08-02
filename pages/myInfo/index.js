@@ -76,29 +76,29 @@ export default function MyInfo() {
         </div>
       </div>
 
-      <div className="block mx-8 my-8 after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
+      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
         이메일
       </div>
       {me == null ? null : <div className="block mx-8">{`${me['email']}`}</div>}
 
-      <div className="block mx-8 my-8 after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
+      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
         이름
       </div>
       {me == null ? null : <div className="block mx-8">{`${me['name']}`}</div>}
 
-      <div className="block mx-8 my-8 after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
+      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
         별명
       </div>
       {me == null ? null : (
         <div className="block mx-8">{`${me['nickname']}`}</div>
       )}
 
-      <div className="block mx-8 my-8 after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
+      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
         음식 취향
       </div>
       {me == null ? null : <div className="block mx-8">{`${me['taste']}`}</div>}
 
-      <div className="block mx-8 my-8 after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
+      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
         휴대폰 번호
       </div>
       {me == null ? null : (

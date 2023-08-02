@@ -10,6 +10,7 @@ import axios from 'axios';
 const Modify = (props) => {
   const router = useRouter();
   console.log('ROUTER QUERY', router.query); //
+  const queryDate = router.query.date + '';
 
   const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
@@ -127,7 +128,7 @@ const Modify = (props) => {
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
             id="date"
             type="text"
-            placeholder={`${router.query.date.substr(0, 10)}`}
+            placeholder={`${queryDate.substr(0, 10)}`}
           ></input>
         </div>
         <div className="mb-4">

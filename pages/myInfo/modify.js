@@ -133,7 +133,7 @@ export default function MyInfo() {
       >
         <div className="mb-4">
           <label className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
-            이메일
+            이메일(변경불가)
           </label>
           {me == null ? null : (
             <div className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline">

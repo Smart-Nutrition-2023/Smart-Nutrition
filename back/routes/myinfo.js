@@ -19,12 +19,12 @@ const router = express.Router();
 router.post('/modify', upload.single('profile_img'), async (req, res) => {
   const { email, password1, password2, name, nickname, phonenumber, taste } =
     req.body;
-  const filename = req.file.path;
   const sendData = { isSuccess: '' };
 
   const conn = await mysql.getConnection(async (conn) => conn);
 
   if (password1 && password2 && nickname && phonenumber && req.file) {
+    const filename = req.file.path;
     if (password1 === password2) {
       const hPassword = bcrypt.hashSync(password1, 10);
       const [results, flds] = await conn.query(
@@ -43,8 +43,22 @@ router.post('/modify', upload.single('profile_img'), async (req, res) => {
       res.send(sendData);
     }
   } else {
-    sendData.isSuccess = '비밀번호를 입력하세요!';
-    res.send(sendData);
+    if (!password1) {
+      sendData.isSuccess = '비밀번호를 입력하세요!';
+      res.send(sendData);
+    } else if (!password2) {
+      sendData.isSuccess = '비밀번호를 한 번 더 입력해주세요!';
+      res.send(sendData);
+    } else if (!nickname) {
+      sendData.isSuccess = '닉네임을 입력하세요!';
+      res.send(sendData);
+    } else if (!req.file) {
+      sendData.isSuccess = '프로필 사진을 등록하세요!';
+      res.send(sendData);
+    } else if (!phonenumber) {
+      sendData.isSuccess = '휴대폰 번호를 입력하세요!';
+      res.send(sendData);
+    }
   }
   conn.release();
 });

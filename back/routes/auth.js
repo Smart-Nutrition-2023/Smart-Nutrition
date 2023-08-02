@@ -44,11 +44,11 @@ router.get('/', (req, res) => {
 router.post('/signup', upload.single('profile_img'), async (req, res) => {
   const { email, password1, password2, name, nickname, phonenumber, taste } =
     req.body;
-  const filename = req.file.path;
   const sendData = { isSuccess: '' };
   const conn = await mysql.getConnection(async (conn) => conn);
 
   if (email && password1 && password2 && nickname && phonenumber && req.file) {
+    const filename = req.file.path;
     const [rows, fields] = await conn.query(
       'SELECT * FROM userTable WHERE email = ?',
       [email],
@@ -59,6 +59,7 @@ router.post('/signup', upload.single('profile_img'), async (req, res) => {
         'INSERT INTO userTable VALUES (?,?,?,?,?,?,?)',
         [email, hPassword, name, nickname, phonenumber, taste, filename],
       );
+      conn.release();
       req.session.save(() => {
         sendData.isSuccess = 'True';
         res.send(sendData);
@@ -71,11 +72,26 @@ router.post('/signup', upload.single('profile_img'), async (req, res) => {
       res.send(sendData);
     }
   } else {
-    sendData.isSuccess = '아이디와 비밀번호를 입력하세요!';
-    res.send(sendData);
+    if (!email) {
+      sendData.isSuccess = '아이디를 입력하세요!';
+      return res.send(sendData);
+    } else if (!password1) {
+      sendData.isSuccess = '비밀번호를 입력하세요!';
+      return res.send(sendData);
+    } else if (!password2) {
+      sendData.isSuccess = '비밀번호를 한 번 더 입력해주세요!';
+      return res.send(sendData);
+    } else if (!nickname) {
+      sendData.isSuccess = '닉네임을 입력하세요!';
+      return res.send(sendData);
+    } else if (!req.file) {
+      sendData.isSuccess = '프로필 사진을 등록하세요!';
+      return res.send(sendData);
+    } else if (!phonenumber) {
+      sendData.isSuccess = '휴대폰 번호를 입력하세요!';
+      return res.send(sendData);
+    }
   }
-
-  conn.release();
 });
 
 router.post('/login', async (req, res) => {

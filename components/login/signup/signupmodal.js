@@ -48,7 +48,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
     phonenumberToggle: false,
     profile_imgToggle: false,
     non_field_errorsToggle: false,
-    email: '',
+    email: 'email error',
     password1: '',
     password2: '',
     nickname: '',
@@ -161,6 +161,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             </p>
           )}
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
@@ -189,6 +190,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             </p>
           )}
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
@@ -228,12 +230,13 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             placeholder="000"
           ></input>
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
             htmlFor="nickname"
           >
-            별명
+            닉네임
           </label>
           <input
             onChange={onChange}
@@ -250,6 +253,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             </p>
           )}
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
@@ -272,6 +276,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             </p>
           )}
         </div>
+
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -288,6 +293,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             placeholder="ex) 한식, 중식, 일식"
           ></input>
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"

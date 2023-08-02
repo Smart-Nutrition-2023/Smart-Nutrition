@@ -40,26 +40,6 @@ export default function MyInfo() {
     taste: '',
   });
 
-  const initErrorMessage = {
-    emailToggle: false,
-    password1Toggle: false,
-    password2Toggle: false,
-    nicknameToggle: false,
-    phonenumberToggle: false,
-    profile_imgToggle: false,
-    non_field_errorsToggle: false,
-    email: '',
-    password1: '',
-    password2: '',
-    nickname: '',
-    phonenumber: '',
-    profile_img: '',
-    non_field_errors: '',
-  };
-
-  const [signUpErrorMessage, setSignUpErrorMessage] =
-    useState(initErrorMessage);
-
   const onChange = (e) => {
     setInputValue({
       ...inputValue,
@@ -161,6 +141,7 @@ export default function MyInfo() {
             </div>
           )}
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
@@ -176,19 +157,8 @@ export default function MyInfo() {
             type="password"
             placeholder="******************"
           ></input>
-          {/* {signUpErrorMessage['password1Toggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['password1']}{' '}
-            </p>
-          )}
-          {signUpErrorMessage['non_field_errorsToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['non_field_errors']}{' '}
-            </p>
-          )} */}
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
@@ -204,12 +174,6 @@ export default function MyInfo() {
             type="password"
             placeholder="******************"
           ></input>
-          {/* {signUpErrorMessage['password2Toggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['password2']}{' '}
-            </p>
-          )} */}
         </div>
 
         <div className="mb-4">
@@ -230,6 +194,7 @@ export default function MyInfo() {
             ></input>
           )}
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
@@ -247,14 +212,8 @@ export default function MyInfo() {
               placeholder={`${me['nickname']}`}
             ></input>
           )}
-
-          {/* {signUpErrorMessage['nicknameToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['nickname']}{' '}
-            </p>
-          )} */}
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
@@ -270,13 +229,8 @@ export default function MyInfo() {
             type="file"
             placeholder="사진을 입력해 주세요"
           ></input>
-          {/* {signUpErrorMessage['profile_imgToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['profile_img']}{' '}
-            </p>
-          )} */}
         </div>
+
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -295,6 +249,7 @@ export default function MyInfo() {
             ></input>
           )}
         </div>
+
         <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
@@ -313,12 +268,6 @@ export default function MyInfo() {
             ></input>
           )}
 
-          {/* {signUpErrorMessage['phonenumberToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['phonenumber']}{' '}
-            </p>
-          )} */}
           <div className="flex flex-col items-center">
             <button className="bg-yellow1 mx-8 mt-8 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
               회원정보 저장

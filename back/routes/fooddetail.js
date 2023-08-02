@@ -25,7 +25,7 @@ router.post('/modify', async (req, res) => {
 
   const conn = await mysql.getConnection(async (conn) => conn);
   const [rows, fields] = await conn.query(
-    'UPDATE todayFood  SET date = ?, food_name = ?, memo = ?  WHERE id = ?',
+    'UPDATE todayFood SET date = ?, food_name = ?, memo = ?  WHERE id = ?',
     [date, food_name, memo, id],
   );
   const sendData = { isModified: true };

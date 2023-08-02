@@ -3,15 +3,19 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSuccessAction } from '../reducers/user';
-import TopNav from '../components/login/topnav';
-import styles from '../styles/Home.module.css';
+import { loginSuccessAction } from '../../reducers/user';
+import TopNav from '../../components/login/topnav';
+import styles from '../../styles/Home.module.css';
 
 export default function MyInfo() {
   const router = useRouter();
   const { accessToken, me } = useSelector((state) => state.user); // ***
   const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
+
+  const handleMyInfoModifyClick = () => {
+    router.push('/myInfo/modify');
+  };
 
   const getAuth = () => {
     fetch('http://localhost:5000/auth', {
@@ -71,30 +75,37 @@ export default function MyInfo() {
       <div className="block mx-8 my-8 after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
         이메일
       </div>
-      <div className="block mx-8">{`${me['email']}`}</div>
+      {me == null ? null : <div className="block mx-8">{`${me['email']}`}</div>}
 
       <div className="block mx-8 my-8 after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
         이름
       </div>
-      <div className="block mx-8">{`${me['name']}`}</div>
+      {me == null ? null : <div className="block mx-8">{`${me['name']}`}</div>}
 
       <div className="block mx-8 my-8 after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
         별명
       </div>
-      <div className="block mx-8">{`${me['nickname']}`}</div>
+      {me == null ? null : (
+        <div className="block mx-8">{`${me['nickname']}`}</div>
+      )}
 
       <div className="block mx-8 my-8 after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
         음식 취향
       </div>
-      <div className="block mx-8">{`${me['taste']}`}</div>
+      {me == null ? null : <div className="block mx-8">{`${me['taste']}`}</div>}
 
       <div className="block mx-8 my-8 after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
         휴대폰 번호
       </div>
-      <div className="block mx-8">{`${me['phonenumber']}`}</div>
+      {me == null ? null : (
+        <div className="block mx-8">{`${me['phonenumber']}`}</div>
+      )}
 
       <div className="flex flex-col items-center">
-        <button className="bg-yellow1 mx-8 mt-8 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <button
+          className="bg-yellow1 mx-8 mt-8 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          onClick={handleMyInfoModifyClick}
+        >
           회원정보 수정
         </button>
       </div>

@@ -1,38 +1,37 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import axios from 'axios';
-import {
-  signUpRequestAction,
-  signupSuccessAction,
-} from '../../../reducers/user';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import ReactLoading from 'react-loading';
-import lottie from 'lottie-web';
-import Home from '../../../pages/main';
-import { redirect } from 'next/dist/server/api-utils';
+import Head from 'next/head';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccessAction } from '../../reducers/user';
+import TopNav from '../../components/login/topnav';
+import styles from '../../styles/Home.module.css';
 
-const SignUpModal = ({ isSetSignUpModal }) => {
-  function postSignUp(input) {
-    fetch('http://localhost:5000/auth/signup', {
+export default function MyInfo() {
+  function postMyInfoModify(input) {
+    fetch('http://localhost:5000/myinfo/modify', {
       method: 'post',
+      credentials: 'include',
       body: input,
     })
       .then((res) => res.json())
       .then((json) => {
         if (json.isSuccess === 'True') {
-          //alert('회원가입을 환영합니다!');
-          dispatch(signupSuccessAction(formData));
+          dispatch(loginSuccessAction(formData));
+          router.push('/main');
         } else {
           alert(json.isSuccess);
         }
       });
   }
 
-  const checkAnimation = useRef(null);
+  const router = useRouter();
+  const { accessToken, me } = useSelector((state) => state.user); // ***
+  const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
-  const { signUpError, signUpDone } = useSelector((state) => state.user);
+
   const [inputValue, setInputValue] = useState({
-    email: '',
+    // email: '',
     password1: '',
     password2: '',
     name: '',
@@ -40,6 +39,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
     phonenumber: '',
     taste: '',
   });
+
   const initErrorMessage = {
     emailToggle: false,
     password1Toggle: false,
@@ -56,8 +56,10 @@ const SignUpModal = ({ isSetSignUpModal }) => {
     profile_img: '',
     non_field_errors: '',
   };
+
   const [signUpErrorMessage, setSignUpErrorMessage] =
     useState(initErrorMessage);
+
   const onChange = (e) => {
     setInputValue({
       ...inputValue,
@@ -73,7 +75,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
   const submitFuction = async (e) => {
     e.preventDefault();
 
-    formData.append('email', inputValue['email']);
+    formData.append('email', me['email']);
     formData.append('password1', inputValue['password1']);
     formData.append('password2', inputValue['password2']);
     formData.append('name', inputValue['name']);
@@ -83,82 +85,80 @@ const SignUpModal = ({ isSetSignUpModal }) => {
     formData.append('profile_img', imageFile); // 이미지 파일 추가
 
     for (var pair of formData.entries()) console.log(pair); // formdata 프론트 쪽에서 확인
-    dispatch(signUpRequestAction(formData));
-    postSignUp(formData);
+    //dispatch(signUpRequestAction(formData));
+    postMyInfoModify(formData);
+  };
+
+  const getAuth = () => {
+    fetch('http://localhost:5000/auth', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isLogin === 'True') {
+          dispatch(
+            loginSuccessAction({
+              email: json.email,
+              name: json.name,
+              nickname: json.nickname,
+              phonenumber: json.phonenumber,
+              taste: json.taste,
+              profile_img: json.profile_img,
+            }),
+          );
+          setIsLogined(true);
+        } else {
+          setIsLogined(false);
+          router.push({
+            pathname: '/main',
+          });
+        }
+      });
   };
 
   useEffect(() => {
-    if (signUpDone) {
-      setTimeout(() => {
-        isSetSignUpModal(false);
-      }, 1100);
-    }
-  }, [signUpDone]);
-
-  useEffect(() => {
-    lottie.loadAnimation({
-      container: checkAnimation.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: require('../../../public/check.json'),
-    });
+    getAuth();
   }, []);
 
-  useEffect(() => {
-    // error message useState에 넣는 함수
-    console.log(signUpError, 'signup-errorr');
-    let value = '';
-    let data = {};
-    setSignUpErrorMessage(initErrorMessage);
-    for (value in signUpError) {
-      // console.log(value);
-      // console.log(signUpError[value][0]);
-      data[value + 'Toggle'] = true;
-      data[value] = signUpError[value][0];
-    }
-    setSignUpErrorMessage((prevState) => ({
-      ...prevState,
-      ...data,
-    }));
-  }, [signUpError]);
-
   return (
-    <div
-      onClick={(e) => {
-        isSetSignUpModal(false);
-      }}
-      className="w-screen h-screen inset-0 absolute bg-gray-200 bg-opacity-75"
-    >
-      {/* 왜 버블링 안되지? 나중에 확인 */}
+    <div className="container mx-auto pb-8 lg:w-[500px] h-full bg-slate-50 rounded-3xl">
+      <TopNav />
+      <div className="h-40 p-8  text-left w-full">
+        {isLogined === false ? null : (
+          <div className=" w-full font-bold text-3xl text-yellow1 ">
+            <div className="flex justify-end  items-center">
+              "<span className='font-["Jalnan"] '>{me['nickname']}</span>" 님
+              &nbsp;
+              <div className=" rounded-3xl relative w-[30px] h-[30px]">
+                <Image
+                  className=" rounded-3xl"
+                  src={`http://localhost:5000/${me['profile_img']}`}
+                  layout={'fill'}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+        <div className="flex justify-end text-gray-400 font-bold mt-2">
+          마이페이지 정보 수정
+        </div>
+      </div>
       <form
         onSubmit={submitFuction}
         encType="multipart/form-data"
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="bg-white w-5/6 h-3/6 shadow-md px-8 pt-6 pb-8 mb-4 overflow-scroll fixed p-5 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        className="px-8"
       >
         <div className="mb-4">
-          <label
-            className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
+          <label className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
             이메일
           </label>
-          <input
-            onChange={onChange}
-            name="email"
-            className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
-            id="email"
-            type="text"
-            placeholder="yammm@gmail.com"
-          ></input>
-          {signUpErrorMessage['emailToggle'] && (
-            <p className="text-red-500 text-xs italic">
-              {' '}
-              {signUpErrorMessage['email']}{' '}
-            </p>
+          {me == null ? null : (
+            <div className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline">
+              {`${me['email']}`}
+            </div>
           )}
         </div>
         <div className="mb-4">
@@ -176,7 +176,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             type="password"
             placeholder="******************"
           ></input>
-          {signUpErrorMessage['password1Toggle'] && (
+          {/* {signUpErrorMessage['password1Toggle'] && (
             <p className="text-red-500 text-xs italic">
               {' '}
               {signUpErrorMessage['password1']}{' '}
@@ -187,7 +187,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
               {' '}
               {signUpErrorMessage['non_field_errors']}{' '}
             </p>
-          )}
+          )} */}
         </div>
         <div className="mb-4">
           <label
@@ -204,12 +204,12 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             type="password"
             placeholder="******************"
           ></input>
-          {signUpErrorMessage['password2Toggle'] && (
+          {/* {signUpErrorMessage['password2Toggle'] && (
             <p className="text-red-500 text-xs italic">
               {' '}
               {signUpErrorMessage['password2']}{' '}
             </p>
-          )}
+          )} */}
         </div>
 
         <div className="mb-4">
@@ -219,14 +219,16 @@ const SignUpModal = ({ isSetSignUpModal }) => {
           >
             이름
           </label>
-          <input
-            onChange={onChange}
-            name="name"
-            className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2  focus:shadow-outline"
-            id="name"
-            type="text"
-            placeholder="000"
-          ></input>
+          {me == null ? null : (
+            <input
+              onChange={onChange}
+              name="name"
+              className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2  focus:shadow-outline"
+              id="name"
+              type="text"
+              placeholder={`${me['name']}`}
+            ></input>
+          )}
         </div>
         <div className="mb-4">
           <label
@@ -235,20 +237,23 @@ const SignUpModal = ({ isSetSignUpModal }) => {
           >
             별명
           </label>
-          <input
-            onChange={onChange}
-            name="nickname"
-            className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="nickname"
-            type="text"
-            placeholder="nickname"
-          ></input>
-          {signUpErrorMessage['nicknameToggle'] && (
+          {me == null ? null : (
+            <input
+              onChange={onChange}
+              name="nickname"
+              className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="nickname"
+              type="text"
+              placeholder={`${me['nickname']}`}
+            ></input>
+          )}
+
+          {/* {signUpErrorMessage['nicknameToggle'] && (
             <p className="text-red-500 text-xs italic">
               {' '}
               {signUpErrorMessage['nickname']}{' '}
             </p>
-          )}
+          )} */}
         </div>
         <div className="mb-4">
           <label
@@ -265,12 +270,12 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             type="file"
             placeholder="사진을 입력해 주세요"
           ></input>
-          {signUpErrorMessage['profile_imgToggle'] && (
+          {/* {signUpErrorMessage['profile_imgToggle'] && (
             <p className="text-red-500 text-xs italic">
               {' '}
               {signUpErrorMessage['profile_img']}{' '}
             </p>
-          )}
+          )} */}
         </div>
         <div className="mb-4">
           <label
@@ -279,14 +284,16 @@ const SignUpModal = ({ isSetSignUpModal }) => {
           >
             음식 취향
           </label>
-          <input
-            onChange={onChange}
-            name="taste"
-            className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="taste"
-            type="text"
-            placeholder="ex) 한식, 중식, 일식"
-          ></input>
+          {me == null ? null : (
+            <input
+              onChange={onChange}
+              name="taste"
+              className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="taste"
+              type="text"
+              placeholder={`${me['taste']}`}
+            ></input>
+          )}
         </div>
         <div className="mb-4">
           <label
@@ -295,45 +302,30 @@ const SignUpModal = ({ isSetSignUpModal }) => {
           >
             휴대폰 번호
           </label>
-          <input
-            onChange={onChange}
-            name="phonenumber"
-            className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="phonenumber"
-            type="text"
-            placeholder="000-0000-0000"
-          ></input>
-          {signUpErrorMessage['phonenumberToggle'] && (
+          {me == null ? null : (
+            <input
+              onChange={onChange}
+              name="phonenumber"
+              className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="phonenumber"
+              type="text"
+              placeholder={`${me['phonenumber']}`}
+            ></input>
+          )}
+
+          {/* {signUpErrorMessage['phonenumberToggle'] && (
             <p className="text-red-500 text-xs italic">
               {' '}
               {signUpErrorMessage['phonenumber']}{' '}
             </p>
-          )}
-        </div>
-
-        <div className="flex items-center justify-center ">
-          {signUpDone ? (
-            <div>
-              <p className=" text-yellow1"> 회원가입이 완료되었습니다 !</p>
-              <div className="w-full flex justify-center ">
-                <div
-                  className="max-h-[50px] max-w-[50px]"
-                  ref={checkAnimation}
-                ></div>
-              </div>
-            </div>
-          ) : (
-            <button
-              className="bg-yellow1 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              회원가입
+          )} */}
+          <div className="flex flex-col items-center">
+            <button className="bg-yellow1 mx-8 mt-8 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              회원정보 저장
             </button>
-          )}
+          </div>
         </div>
       </form>
     </div>
   );
-};
-
-export default SignUpModal;
+}

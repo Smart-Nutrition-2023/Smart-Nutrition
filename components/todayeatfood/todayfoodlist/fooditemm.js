@@ -76,9 +76,9 @@ const FoodItemm = ({ foodData, testData }) => {
             <div className=" col-span-1 rounded-full  w-4/6 min-h-[50px] min-w-[50px]  flex justify-center items-center relative">
               <SmileClick />
             </div>
-            <div className="flexitems-center justify-center text-xs mt-1">
+            {/* <div className="flexitems-center justify-center text-xs mt-1">
               <div>{formDate}</div>
-            </div>
+            </div> */}
             <div className="flex items-center justify-center text-xs">
               <div>좋아요</div>
             </div>

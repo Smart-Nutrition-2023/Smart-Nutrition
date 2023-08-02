@@ -101,6 +101,7 @@ export default function Home({}) {
       .then((res) => res.json())
       .then((json) => {
         if (json.isLogin === 'True') {
+          console.log('왜안바뀜', json);
           dispatch(
             loginSuccessAction({
               email: json.email,

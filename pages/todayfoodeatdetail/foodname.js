@@ -166,8 +166,12 @@ function FoodInFoFoodName({ response }) {
         {nowTime}
       </div>
 
+      <div className='flex justify-center font-["Jalnan"]'>
+        {router.query.name}
+      </div>
+
       {
-        <div className="flex justify-center mt-12">
+        <div className="flex justify-center mt-5">
           <div className="w-[250px] h-[250px] relative">
             <Image
               className={'rounded-2xl shadow-2xl'}
@@ -178,7 +182,7 @@ function FoodInFoFoodName({ response }) {
         </div>
       }
 
-      <div className=" flex justify-center min-h-[200px] bg-neutral-200 mt-10 ml-5 mr-5 rounded-2xl">
+      <div className=" flex justify-center min-h-[200px] bg-neutral-200 mt-10 px-4 py-2 ml-5 mr-5 rounded-2xl">
         <div className="h-full">
           {/* {console.log(tanDanGiData.datasets.length, "dkasdjlas")  } */}
           {data.datasets.length == 0 ? (
@@ -189,11 +193,11 @@ function FoodInFoFoodName({ response }) {
         </div>
       </div>
 
-      <div className=" flex-col item justify-center bg-neutral-200 mt-10 rounded-2xl ml-5 mr-5">
+      <div className=" flex-col item justify-center bg-neutral-200 m-10 px-4 py-2 rounded-2xl ml-5 mr-5">
         <div className='items-center justify-center flex font-["Jalnan"]'>
           📌 Ya---M 일기
         </div>
-        <div className="my-7 items-center justify-center flex">
+        <div className="items-center justify-center flex">
           {router.query['memo']}
         </div>
       </div>

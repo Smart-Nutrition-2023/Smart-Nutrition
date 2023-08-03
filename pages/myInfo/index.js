@@ -76,34 +76,53 @@ export default function MyInfo() {
         </div>
       </div>
 
-      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
-        이메일
-      </div>
-      {me == null ? null : <div className="block mx-8">{`${me['email']}`}</div>}
+      <div className="flex flex-col justify-center items-center mb-5">
+        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+            이메일
+          </div>
+          {me == null ? null : (
+            <div className="block w-[200px]">{`${me['email']}`}</div>
+          )}
+        </div>
 
-      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
-        이름
-      </div>
-      {me == null ? null : <div className="block mx-8">{`${me['name']}`}</div>}
+        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
+          {' '}
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+            이름
+          </div>
+          {me == null ? null : (
+            <div className="block w-[200px]">{`${me['name']}`}</div>
+          )}
+        </div>
 
-      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
-        별명
-      </div>
-      {me == null ? null : (
-        <div className="block mx-8">{`${me['nickname']}`}</div>
-      )}
+        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+            닉네임
+          </div>
+          {me == null ? null : (
+            <div className="block w-[200px]">{`${me['nickname']}`}</div>
+          )}
+        </div>
 
-      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
-        음식 취향
-      </div>
-      {me == null ? null : <div className="block mx-8">{`${me['taste']}`}</div>}
+        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+            음식 취향
+          </div>
+          {me == null ? null : (
+            <div className="block w-[200px]">{`${me['taste']}`}</div>
+          )}
+        </div>
 
-      <div className="block mx-8 my-8 text-gray-700 text-sm font-bold mb-2">
-        휴대폰 번호
+        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+            휴대폰 번호
+          </div>
+          {me == null ? null : (
+            <div className="block w-[200px]">{`${me['phonenumber']}`}</div>
+          )}
+        </div>
       </div>
-      {me == null ? null : (
-        <div className="block mx-8">{`${me['phonenumber']}`}</div>
-      )}
 
       <div className="flex flex-col items-center">
         <button

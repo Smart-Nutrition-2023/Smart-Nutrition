@@ -132,11 +132,18 @@ export default function MyInfo() {
         className="px-8"
       >
         <div className="mb-4">
-          <label className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2">
-            이메일(변경불가)
+          <label
+            className="block after:content-['변경불가'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
+            htmlFor="email"
+          >
+            이메일
           </label>
           {me == null ? null : (
-            <div className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline">
+            <div
+              id="email"
+              name="email"
+              className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
+            >
               {`${me['email']}`}
             </div>
           )}
@@ -187,7 +194,7 @@ export default function MyInfo() {
             <input
               onChange={onChange}
               name="name"
-              className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2  focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2  focus:shadow-outline"
               id="name"
               type="text"
               placeholder={`${me['name']}`}
@@ -200,7 +207,7 @@ export default function MyInfo() {
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
             htmlFor="nickname"
           >
-            별명
+            닉네임
           </label>
           {me == null ? null : (
             <input

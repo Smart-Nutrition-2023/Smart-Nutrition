@@ -115,8 +115,8 @@ const Modify = (props) => {
       {/* <img src={`http://localhost:5000/${router.query.img}`} /> */}
       {/* <BoardImage imageUrl={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${router.query["img"]}`} /> */}
 
-      <div className="flex  mt-7 mb-[-20px] ml-5 mr-5 gap-4 ">
-        <div className=" mb-4">
+      <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-4">
+        <div className="mb-4">
           <label
             className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
             htmlFor="username"

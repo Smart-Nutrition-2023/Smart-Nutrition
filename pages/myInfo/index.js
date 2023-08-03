@@ -78,48 +78,48 @@ export default function MyInfo() {
 
       <div className="flex flex-col justify-center items-center mb-5">
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
             이메일
           </div>
           {me == null ? null : (
-            <div className="block w-[200px]">{`${me['email']}`}</div>
+            <div className="block w-[300px]">{`${me['email']}`}</div>
           )}
         </div>
 
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
           {' '}
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
             이름
           </div>
           {me == null ? null : (
-            <div className="block w-[200px]">{`${me['name']}`}</div>
+            <div className="block w-[300px]">{`${me['name']}`}</div>
           )}
         </div>
 
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
             닉네임
           </div>
           {me == null ? null : (
-            <div className="block w-[200px]">{`${me['nickname']}`}</div>
+            <div className="block w-[300px]">{`${me['nickname']}`}</div>
           )}
         </div>
 
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
             음식 취향
           </div>
           {me == null ? null : (
-            <div className="block w-[200px]">{`${me['taste']}`}</div>
+            <div className="block w-[300px]">{`${me['taste']}`}</div>
           )}
         </div>
 
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
             휴대폰 번호
           </div>
           {me == null ? null : (
-            <div className="block w-[200px]">{`${me['phonenumber']}`}</div>
+            <div className="block w-[300px]">{`${me['phonenumber']}`}</div>
           )}
         </div>
       </div>

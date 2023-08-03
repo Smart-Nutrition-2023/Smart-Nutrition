@@ -1,12 +1,17 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const mysql = require('../config/database');
 const { v4: uuidv4 } = require('uuid');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');
+    const dir = 'uploads/';
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    cb(null, dir);
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}${file.originalname}`);

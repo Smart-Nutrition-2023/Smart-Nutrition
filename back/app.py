@@ -1,3 +1,4 @@
+import os
 from flask_cors import CORS
 from flask import Flask, jsonify, request
 
@@ -10,10 +11,10 @@ def index():
 
 @app.route('/foodimage', methods=['POST'])
 def foodimage():
-    imageFile = request.files.get('image')
-    print(imageFile)
+    image_file = request.files.get('image')
     
-    imageFile.save('./FlaskUpload/' + imageFile.filename)
+    os.makedirs('FlaskUpload', exist_ok=True)
+    image_file.save('./FlaskUpload/' + image_file.filename)
     
     return jsonify({
         'result': 'success',

@@ -163,10 +163,10 @@ export default function Home({}) {
             </div>
           </button>
         </div>
-        {todayFoodInfo ? (
-          <TodayEatFood todayFoodInfo={todayFoodInfo} />
-        ) : (
+        {!todayFoodInfo || todayFoodInfo.length <= 0 ? (
           <TodayEatFoodNull />
+        ) : (
+          <TodayEatFood todayFoodInfo={todayFoodInfo} />
         )}
         <div className="font-bold px-8 pt-8 text-xl">달력</div>
         <div className="mt-0">

@@ -11,12 +11,6 @@ const settings = {
   slidesToShow: 1,
   speed: 500,
 };
-const dummyFoodImage = [
-  '/asset/떡볶이.png',
-  '/asset/삼겹살.png',
-  '/asset/삼겹살.png',
-  '/asset/떡볶이.png',
-];
 
 const TodayEatFood = ({ todayFoodInfo }) => {
   const router = useRouter();

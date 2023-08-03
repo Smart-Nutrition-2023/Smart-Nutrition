@@ -37,7 +37,6 @@ export default function Camera(props) {
     localStorage.setItem('image', imageSrc);
 
     const imgFile = dataURLtoFile(imageSrc, 'food.png');
-    console.log('IMAGE FILE TEST', imgFile); ////
     const formData = new FormData();
     formData.append('image', imgFile);
     postFoodImageFlask(formData);

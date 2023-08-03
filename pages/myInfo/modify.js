@@ -31,7 +31,6 @@ export default function MyInfo() {
   const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState({
-    // email: '',
     password1: '',
     password2: '',
     name: '',

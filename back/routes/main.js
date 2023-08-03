@@ -68,7 +68,6 @@ router.get('/calendar', async (req, res) => {
     if (dayTest === 0) {
       dates.push({ month: dateMonth, day: dateDay });
     }
-    //console.log('day array', dates);
   }
 
   res.json(dates);

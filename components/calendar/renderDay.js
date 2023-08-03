@@ -1,8 +1,4 @@
-import { LinkOff } from '@mui/icons-material';
 import Link from 'next/link';
-
-// API 로 수정 할 것 30일 데이터에서 해당 날짜 색칠
-const birthdays = [13];
 
 let currentMonth = 0;
 let totalDay = [];
@@ -15,7 +11,6 @@ const getTotalFoodEatDay = () => {
     .then((res) => res.json())
     .then((json) => {
       totalDay = json;
-      //console.log('TOTAL DAY', totalDay);
     });
 };
 
@@ -74,24 +69,6 @@ export default function renderDay(day) {
           </a>
         </Link>
       ) : null}
-
-      {/* {birthdays[date] &&
-        birthdays[date].map((name, i) => (
-          <Link
-            key={i}
-            href={{
-              pathname: '/todayfoodeatdetail/',
-              query: {},
-            }}
-          >
-            <a key={i}>
-              {console.log(name)}
-              <div className="break-before-column bg-yellow1 text-left text-xs flex justify-center">
-                {name}
-              </div>
-            </a>
-          </Link>
-        ))} */}
     </div>
   );
 }

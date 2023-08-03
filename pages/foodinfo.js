@@ -106,8 +106,6 @@ function foodinfo(props) {
       method: 'post',
       body: input,
     });
-    // .then((res) => res.json())
-    // .then((json) => {});
     for (var pair of input.entries()) console.log(pair);
   }
 

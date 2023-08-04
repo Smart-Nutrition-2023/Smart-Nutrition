@@ -161,6 +161,7 @@ export default function MyInfo() {
             className="shadow appearance-none border focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:shadow-outline"
             id="password1"
             type="password"
+            maxLength={20}
             placeholder="******************"
           ></input>
         </div>
@@ -178,6 +179,7 @@ export default function MyInfo() {
             className="shadow appearance-none border focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:shadow-outline"
             id="password2"
             type="password"
+            maxLength={20}
             placeholder="******************"
           ></input>
         </div>
@@ -196,6 +198,7 @@ export default function MyInfo() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2  focus:shadow-outline"
               id="name"
               type="text"
+              maxLength={30}
               placeholder={`${me['name']}`}
             ></input>
           )}
@@ -215,6 +218,7 @@ export default function MyInfo() {
               className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="nickname"
               type="text"
+              maxLength={30}
               placeholder={`${me['nickname']}`}
             ></input>
           )}
@@ -251,6 +255,7 @@ export default function MyInfo() {
               className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="taste"
               type="text"
+              maxLength={30}
               placeholder={`${me['taste']}`}
             ></input>
           )}
@@ -270,6 +275,7 @@ export default function MyInfo() {
               className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="phonenumber"
               type="text"
+              maxLength={20}
               placeholder={`${me['phonenumber']}`}
             ></input>
           )}

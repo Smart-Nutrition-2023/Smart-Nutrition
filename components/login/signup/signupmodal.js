@@ -116,6 +116,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
             id="email"
             type="text"
+            maxLength={30}
             placeholder="yammm@gmail.com"
           ></input>
         </div>
@@ -133,6 +134,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             className="shadow appearance-none border focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:shadow-outline"
             id="password1"
             type="password"
+            maxLength={20}
             placeholder="******************"
           ></input>
         </div>
@@ -150,6 +152,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             className="shadow appearance-none border focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:shadow-outline"
             id="password2"
             type="password"
+            maxLength={20}
             placeholder="******************"
           ></input>
         </div>
@@ -167,6 +170,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2  focus:shadow-outline"
             id="name"
             type="text"
+            maxLength={30}
             placeholder="000"
           ></input>
         </div>
@@ -184,6 +188,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="nickname"
             type="text"
+            maxLength={30}
             placeholder="nickname"
           ></input>
         </div>
@@ -218,6 +223,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="taste"
             type="text"
+            maxLength={30}
             placeholder="ex) 한식, 중식, 일식"
           ></input>
         </div>
@@ -235,6 +241,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
             className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="phonenumber"
             type="text"
+            maxLength={20}
             placeholder="000-0000-0000"
           ></input>
         </div>

@@ -72,8 +72,8 @@ const FoodItemm = ({ foodData, testData }) => {
       ) : (
         <div className="flex">
           {/* {console.log(foodData)} */}
-          <div className="w-2/6 mt-2  flex flex-col items-center justify-center">
-            <div className=" col-span-1 rounded-full  w-4/6 min-h-[50px] min-w-[50px]  flex justify-center items-center relative">
+          <div className="w-2/6 mt-2 flex flex-col items-center justify-center">
+            <div className="col-span-1 rounded-full w-4/6 min-h-[50px] min-w-[50px] flex justify-center items-center relative">
               <SmileClick />
             </div>
             {/* <div className="flexitems-center justify-center text-xs mt-1">
@@ -84,7 +84,6 @@ const FoodItemm = ({ foodData, testData }) => {
             </div>
           </div>
 
-          {/* 여기 슬라이더 css 살짝 안맞음 수정할 것*/}
           <div className="w-4/6 flex justify-end mt-2">
             <div className="rounded-2xl w-4/6 min-h-[200px] h-full mx-16 flex items-center justify-center">
               {
@@ -101,11 +100,11 @@ const FoodItemm = ({ foodData, testData }) => {
                         src={`http://localhost:5000/${test['image']}`}
                         layout="fill"
                       />
-                      <div className=" absolute w-full bottom-0 px-2 bg-yellow1 rounded-b-2xl bg-opacity-90">
+                      <div className="absolute w-full bottom-0 px-2 bg-yellow1 rounded-b-2xl bg-opacity-90">
                         <p className="text-xs text-neutral-200 font-sans m-3 ml-[-2px]">
                           {test['food_name']}
                         </p>
-                        {/* <p className=" mb-2 flex justify-first text-[4px] text-neutral-200 font-sans overflow-hidden h-[15px]">{""}</p> */}
+                        {/* <p className="mb-2 flex justify-first text-[4px] text-neutral-200 font-sans overflow-hidden h-[15px]">{""}</p> */}
                       </div>
                     </div>
                   ))}

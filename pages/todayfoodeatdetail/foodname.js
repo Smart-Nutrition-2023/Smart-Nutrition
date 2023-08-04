@@ -10,11 +10,13 @@ import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccessAction } from '../../reducers/user';
 import TopNav from '../../components/login/topnav';
+import CheckDeleteModal from '../../components/delete/checkDelete';
 // withRouter 사용법 알아 둘 것!!
 
 function FoodInFoFoodName({ response }) {
   const router = useRouter();
 
+  const [isCheckDeleteModal, isSetCheckDeleteModal] = useState(undefined);
   const { accessToken, me } = useSelector((state) => state.user); // ***
   const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
@@ -34,6 +36,10 @@ function FoodInFoFoodName({ response }) {
     'YYYY년 MM월 DD일',
   );
 
+  const handleDeleteClick = () => {
+    isSetCheckDeleteModal(true);
+  };
+
   const routeBackFuntion = () => {
     router.push('/todayfoodeatdetail');
   };
@@ -44,24 +50,6 @@ function FoodInFoFoodName({ response }) {
       pathname: `/todayfoodeatdetail/modify`,
       query: { ...router.query },
     });
-  };
-
-  const handleDeleteClick = () => {
-    console.log('delete', router.query.id);
-    fetch('http://localhost:5000/fooddetail/delete', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: router.query.id }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.isDeleted === true) {
-          router.push('/main');
-        }
-      });
   };
 
   // useEffect(()=>{
@@ -158,19 +146,17 @@ function FoodInFoFoodName({ response }) {
         {router.query.name}
       </div>
 
-      {
-        <div className="flex justify-center mt-5">
-          <div className="w-[250px] h-[250px] relative">
-            <Image
-              className={'rounded-2xl shadow-2xl'}
-              src={`http://localhost:5000/${router.query.img}`}
-              layout="fill"
-            />
-          </div>
+      <div className="flex justify-center mt-5">
+        <div className="w-[250px] h-[250px] relative">
+          <Image
+            className={'rounded-2xl shadow-2xl'}
+            src={`http://localhost:5000/${router.query.img}`}
+            layout="fill"
+          />
         </div>
-      }
+      </div>
 
-      <div className=" flex justify-center min-h-[200px] bg-neutral-200 mt-10 px-4 py-2 ml-5 mr-5 rounded-2xl">
+      <div className="flex justify-center min-h-[200px] bg-neutral-200 mt-10 px-4 py-2 ml-5 mr-5 rounded-2xl">
         <div className="h-full">
           {/* {console.log(tanDanGiData.datasets.length, "dkasdjlas")  } */}
           {data.datasets.length == 0 ? (
@@ -181,7 +167,7 @@ function FoodInFoFoodName({ response }) {
         </div>
       </div>
 
-      <div className=" flex-col item justify-center bg-neutral-200 m-10 px-4 py-2 rounded-2xl ml-5 mr-5">
+      <div className="flex-col item justify-center bg-neutral-200 m-10 px-4 py-2 rounded-2xl ml-5 mr-5">
         <div className='items-center justify-center flex font-["Jalnan"]'>
           📌 Ya---M 일기
         </div>
@@ -189,6 +175,13 @@ function FoodInFoFoodName({ response }) {
           {router.query['memo']}
         </div>
       </div>
+
+      {isCheckDeleteModal && (
+        <CheckDeleteModal
+          isSetCheckDeleteModal={isSetCheckDeleteModal}
+          foodId={router.query.id}
+        />
+      )}
     </div>
   );
 }

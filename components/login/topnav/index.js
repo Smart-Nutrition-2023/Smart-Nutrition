@@ -53,7 +53,10 @@ const TopNav = () => {
         >
           <Image src={'/Arrow2.svg'} layout={'fill'} />
         </div>
-        <div className="mt-7 text-2xl font-bold">
+        <div
+          onClick={(e) => router.push('/main')}
+          className="mt-7 text-2xl font-bold"
+        >
           <FontTitle marginTop="" textSize="text-xl" />
         </div>
         <div

@@ -6,6 +6,28 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 function foodinfo(props) {
+  const router = useRouter();
+  const [nutrition, setNutrition] = useState({
+    '1회제공량(g)': '',
+    '나트륨(mg)': '',
+    '단백질(g)': '',
+    '당류(g)': '',
+    '에너지(kcal)': '',
+    '지방(g)': '',
+    '탄수화물(g)': '',
+  });
+
+  useEffect(() => {
+    for (const key in router.query) {
+      if (key === '음식') {
+        setFoodName(router.query[key]);
+      } else {
+        nutrition[key] = router.query[key];
+      }
+    }
+    console.log('nutrtion 다 채웠나?', nutrition);
+  }, [router.query]);
+
   const { accessToken, me } = useSelector((state) => state.user);
 
   const [foodImage, setFoodImage] = useState('');
@@ -24,9 +46,6 @@ function foodinfo(props) {
   const [todayDate, setTodayDate] = useState(nowDate);
   const [time, setTime] = useState(nowTime);
   const [memo, setMemo] = useState('');
-
-  // console.log(todayDate+' '+time)
-  // Form data 시간 형태
 
   useEffect(() => {
     const Image = localStorage.getItem('image');
@@ -47,13 +66,6 @@ function foodinfo(props) {
       setFoodImageFile(testfile);
       const formData = new FormData();
       formData.append('image', testfile);
-      // axios({
-      //   method: 'post',
-      //   url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/distinction',
-      //   data: formData,
-      // }).then((response) => {
-      //   setFoodName(response.data.food_name);
-      // });
     }
     fetchData();
   }, []);
@@ -72,8 +84,6 @@ function foodinfo(props) {
   const changeTime = (e) => setTime(e.target.value);
   const changeMemo = (e) => setMemo(e.target.value);
 
-  const router = useRouter();
-
   const searchFood = (e) => {
     setSearchResult(e.target.value);
   };
@@ -88,6 +98,13 @@ function foodinfo(props) {
       formData.append('image', foodImageFile);
       formData.append('date', todayDate + ' ' + time);
       formData.append('memo', memo);
+      formData.append('amount', nutrition['1회제공량(g)']);
+      formData.append('natrium', nutrition['나트륨(mg)']);
+      formData.append('protein', nutrition['단백질(g)']);
+      formData.append('sugar', nutrition['당류(g)']);
+      formData.append('energy', nutrition['에너지(kcal)']);
+      formData.append('fat', nutrition['지방(g)']);
+      formData.append('carbohydrate', nutrition['탄수화물(g)']);
 
       // const res = await axios({
       //   method: 'post',

@@ -15,8 +15,10 @@ export default function Camera(props) {
   //   };
 
   // 후면 카메라를 기본 카메라로 하기 위해서는 위 주석 해제
+  const router = useRouter();
   const [foodImg, setFoodImg] = useState();
   const webcamRef = useRef(null);
+  const [nutrition, setNutrition] = useState();
 
   const dataURLtoFile = (dataurl, fileName) => {
     var arr = dataurl.split(','),
@@ -41,13 +43,19 @@ export default function Camera(props) {
     formData.append('image', imgFile);
     postFoodImageFlask(formData);
 
-    moveFoodInfo();
+    // moveFoodInfo();
   }, [webcamRef]);
 
-  const router = useRouter();
+  useEffect(() => {
+    if (nutrition) {
+      moveFoodInfo();
+    }
+  }, [nutrition]);
+
   const moveFoodInfo = () => {
     router.push({
       pathname: '/foodinfo',
+      query: nutrition,
     });
   };
 
@@ -55,7 +63,9 @@ export default function Camera(props) {
     fetch('http://localhost:5001/foodimage', {
       method: 'post',
       body: input,
-    });
+    })
+      .then((res) => res.json())
+      .then((json) => setNutrition(json));
   };
 
   return (

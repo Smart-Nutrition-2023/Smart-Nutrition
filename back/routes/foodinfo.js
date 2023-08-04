@@ -22,7 +22,19 @@ const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.post('/', upload.single('image'), async (req, res) => {
-  const { email, food_name, date, memo } = req.body;
+  const {
+    email,
+    food_name,
+    date,
+    memo,
+    amount,
+    natrium,
+    protein,
+    sugar,
+    energy,
+    fat,
+    carbohydrate,
+  } = req.body;
   const id = uuidv4();
   const filename = req.file.path;
   const sendData = { isSuccess: '' };
@@ -32,6 +44,11 @@ router.post('/', upload.single('image'), async (req, res) => {
   const [rows, fields] = await conn.query(
     'INSERT INTO todayFood VALUES (?,?,?,?,?,?)',
     [email, id, food_name, filename, date, memo],
+  );
+
+  const [r, f] = await conn.query(
+    'INSERT INTO foodNutrition VALUES (?,?,?,?,?,?,?,?)',
+    [id, amount, natrium, protein, sugar, energy, fat, carbohydrate],
   );
 
   conn.release();

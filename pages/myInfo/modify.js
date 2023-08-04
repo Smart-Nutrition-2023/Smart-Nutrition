@@ -119,7 +119,7 @@ export default function MyInfo() {
           </div>
         )}
         <div className="flex justify-end text-gray-400 font-bold mt-2">
-          마이페이지 정보 수정
+          회원정보 수정
         </div>
       </div>
       <form

@@ -1,5 +1,4 @@
 import TopNav from '../../components/login/topnav';
-// import BoardImage from '../community/board/BoardImage';
 import React, { useState, useEffect } from 'react';
 import { useRouter, withRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,8 +27,6 @@ const Modify = (props) => {
       [e.target.id]: e.target.value,
     });
   };
-
-  // console.log(router.query,"sdfdsfsdfd")
 
   const submitFuction = async (e) => {
     console.log(inputValue, '보낼값!');
@@ -93,11 +90,7 @@ const Modify = (props) => {
     <div className="">
       <TopNav />
 
-      {me == null ? (
-        <span className=" flex justify-end font-bold mr-5 text-3xl text-main ">
-          안녕하세요. --- 님
-        </span>
-      ) : (
+      {me == null ? null : (
         <div className=" w-full font-bold text-3xl text-yellow1 ">
           <div className="flex  mt-12 mb-[-16px] justify-end mr-5  items-center">
             <div className=" rounded-3xl relative w-[30px] h-[30px]">
@@ -112,8 +105,18 @@ const Modify = (props) => {
           </div>
         </div>
       )}
-      {/* <img src={`http://localhost:5000/${router.query.img}`} /> */}
-      {/* <BoardImage imageUrl={`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com${router.query["img"]}`} /> */}
+
+      <div className="flex justify-center mt-4">
+        <div className="w-[200px] h-[200px] relative">
+          {me == null ? null : (
+            <Image
+              className="rounded-3xl"
+              src={`http://localhost:5000/${router.query.img}`}
+              layout="fill"
+            />
+          )}
+        </div>
+      </div>
 
       <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-4">
         <div className="mb-4">
@@ -157,13 +160,19 @@ const Modify = (props) => {
         ></textarea>
       </div>
 
-      <div className="flex items-center justify-center my-10 ml-5 mr-5 bg-yellow1 rounded-md">
+      <div className="flex flex-col items-center justify-center my-10 ml-5 mr-5 bg-yellow1 rounded-md">
         <button
           onClick={submitFuction}
           className="bg-yellow1 w-full active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          수정하기
+          수정
         </button>
+        {/* <button
+          onClick={submitFuction}
+          className="bg-neutral-400 w-full active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          취소
+        </button> */}
       </div>
     </div>
   );

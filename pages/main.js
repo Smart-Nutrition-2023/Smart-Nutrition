@@ -40,6 +40,12 @@ export default function Home({}) {
     }
   };
 
+  const clickLogin = () => {
+    router.push({
+      pathname: '/login',
+    });
+  };
+
   const clickLogout = () => {
     fetch('http://localhost:5000/auth/logout', {
       credentials: 'include',
@@ -110,7 +116,10 @@ export default function Home({}) {
       <div className="container mx-auto lg:w-[500px] h-full bg-slate-50 rounded-3xl">
         <div className="h-40 p-8 text-left w-full">
           {isLogined == false ? (
-            <span className="flex justify-end font-bold text-3xl text-main">
+            <span
+              className="flex justify-end font-bold text-3xl text-main"
+              onClick={clickLogin}
+            >
               안녕하세요. --- 님
             </span>
           ) : (
@@ -165,7 +174,11 @@ export default function Home({}) {
             <button className="text-gray-400 py-8" onClick={clickLogout}>
               로그아웃
             </button>
-          ) : null}
+          ) : (
+            <button className="text-gray-400 py-8" onClick={clickLogin}>
+              로그인
+            </button>
+          )}
         </div>
       </div>
     </>

@@ -71,19 +71,6 @@ function FoodInFo({ response }) {
         console.log('DETAIL FOOD LIST', json);
         setEatFoodData(json);
       });
-    // fetch('http://localhost:5000/fooddetail/todayeatfood', {
-    //   method: 'post',
-    //   credentials: 'include',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ year, month, date }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((json) => {
-    //     console.log('DETAIL FOOD LIST', json);
-    //     setEatFoodData(json);
-    //   });
   };
 
   const fetchNutrition = (id) => {
@@ -134,30 +121,6 @@ function FoodInFo({ response }) {
       fetchNutrition(foodIdData);
     }
   }, [eatFoodData]);
-
-  // useEffect(()=>{
-  //   axios.get(`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten?date=${nowTimeAPI}`)
-  //   // axios.get("http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten?date=2021-03-11")
-  //   .then((res)=>{
-  //       console.log(res,  "칼로리 API 응답 성공")
-  //       setTanDanGiAPI({
-  //           ...tanDanGiAPI,
-  //           ["calorie"] : parseInt(res.data[0]["calorie"]),
-  //           ["carb"] : parseInt(res.data[0]["carb"]),
-  //           ["protein"] : parseInt(res.data[0]["protein"]),
-  //           ["fat"] : parseInt(res.data[0]["fat"])
-  //       });
-  //       setEatFoodData([
-  //         ...eatFoodData,
-  //         ...res.data
-  //       ])
-  //   })
-  //   .catch((error)=>{
-  //     console.log(error, "칼로리 API 응답 실패")
-  //     setDataNull(true);
-  //   })
-  // },[]);
-  //console.log(response, 'getserverside Props');
 
   return (
     <div>

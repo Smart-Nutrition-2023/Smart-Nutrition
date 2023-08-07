@@ -37,6 +37,18 @@ router.post('/nutrition', async (req, res) => {
   conn.release();
 });
 
+router.post('/foodname', async (req, res) => {
+  const id = req.body.id;
+
+  const conn = await mysql.getConnection(async (conn) => conn);
+  const [r, f] = await conn.query(
+    'SELECT id, amount, natrium, protein, sugar, energy, fat, carbohydrate FROM foodNutrition WHERE id = ?',
+    [id],
+  );
+  res.json(r[0]);
+  conn.release();
+});
+
 router.post('/modify', async (req, res) => {
   const { id, date, food_name, memo } = req.body;
 

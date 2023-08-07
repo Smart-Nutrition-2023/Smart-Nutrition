@@ -71,14 +71,6 @@ export default function LoginNavbar() {
     if (accessToken != null) dispatch(userInfoRequestAction(accessToken));
   }, [accessToken]);
 
-  // useEffect(() => {
-  //   if (me != null) router.push('/main');
-  // }, [me]);
-
-  // useEffect(() => {
-  //   if (user != null) router.push('/main');
-  // }, [user]);
-
   return (
     <div>
       <TopNav />

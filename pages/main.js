@@ -13,7 +13,7 @@ import Image from 'next/image';
 
 export default function Home({}) {
   const router = useRouter();
-  const { accessToken, me } = useSelector((state) => state.user); // ***
+  const { accessToken, me } = useSelector((state) => state.user);
   const [isLogined, setIsLogined] = useState(false);
   const [todayFoodInfo, setTodayFoodInfo] = useState();
   const dispatch = useDispatch();

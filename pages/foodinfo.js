@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import Memo from '../components/Memo';
 import Search from '../components/Search';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginSuccessAction } from '../reducers/user';
 
 function foodinfo(props) {
   const router = useRouter();
@@ -28,6 +29,7 @@ function foodinfo(props) {
   }, [router.query]);
 
   const { accessToken, me } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const [isLogined, setIsLogined] = useState(false);
 
@@ -47,10 +49,6 @@ function foodinfo(props) {
   const [todayDate, setTodayDate] = useState(nowDate);
   const [time, setTime] = useState(nowTime);
   const [memo, setMemo] = useState('');
-
-  useEffect(() => {
-    getAuth();
-  }, []);
 
   useEffect(() => {
     const Image = localStorage.getItem('image');
@@ -116,23 +114,6 @@ function foodinfo(props) {
     router.push('/main');
   };
 
-  const getAuth = () => {
-    fetch('http://localhost:5000/auth', {
-      credentials: 'include',
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.isLogin === 'True') {
-          setIsLogined(true);
-        } else {
-          setIsLogined(false);
-          router.push({
-            pathname: '/main',
-          });
-        }
-      });
-  };
-
   const postFoodinfo = (input) => {
     fetch('http://localhost:5000/foodinfo', {
       method: 'post',
@@ -140,6 +121,33 @@ function foodinfo(props) {
     });
     for (var pair of input.entries()) console.log(pair);
   };
+
+  const getAuth = () => {
+    fetch('http://localhost:5000/auth', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isLogin == 'True') {
+          dispatch(
+            loginSuccessAction({
+              email: json.email,
+              name: json.name,
+              nickname: json.nickname,
+              phonenumber: json.phonenumber,
+              taste: json.taste,
+              profile_img: json.profile_img,
+            }),
+          );
+        } else {
+          router.push('/main');
+        }
+      });
+  };
+
+  useEffect(() => {
+    // getAuth();
+  }, []);
 
   return (
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">

@@ -15,9 +15,8 @@ import CheckDeleteModal from '../../components/delete/checkDelete';
 
 function FoodInFoFoodName({ response }) {
   const router = useRouter();
-
   const [isCheckDeleteModal, isSetCheckDeleteModal] = useState(undefined);
-  const { accessToken, me } = useSelector((state) => state.user); // ***
+  const { accessToken, me } = useSelector((state) => state.user);
   const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
   const [tanDanGi, setTanDanGi] = useState({
@@ -51,22 +50,7 @@ function FoodInFoFoodName({ response }) {
     });
   };
 
-  // useEffect(()=>{
-  //   axios.get(`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/nutrient?food_name=${query["name"]}`)
-  //   .then((res)=>{
-  //     console.log(res)
-  //     setTanDanGi({
-  //       ...tanDanGi,
-  //       ["calorie"] : parseInt(res.data["calorie"]),
-  //       ["carb"] : parseInt(res.data["carb"]),
-  //       ["protein"] : parseInt(res.data["protein"]),
-  //       ["fat"] : parseInt(res.data["fat"])
-  //   });
-  //   })
-  //   .catch((error)=> console.log(error, "error 탄단지 1개"))
-  // }, []);
-
-  function getAuth() {
+  const getAuth = () => {
     fetch('http://localhost:5000/auth', {
       credentials: 'include',
     })
@@ -91,11 +75,54 @@ function FoodInFoFoodName({ response }) {
           });
         }
       });
-  }
+  };
+
+  const fetchNutrition = (id) => {
+    fetch('http://localhost:5000/fooddetail/foodname', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log('NUTRTION TEST', json);
+        setTanDanGi({
+          ...tanDanGi,
+          ['calorie']: json.energy,
+          ['carb']: json.carbohydrate,
+          ['fat']: json.fat,
+          ['protein']: json.protein,
+        });
+      });
+  };
 
   useEffect(() => {
     getAuth();
   }, []);
+
+  useEffect(() => {
+    if (Object.keys(router.query).length !== 0) {
+      fetchNutrition(router.query.id);
+    }
+  }, [router.query]);
+
+  // useEffect(()=>{
+  //   axios.get(`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/nutrient?food_name=${query["name"]}`)
+  //   .then((res)=>{
+  //     console.log(res)
+  //     setTanDanGi({
+  //       ...tanDanGi,
+  //       ["calorie"] : parseInt(res.data["calorie"]),
+  //       ["carb"] : parseInt(res.data["carb"]),
+  //       ["protein"] : parseInt(res.data["protein"]),
+  //       ["fat"] : parseInt(res.data["fat"])
+  //   });
+  //   })
+  //   .catch((error)=> console.log(error, "error 탄단지 1개"))
+  // }, []);
 
   useEffect(() => {
     if (tanDanGi['carb'] != '') {
@@ -155,9 +182,8 @@ function FoodInFoFoodName({ response }) {
         </div>
       </div>
 
-      <div className="flex justify-center min-h-[200px] bg-neutral-200 mt-10 px-4 py-2 ml-5 mr-5 rounded-2xl">
+      <div className="flex justify-center mt-10 px-4 py-4 ml-5 mr-5 rounded-2xl">
         <div className="h-full">
-          {/* {console.log(tanDanGiData.datasets.length, "dkasdjlas")  } */}
           {data.datasets.length == 0 ? (
             <div>로딩중</div>
           ) : (
@@ -166,7 +192,7 @@ function FoodInFoFoodName({ response }) {
         </div>
       </div>
 
-      <div className="flex-col item justify-center bg-neutral-200 m-10 px-4 py-2 rounded-2xl ml-5 mr-5">
+      <div className="flex-col item justify-center bg-neutral-200 mx-10 mb-10 px-4 py-2 rounded-2xl ml-5 mr-5">
         <div className='items-center justify-center flex font-["Jalnan"]'>
           📌 Ya---M 일기
         </div>

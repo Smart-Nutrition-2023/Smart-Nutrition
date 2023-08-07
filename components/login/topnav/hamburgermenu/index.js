@@ -12,7 +12,7 @@ const HamburgerMenu = ({ bgColor }) => {
   };
   const handleTodayEatFoodClick = () => {
     router.push({
-      path: '/todayfoodeatdetail',
+      pathname: '/todayfoodeatdetail',
       query: {
         year: new Date().getFullYear(),
         month: new Date().getMonth() + 1,

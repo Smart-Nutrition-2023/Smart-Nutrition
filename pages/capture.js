@@ -12,7 +12,13 @@ function capture() {
   const [preview, setPreview] = useState('');
   const [nutrition, setNutrition] = useState();
 
+  const [isLogined, setIsLogined] = useState(false);
+
   const imageRef = useRef(null);
+
+  useEffect(() => {
+    getAuth();
+  }, []);
 
   useEffect(() => {
     if (files) {
@@ -75,6 +81,23 @@ function capture() {
       pathname: '/foodinfo',
       query: nutrition,
     });
+  };
+
+  const getAuth = () => {
+    fetch('http://localhost:5000/auth', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isLogin === 'True') {
+          setIsLogined(true);
+        } else {
+          setIsLogined(false);
+          router.push({
+            pathname: '/main',
+          });
+        }
+      });
   };
 
   return (

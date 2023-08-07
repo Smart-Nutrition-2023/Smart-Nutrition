@@ -12,7 +12,7 @@ import { loginSuccessAction } from '../../reducers/user';
 
 function FoodInFo({ response }) {
   const router = useRouter();
-  const { accessToken, me } = useSelector((state) => state.user); // ***
+  const { accessToken, me } = useSelector((state) => state.user);
   const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ function FoodInFo({ response }) {
     protein: '',
   });
 
-  function getAuth() {
+  const getAuth = () => {
     fetch('http://localhost:5000/auth', {
       credentials: 'include',
     })
@@ -57,13 +57,9 @@ function FoodInFo({ response }) {
           });
         }
       });
-  }
+  };
 
-  useEffect(() => {
-    getAuth();
-  }, []);
-
-  useEffect(() => {
+  const fetchFoodList = () => {
     fetch('http://localhost:5000/fooddetail/todayeatfood', {
       method: 'post',
       credentials: 'include',
@@ -77,7 +73,56 @@ function FoodInFo({ response }) {
         console.log('DETAIL FOOD LIST', json);
         setEatFoodData(json);
       });
+  };
+
+  const fetchNutrition = (id) => {
+    fetch('http://localhost:5000/fooddetail/nutrition', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        const nutritionData = { calorie: 0, carb: 0, fat: 0, protein: 0 };
+        for (var i = 0; i < json.length; i++) {
+          nutritionData.calorie =
+            nutritionData.calorie + parseInt(json[i].energy);
+          nutritionData.carb =
+            nutritionData.carb + parseInt(json[i].carbohydrate);
+          nutritionData.fat = nutritionData.fat + parseInt(json[i].fat);
+          nutritionData.protein =
+            nutritionData.protein + parseInt(json[i].protein);
+        }
+        setTanDanGiAPI({
+          ...tanDanGiAPI,
+          ['calorie']: nutritionData.calorie,
+          ['carb']: nutritionData.carb,
+          ['fat']: nutritionData.fat,
+          ['protein']: nutritionData.protein,
+        });
+      });
+  };
+
+  useEffect(() => {
+    getAuth();
   }, []);
+
+  useEffect(() => {
+    fetchFoodList();
+  }, []);
+
+  useEffect(() => {
+    if (eatFoodData.length > 0) {
+      const foodIdData = [];
+      eatFoodData.forEach((food, index) => {
+        foodIdData.push(food.id);
+      });
+      fetchNutrition(foodIdData);
+    }
+  }, [eatFoodData]);
 
   // useEffect(()=>{
   //   axios.get(`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten?date=${nowTimeAPI}`)

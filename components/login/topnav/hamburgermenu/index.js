@@ -11,7 +11,14 @@ const HamburgerMenu = ({ bgColor }) => {
     router.push('/capture');
   };
   const handleTodayEatFoodClick = () => {
-    console.log('TodayEatFood Clicked');
+    router.push({
+      path: '/todayfoodeatdetail',
+      query: {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1,
+        date: new Date().getDate(),
+      },
+    });
   };
   const handleCalendarClick = () => {
     console.log('Calendar Clicked');

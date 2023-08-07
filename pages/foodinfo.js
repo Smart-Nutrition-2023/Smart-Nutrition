@@ -25,10 +25,11 @@ function foodinfo(props) {
         nutrition[key] = router.query[key];
       }
     }
-    console.log('nutrtion 다 채웠나?', nutrition);
   }, [router.query]);
 
   const { accessToken, me } = useSelector((state) => state.user);
+
+  const [isLogined, setIsLogined] = useState(false);
 
   const [foodImage, setFoodImage] = useState('');
   const [foodImageFile, setFoodImageFile] = useState();
@@ -46,6 +47,10 @@ function foodinfo(props) {
   const [todayDate, setTodayDate] = useState(nowDate);
   const [time, setTime] = useState(nowTime);
   const [memo, setMemo] = useState('');
+
+  useEffect(() => {
+    getAuth();
+  }, []);
 
   useEffect(() => {
     const Image = localStorage.getItem('image');
@@ -105,26 +110,36 @@ function foodinfo(props) {
       formData.append('energy', nutrition['에너지(kcal)']);
       formData.append('fat', nutrition['지방(g)']);
       formData.append('carbohydrate', nutrition['탄수화물(g)']);
-
-      // const res = await axios({
-      //   method: 'post',
-      //   url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
-      //   data: formData,
-      //   headers: { Authorization: `Bearer ${accessToken}` },
-      // });
       postFoodinfo(formData);
     }
     fetchData();
     router.push('/main');
   };
 
-  function postFoodinfo(input) {
+  const getAuth = () => {
+    fetch('http://localhost:5000/auth', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isLogin === 'True') {
+          setIsLogined(true);
+        } else {
+          setIsLogined(false);
+          router.push({
+            pathname: '/main',
+          });
+        }
+      });
+  };
+
+  const postFoodinfo = (input) => {
     fetch('http://localhost:5000/foodinfo', {
       method: 'post',
       body: input,
     });
     for (var pair of input.entries()) console.log(pair);
-  }
+  };
 
   return (
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">

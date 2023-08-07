@@ -120,7 +120,6 @@ const reducer = (state = initialState, action) =>
         draft.user = action.data['email'];
 
         draft.me = action.data;
-        console.log('USER TEST:::', draft.me);
         // draft.me = dummyUser(action.data);
         break;
       case LOG_IN_FAILURE:

@@ -55,7 +55,7 @@ const Modify = (props) => {
     //   .catch((error) => console.log(error));
   };
 
-  function getAuth() {
+  const getAuth = () => {
     fetch('http://localhost:5000/auth', {
       credentials: 'include',
     })
@@ -80,7 +80,7 @@ const Modify = (props) => {
           });
         }
       });
-  }
+  };
 
   useEffect(() => {
     getAuth();
@@ -91,8 +91,8 @@ const Modify = (props) => {
       <TopNav />
 
       {me == null ? null : (
-        <div className=" w-full font-bold text-3xl text-yellow1 ">
-          <div className="flex  mt-12 mb-[-16px] justify-end mr-5  items-center">
+        <div className="w-full font-bold text-3xl text-yellow1 ">
+          <div className="flex mt-12 mb-[-16px] justify-end mr-5 items-center">
             <div className=" rounded-3xl relative w-[30px] h-[30px]">
               <Image
                 className=" rounded-3xl"
@@ -100,7 +100,7 @@ const Modify = (props) => {
                 layout={'fill'}
               />
             </div>
-            <div className=" w-[10px]"></div>
+            <div className="w-[10px]"></div>
             <div>{me['nickname']}</div>
           </div>
         </div>
@@ -167,12 +167,6 @@ const Modify = (props) => {
         >
           수정
         </button>
-        {/* <button
-          onClick={submitFuction}
-          className="bg-neutral-400 w-full active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          취소
-        </button> */}
       </div>
     </div>
   );

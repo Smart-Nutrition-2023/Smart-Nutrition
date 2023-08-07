@@ -12,21 +12,6 @@ import Home from '../../../pages/main';
 import { redirect } from 'next/dist/server/api-utils';
 
 const SignUpModal = ({ isSetSignUpModal }) => {
-  function postSignUp(input) {
-    fetch('http://localhost:5000/auth/signup', {
-      method: 'post',
-      body: input,
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.isSuccess === 'True') {
-          dispatch(signupSuccessAction(formData));
-        } else {
-          alert(json.isSuccess);
-        }
-      });
-  }
-
   const checkAnimation = useRef(null);
   const dispatch = useDispatch();
   const { signUpError, signUpDone } = useSelector((state) => state.user);
@@ -62,11 +47,26 @@ const SignUpModal = ({ isSetSignUpModal }) => {
     formData.append('nickname', inputValue['nickname']);
     formData.append('phonenumber', inputValue['phonenumber']);
     formData.append('taste', inputValue['taste']);
-    formData.append('profile_img', imageFile); // 이미지 파일 추가
+    formData.append('profile_img', imageFile);
 
-    for (var pair of formData.entries()) console.log(pair); // formdata 프론트 쪽에서 확인
+    for (var pair of formData.entries()) console.log(pair);
     dispatch(signUpRequestAction(formData));
     postSignUp(formData);
+  };
+
+  const postSignUp = (input) => {
+    fetch('http://localhost:5000/auth/signup', {
+      method: 'post',
+      body: input,
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isSuccess === 'True') {
+          dispatch(signupSuccessAction(formData));
+        } else {
+          alert(json.isSuccess);
+        }
+      });
   };
 
   useEffect(() => {
@@ -101,7 +101,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="bg-white w-5/6 h-3/6 shadow-md px-8 pt-6 pb-8 mb-4 overflow-scroll fixed p-5 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        className="bg-white w-5/6 h-3/6 shadow-md px-8 pt-6 pb-8 mb-4 overflow-auto fixed p-5 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
         <div className="mb-4">
           <label
@@ -113,7 +113,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
           <input
             onChange={onChange}
             name="email"
-            className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
             id="email"
             type="text"
             maxLength={30}
@@ -167,7 +167,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
           <input
             onChange={onChange}
             name="name"
-            className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2  focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
             id="name"
             type="text"
             maxLength={30}
@@ -185,7 +185,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
           <input
             onChange={onChange}
             name="nickname"
-            className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="nickname"
             type="text"
             maxLength={30}
@@ -220,7 +220,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
           <input
             onChange={onChange}
             name="taste"
-            className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="taste"
             type="text"
             maxLength={30}
@@ -246,11 +246,11 @@ const SignUpModal = ({ isSetSignUpModal }) => {
           ></input>
         </div>
 
-        <div className="flex items-center justify-center ">
+        <div className="flex items-center justify-center">
           {signUpDone ? (
             <div>
-              <p className=" text-yellow1"> 회원가입이 완료되었습니다 !</p>
-              <div className="w-full flex justify-center ">
+              <p className="text-yellow1"> 회원가입이 완료되었습니다 !</p>
+              <div className="w-full flex justify-center">
                 <div
                   className="max-h-[50px] max-w-[50px]"
                   ref={checkAnimation}

@@ -3,7 +3,7 @@ import Calendar from '../components/calendar/index';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TodayEatFood from '../components/todayeatfood/todayeatfood';
 import TodayEatFoodNull from '../components/todayeatfood/todayeatfoodnull';
-import { useSelector, useDispatch } from 'react-redux'; // ***
+import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccessAction } from '../reducers/user';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -15,6 +15,7 @@ export default function Home({}) {
   const router = useRouter();
   const { accessToken, me } = useSelector((state) => state.user); // ***
   const [isLogined, setIsLogined] = useState(false);
+  const [todayFoodInfo, setTodayFoodInfo] = useState();
   const dispatch = useDispatch();
 
   const moveCapture = () => {
@@ -51,23 +52,8 @@ export default function Home({}) {
       });
   };
 
-  const [todayFoodInfo, setTodayFoodInfo] = useState();
-
   useEffect(() => {
     getAuth();
-    // const fetchDate = () => {
-    //   fetch("http://localhost:5000/main", {
-    //   })
-    //   axios({
-    //     method: 'get',
-    //     url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
-    //     params: { date: nowDate },
-    //     headers: { Authorization: `Bearer ${accessToken}` },
-    //   }).then((response) => {
-    //     response.data.shift();
-    //     setTodayFoodInfo(response.data.flat());
-    //   });
-    // };
   }, []);
 
   useEffect(() => {
@@ -79,7 +65,7 @@ export default function Home({}) {
     }
   }, [isLogined]);
 
-  function postMain(t) {
+  const postMain = (t) => {
     fetch('http://localhost:5000/main', {
       method: 'post',
       credentials: 'include',
@@ -92,9 +78,9 @@ export default function Home({}) {
       .then((json) => {
         setTodayFoodInfo(json);
       });
-  }
+  };
 
-  function getAuth() {
+  const getAuth = () => {
     fetch('http://localhost:5000/auth', {
       credentials: 'include',
     })
@@ -116,31 +102,31 @@ export default function Home({}) {
           setIsLogined(false);
         }
       });
-  }
+  };
 
   return (
     <>
       <div className="container mx-auto lg:w-[500px] h-full bg-slate-50 rounded-3xl">
-        <div className=" h-40 p-8  text-left w-full ">
+        <div className="h-40 p-8  text-left w-full ">
           {isLogined == false ? (
-            <span className=" flex justify-end font-bold text-3xl text-main ">
+            <span className="flex justify-end font-bold text-3xl text-main">
               안녕하세요. --- 님
             </span>
           ) : (
-            <div className=" w-full font-bold text-3xl text-yellow1 ">
-              <div className="flex justify-end  items-center">
+            <div className="w-full font-bold text-3xl text-yellow1">
+              <div className="flex justify-end items-center">
                 안녕하세요 &nbsp;
-                <div className=" rounded-3xl relative w-[30px] h-[30px]">
+                <div className="rounded-3xl relative w-[30px] h-[30px]">
                   <Image
-                    className=" rounded-3xl"
+                    className="rounded-3xl"
                     src={`http://localhost:5000/${me['profile_img']}`}
                     layout={'fill'}
                     onClick={moveMyInfo}
                   />
                 </div>
               </div>
-              <div className="flex justify-end ">
-                "<span className='font-["Jalnan"] '>{me['nickname']}</span>
+              <div className="flex justify-end">
+                "<span className='font-["Jalnan"]'>{me['nickname']}</span>
                 " 님
                 <br />
               </div>
@@ -152,7 +138,7 @@ export default function Home({}) {
         </div>
 
         <div className="font-bold px-8 py-2 text-xl">사진 업로드</div>
-        <div className="flex justify-center px-8 ">
+        <div className="flex justify-center px-8">
           <button
             className="w-full h-48 top-1/2 bg-slate-800 rounded-3xl flex flex-col items-center text-white"
             onClick={moveCapture}

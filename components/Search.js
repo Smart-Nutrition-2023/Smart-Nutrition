@@ -10,7 +10,7 @@ function Search({
   searchFood,
   searchResult,
 }) {
-  const [foodList, setFoodList] = useState();
+  const [foodList, setFoodList] = useState([]);
 
   const enterKey = () => {
     if (window.event.keyCode == 13) {
@@ -21,16 +21,18 @@ function Search({
 
   const search = () => {
     async function fetchData() {
-      axios({
-        method: 'get',
-        url: 'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/search',
-        // headers: {
-        //   "Content-Type": "application/json"
-        // },
-        params: {
-          word: searchResult,
-        },
-      }).then((response) => setFoodList(response.data));
+      console.log('WORD:', searchResult);
+      fetch(
+        'http://localhost:5000/foodinfo/search?' +
+          new URLSearchParams({
+            food: searchResult,
+          }),
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+          setFoodList(json);
+        });
     }
     fetchData();
   };
@@ -49,14 +51,14 @@ function Search({
             />
             <SearchIcon className="ml-2" onClick={search} />
           </div>
-          <div className="grid grid-cols-4 gap-2 mt-10 mx-2">
+          <div className="h-[150px] overflow-auto grid grid-cols-2 gap-2 mt-4 mx-2">
             {foodList
-              ? foodList.search_result.map(function (food, index) {
+              ? foodList.map(function (food, index) {
                   return (
                     <input
                       key={index}
                       type="button"
-                      value={food}
+                      value={food['음식']}
                       className="rounded-3xl text-black bg-white text-sm border-2 border-solid border-main hover:bg-main hover:text-white"
                       onClick={selectFood}
                     />

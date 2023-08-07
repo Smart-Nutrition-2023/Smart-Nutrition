@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const mysql = require('../config/database');
 const { v4: uuidv4 } = require('uuid');
+const xlsx = require('xlsx');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -52,6 +53,23 @@ router.post('/', upload.single('image'), async (req, res) => {
   );
 
   conn.release();
+});
+
+router.get('/search', async (req, res) => {
+  const search = req.query.food;
+  const searchResult = [];
+
+  const foodList = xlsx.readFile(__dirname + '/../foodList.xlsx');
+  const firstSheetName = foodList.SheetNames[0];
+  const firstSheet = foodList.Sheets[firstSheetName];
+  const firstSheetJson = xlsx.utils.sheet_to_json(firstSheet);
+
+  firstSheetJson.forEach(function (food) {
+    if (food['음식'].includes(search)) {
+      searchResult.push(food);
+    }
+  });
+  res.json(searchResult);
 });
 
 module.exports = router;

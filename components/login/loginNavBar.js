@@ -60,24 +60,24 @@ export default function LoginNavbar() {
     postLogin(email, password);
   }, [password, email]);
 
-  // useEffect(() => {
-  //   if (logInDone) {
-  //     router.push('/main');
-  //   }
-  // }, [logInDone]);
+  useEffect(() => {
+    if (logInDone) {
+      router.push('/main');
+    }
+  }, [logInDone]);
 
   useEffect(() => {
     console.log('userinfo - dispatch', accessToken);
     if (accessToken != null) dispatch(userInfoRequestAction(accessToken));
   }, [accessToken]);
 
-  useEffect(() => {
-    if (me != null) router.push('/main');
-  }, [me]);
+  // useEffect(() => {
+  //   if (me != null) router.push('/main');
+  // }, [me]);
 
-  useEffect(() => {
-    if (user != null) router.push('/main');
-  }, [user]);
+  // useEffect(() => {
+  //   if (user != null) router.push('/main');
+  // }, [user]);
 
   return (
     <div>

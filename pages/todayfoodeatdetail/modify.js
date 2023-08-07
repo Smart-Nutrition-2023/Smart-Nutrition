@@ -86,7 +86,7 @@ const Modify = (props) => {
   }, []);
 
   return (
-    <div className="">
+    <div className="container mx-auto lg:w-[500px] h-full rounded-3xl">
       <TopNav />
 
       {me == null ? null : (

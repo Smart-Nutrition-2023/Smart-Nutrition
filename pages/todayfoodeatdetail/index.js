@@ -123,7 +123,7 @@ function FoodInFo({ response }) {
   }, [eatFoodData]);
 
   return (
-    <div>
+    <div className="container mx-auto lg:w-[500px] h-full rounded-3xl">
       <TopNav />
       <CalorieGraph
         tanDanGiAPI={tanDanGiAPI}

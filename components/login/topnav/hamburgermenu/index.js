@@ -27,9 +27,9 @@ const HamburgerMenu = ({ bgColor }) => {
   return (
     <>
       <div className={bgColor}>
-        <div className=" mt-20 flex-col border-t-2 border-t-white">
+        <div className="mt-20 flex-col border-t-2 border-t-white">
           <div
-            className=" bg-yellow1 border-b-[1px] rounded-xl border-dashed border-white flex justify-center p-10 text-white active:bg-red1 "
+            className="bg-yellow1 border-b-[1px] rounded-xl border-dashed border-white flex justify-center p-10 text-white active:bg-red1 "
             onClick={handleMainMenuClick}
           >
             메인 메뉴

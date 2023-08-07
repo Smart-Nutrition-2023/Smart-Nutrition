@@ -100,7 +100,7 @@ function capture() {
   };
 
   return (
-    <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">
+    <div className="container mx-auto lg:w-[500px] h-screen bg-slate-50 rounded-3xl">
       <div className="">
         {showModal ? <Modal closeModal={closeModal} /> : null}
         <div className="h-screen text-white bg-main/30 p-2 pd-8 rounded-3xl">

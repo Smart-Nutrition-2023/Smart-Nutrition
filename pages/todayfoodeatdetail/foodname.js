@@ -11,11 +11,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccessAction } from '../../reducers/user';
 import TopNav from '../../components/login/topnav';
 import CheckDeleteModal from '../../components/delete/checkDelete';
+import ImageZoomModal from '../../components/image/imageZoom';
 // withRouter 사용법 알아 둘 것!!
 
 function FoodInFoFoodName({ response }) {
   const router = useRouter();
   const [isCheckDeleteModal, isSetCheckDeleteModal] = useState(undefined);
+  const [isImageZoomModal, isSetImageZoomModal] = useState(undefined);
   const { accessToken, me } = useSelector((state) => state.user);
   const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
@@ -37,6 +39,10 @@ function FoodInFoFoodName({ response }) {
 
   const handleDeleteClick = () => {
     isSetCheckDeleteModal(true);
+  };
+
+  const handleImageClick = () => {
+    isSetImageZoomModal(true);
   };
 
   const routeBackFuntion = () => {
@@ -146,7 +152,7 @@ function FoodInFoFoodName({ response }) {
   }, [tanDanGi]);
 
   return (
-    <div>
+    <div className="container mx-auto lg:w-[500px] h-full rounded-3xl">
       <TopNav />
       <div className="flex justify-end mx-5 mt-8">
         <div
@@ -178,6 +184,7 @@ function FoodInFoFoodName({ response }) {
             className={'rounded-2xl shadow-2xl'}
             src={`http://localhost:5000/${router.query.img}`}
             layout="fill"
+            onClick={handleImageClick}
           />
         </div>
       </div>
@@ -200,6 +207,13 @@ function FoodInFoFoodName({ response }) {
           {router.query['memo']}
         </div>
       </div>
+
+      {isImageZoomModal && (
+        <ImageZoomModal
+          isSetImageZoomModal={isSetImageZoomModal}
+          foodImage={router.query.img}
+        />
+      )}
 
       {isCheckDeleteModal && (
         <CheckDeleteModal

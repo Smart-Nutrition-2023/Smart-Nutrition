@@ -101,7 +101,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="bg-white w-5/6 h-3/6 shadow-md px-8 pt-6 pb-8 mb-4 overflow-auto fixed p-5 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        className="bg-white lg:w-[500px] h-3/6 shadow-md px-8 pt-6 pb-8 mb-4 overflow-auto fixed p-5 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
         <div className="mb-4">
           <label

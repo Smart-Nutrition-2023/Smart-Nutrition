@@ -29,7 +29,6 @@ const Modify = (props) => {
   };
 
   const submitFuction = async (e) => {
-    console.log(inputValue, '보낼값!');
     fetch('http://localhost:5000/fooddetail/modify', {
       method: 'post',
       credentials: 'include',

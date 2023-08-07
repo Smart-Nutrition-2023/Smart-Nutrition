@@ -45,7 +45,6 @@ function FoodInFoFoodName({ response }) {
   };
 
   const routeFoodname = (e) => {
-    // console.log(testData,"wewewew", e.currentTarget.id)
     Router.push({
       pathname: `/todayfoodeatdetail/modify`,
       query: { ...router.query },

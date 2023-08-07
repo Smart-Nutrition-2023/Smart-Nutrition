@@ -1,4 +1,3 @@
-// import TopNav from '../../components/todayeatfood/topnav/topnav';
 import CalorieGraph from '../../components/todayeatfood/caloriegraph';
 import TodayFoodList from '../../components/todayeatfood/todayfoodlist';
 import React, { useEffect, useState } from 'react';
@@ -60,19 +59,31 @@ function FoodInFo({ response }) {
   };
 
   const fetchFoodList = () => {
-    fetch('http://localhost:5000/fooddetail/todayeatfood', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    fetch(
+      'http://localhost:5000/fooddetail/todayeatfood?' +
+        new URLSearchParams({ year, month, date }),
+      {
+        credentials: 'include',
       },
-      body: JSON.stringify({ year, month, date }),
-    })
+    )
       .then((res) => res.json())
       .then((json) => {
         console.log('DETAIL FOOD LIST', json);
         setEatFoodData(json);
       });
+    // fetch('http://localhost:5000/fooddetail/todayeatfood', {
+    //   method: 'post',
+    //   credentials: 'include',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ year, month, date }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     console.log('DETAIL FOOD LIST', json);
+    //     setEatFoodData(json);
+    //   });
   };
 
   const fetchNutrition = (id) => {

@@ -8,7 +8,7 @@ import TopNav from '../../components/login/topnav';
 import styles from '../../styles/Home.module.css';
 
 export default function MyInfo() {
-  function postMyInfoModify(input) {
+  const postMyInfoModify = (input) => {
     fetch('http://localhost:5000/myinfo/modify', {
       method: 'post',
       credentials: 'include',
@@ -23,7 +23,7 @@ export default function MyInfo() {
           alert(json.isSuccess);
         }
       });
-  }
+  };
 
   const router = useRouter();
   const { accessToken, me } = useSelector((state) => state.user); // ***
@@ -61,9 +61,9 @@ export default function MyInfo() {
     formData.append('nickname', inputValue['nickname']);
     formData.append('phonenumber', inputValue['phonenumber']);
     formData.append('taste', inputValue['taste']);
-    formData.append('profile_img', imageFile); // 이미지 파일 추가
+    formData.append('profile_img', imageFile);
 
-    for (var pair of formData.entries()) console.log(pair); // formdata 프론트 쪽에서 확인
+    for (var pair of formData.entries()) console.log(pair);
     //dispatch(signUpRequestAction(formData));
     postMyInfoModify(formData);
   };

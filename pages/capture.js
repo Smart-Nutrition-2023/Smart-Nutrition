@@ -39,7 +39,6 @@ function capture() {
 
   useEffect(() => {
     if (nutrition) {
-      console.log('NUTRTION:::', nutrition);
       moveFoodInfo();
     }
   }, [nutrition]);

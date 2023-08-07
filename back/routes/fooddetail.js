@@ -4,9 +4,9 @@ const fs = require('fs');
 
 const router = express.Router();
 
-router.post('/todayeatfood', async (req, res) => {
+router.get('/todayeatfood', async (req, res) => {
   const email = req.session.email;
-  const { year, month, date } = req.body;
+  const { year, month, date } = req.query;
   const today_string = `${year}-${String(month).padStart(2, '0')}-${String(
     date,
   ).padStart(2, '0')}%`;

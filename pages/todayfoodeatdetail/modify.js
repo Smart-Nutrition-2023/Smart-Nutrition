@@ -4,16 +4,17 @@ import { useRouter, withRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccessAction } from '../../reducers/user';
 import Image from 'next/image';
+import ImageZoomModal from '../../components/image/imageZoom';
 import axios from 'axios';
 
 const Modify = (props) => {
   const router = useRouter();
-  console.log('ROUTER QUERY', router.query); //
   const queryDate = router.query.date + '';
 
+  const [isImageZoomModal, isSetImageZoomModal] = useState(undefined);
   const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user); // ***
+  const { me } = useSelector((state) => state.user);
   const [inputValue, setInputValue] = useState({
     id: router.query['id'],
     date: '',
@@ -26,6 +27,10 @@ const Modify = (props) => {
       ...inputValue,
       [e.target.id]: e.target.value,
     });
+  };
+
+  const handleImageClick = () => {
+    isSetImageZoomModal(true);
   };
 
   const submitFuction = async (e) => {
@@ -43,15 +48,6 @@ const Modify = (props) => {
           router.push('/main');
         }
       });
-    // axios
-    //   .put(
-    //     'http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/eaten',
-    //     inputValue,
-    //   )
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((error) => console.log(error));
   };
 
   const getAuth = () => {
@@ -112,6 +108,7 @@ const Modify = (props) => {
               className="rounded-3xl"
               src={`http://localhost:5000/${router.query.img}`}
               layout="fill"
+              onClick={handleImageClick}
             />
           )}
         </div>
@@ -167,6 +164,13 @@ const Modify = (props) => {
           수정
         </button>
       </div>
+
+      {isImageZoomModal && (
+        <ImageZoomModal
+          isSetImageZoomModal={isSetImageZoomModal}
+          foodImage={router.query.img}
+        />
+      )}
     </div>
   );
 };

@@ -115,21 +115,6 @@ function FoodInFoFoodName({ response }) {
     }
   }, [router.query]);
 
-  // useEffect(()=>{
-  //   axios.get(`http://elice-kdt-ai-3rd-team15.koreacentral.cloudapp.azure.com/api/yamm/food/nutrient?food_name=${query["name"]}`)
-  //   .then((res)=>{
-  //     console.log(res)
-  //     setTanDanGi({
-  //       ...tanDanGi,
-  //       ["calorie"] : parseInt(res.data["calorie"]),
-  //       ["carb"] : parseInt(res.data["carb"]),
-  //       ["protein"] : parseInt(res.data["protein"]),
-  //       ["fat"] : parseInt(res.data["fat"])
-  //   });
-  //   })
-  //   .catch((error)=> console.log(error, "error 탄단지 1개"))
-  // }, []);
-
   useEffect(() => {
     if (tanDanGi['carb'] != '') {
       setData({

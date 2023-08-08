@@ -1,14 +1,17 @@
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 const ImageZoomModal = ({ isSetImageZoomModal, foodImage }) => {
   const router = useRouter();
 
-  const handleDeleteClick = () => {};
+  useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
 
   return (
     <>
-      {/* w-screen h-screen inset-0 absolute bg-gray-200 bg-opacity-75 */}
       <div
         onClick={(e) => {
           isSetImageZoomModal(false);

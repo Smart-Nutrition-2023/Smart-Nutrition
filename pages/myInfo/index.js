@@ -77,6 +77,7 @@ export default function MyInfo() {
               className="rounded-3xl"
               src={`http://localhost:5000/${me['profile_img']}`}
               layout="fill"
+              objectFit="cover"
             />
           )}
         </div>
@@ -133,7 +134,6 @@ export default function MyInfo() {
       <div className="flex flex-col items-center">
         <button
           className="bg-yellow1 mx-8 mt-8 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          // onClick={handleMyInfoModifyClick}
           onClick={handleModifyMyInfoClick}
         >
           회원정보 수정

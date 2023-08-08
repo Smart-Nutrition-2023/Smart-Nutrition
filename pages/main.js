@@ -134,6 +134,7 @@ export default function Home({}) {
                     className="rounded-3xl"
                     src={`http://localhost:5000/${me['profile_img']}`}
                     layout={'fill'}
+                    objectFit="cover"
                   />
                 </div>
               </div>

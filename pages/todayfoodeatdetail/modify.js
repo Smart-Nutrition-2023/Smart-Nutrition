@@ -93,6 +93,7 @@ const Modify = (props) => {
                 className=" rounded-3xl"
                 src={`http://localhost:5000/${me['profile_img']}`}
                 layout={'fill'}
+                objectFit="cover"
               />
             </div>
             <div className="w-[10px]"></div>
@@ -108,6 +109,7 @@ const Modify = (props) => {
               className="rounded-3xl"
               src={`http://localhost:5000/${router.query.img}`}
               layout="fill"
+              objectFit="cover"
               onClick={handleImageClick}
             />
           )}

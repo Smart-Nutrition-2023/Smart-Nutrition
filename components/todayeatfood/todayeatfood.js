@@ -52,7 +52,7 @@ const TodayEatFood = ({ todayFoodInfo }) => {
             todayFoodInfo.map((images) => (
               <div className="" key={images.id}>
                 <img
-                  className="w-full rounded-t-3xl px-2 h-[155px]"
+                  className="w-full rounded-t-3xl px-2 h-[155px] object-fit-cover"
                   layout="fill"
                   src={`http://localhost:5000/${images.image}`}
                 ></img>

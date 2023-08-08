@@ -169,6 +169,7 @@ function FoodInFoFoodName({ response }) {
             className={'rounded-2xl shadow-2xl'}
             src={`http://localhost:5000/${router.query.img}`}
             layout="fill"
+            objectFit="cover"
             onClick={handleImageClick}
           />
         </div>

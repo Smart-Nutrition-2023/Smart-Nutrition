@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 
 const ImageZoomModal = ({ isSetImageZoomModal, foodImage }) => {
   const router = useRouter();
 
-  useEffect(() => {
-    document.body.style = `overflow: hidden`;
-    return () => (document.body.style = `overflow: auto`);
-  }, []);
+  // useEffect(() => {
+  //   document.body.style = `overflow: hidden`;
+  //   return () => (document.body.style = `overflow: auto`);
+  // }, []);
 
   return (
     <>
@@ -16,16 +15,11 @@ const ImageZoomModal = ({ isSetImageZoomModal, foodImage }) => {
         onClick={(e) => {
           isSetImageZoomModal(false);
         }}
-        className="z-50 w-screen h-screen inset-0 absolute bg-gray-200 bg-opacity-75"
+        className="z-50 inset-0 absolute"
       >
-        <div className="w-100 h-100">
-          <div className="h-4/6">
-            <Image
-              // className={'rounded-2xl shadow-2xl'}
-              src={`http://localhost:5000/${foodImage}`}
-              layout="fill"
-              objectFit="contain"
-            />
+        <div className="bg-white shadow-lg border-2 border-slate-200 p-1 mb-4 fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="flex justify-center ">
+            <img src={`http://localhost:5000/${foodImage}`} />
           </div>
         </div>
       </div>

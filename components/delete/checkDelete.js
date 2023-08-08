@@ -27,7 +27,7 @@ const CheckDeleteModal = ({ isSetCheckDeleteModal, foodId }) => {
         onClick={(e) => {
           isSetCheckDeleteModal(false);
         }}
-        className="h-screen inset-0 absolute"
+        className="inset-0 absolute"
       >
         <div className="bg-white w-[300px] shadow-lg border-2 border-slate-200 px-8 py-6 mb-4 fixed rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div className="flex justify-center">정말 삭제하시겠습니까?</div>

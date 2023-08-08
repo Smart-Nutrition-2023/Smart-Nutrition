@@ -30,10 +30,10 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
   const [inputValue, setInputValue] = useState({
     password1: '',
     password2: '',
-    name: '',
-    nickname: '',
-    phonenumber: '',
-    taste: '',
+    name: me['name'],
+    nickname: me['nickname'],
+    phonenumber: me['phonenumber'],
+    taste: me['taste'],
   });
 
   const onChange = (e) => {
@@ -152,7 +152,7 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
               id="name"
               type="text"
               maxLength={30}
-              placeholder={`${me['name']}`}
+              value={inputValue.name}
             ></input>
           </div>
 
@@ -170,7 +170,7 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
               id="nickname"
               type="text"
               maxLength={30}
-              placeholder={`${me['nickname']}`}
+              value={inputValue.nickname}
             ></input>
           </div>
 
@@ -205,7 +205,7 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
               id="taste"
               type="text"
               maxLength={30}
-              placeholder={`${me['taste']}`}
+              value={inputValue.taste}
             ></input>
           </div>
 
@@ -223,7 +223,7 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
               id="phonenumber"
               type="text"
               maxLength={20}
-              placeholder={`${me['phonenumber']}`}
+              value={inputValue.phonenumber}
             ></input>
           </div>
 

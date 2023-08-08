@@ -16,11 +16,12 @@ const Modify = (props) => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
   const [inputValue, setInputValue] = useState({
-    id: router.query['id'],
+    id: '',
     date: '',
     food_name: '',
     memo: '',
   });
+
   const onChange = (e) => {
     console.log(e.target.id, e.target.value);
     setInputValue({
@@ -81,6 +82,19 @@ const Modify = (props) => {
     getAuth();
   }, []);
 
+  useEffect(() => {
+    if (Object.keys(router.query).length !== 0) {
+      console.log('QUQUUQ', router.query);
+      setInputValue({
+        ...inputValue,
+        id: router.query.id,
+        date: queryDate.substr(0, 10),
+        food_name: router.query.name,
+        memo: router.query.memo,
+      });
+    }
+  }, [router.query]);
+
   return (
     <div className="container mx-auto lg:w-[500px] h-full rounded-3xl">
       <TopNav />
@@ -129,7 +143,7 @@ const Modify = (props) => {
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
             id="date"
             type="text"
-            placeholder={`${queryDate.substr(0, 10)}`}
+            value={inputValue.date}
           ></input>
         </div>
         <div className="mb-4">
@@ -144,7 +158,7 @@ const Modify = (props) => {
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
             id="food_name"
             type="text"
-            placeholder={`${router.query.name}`}
+            value={inputValue.food_name}
           ></input>
         </div>
       </div>
@@ -154,7 +168,7 @@ const Modify = (props) => {
           onChange={onChange}
           id="memo"
           className="h-[100px] focus:h-[170px] bg-white p-3 break-words w-11/12 placeholder:italic placeholder:text-center placeholder:text-slate-400 "
-          placeholder={`${router.query.memo}`}
+          value={inputValue.memo}
         ></textarea>
       </div>
 

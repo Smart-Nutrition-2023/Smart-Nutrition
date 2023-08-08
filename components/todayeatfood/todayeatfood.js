@@ -50,9 +50,9 @@ const TodayEatFood = ({ todayFoodInfo }) => {
         <Slider {...settings}>
           {todayFoodInfo &&
             todayFoodInfo.map((images) => (
-              <div className="" key={images.id}>
+              <div key={images.id}>
                 <img
-                  className="w-full rounded-t-3xl px-2 h-[155px] object-fit-cover"
+                  className="w-full rounded-t-3xl px-2 h-[155px]"
                   layout="fill"
                   src={`http://localhost:5000/${images.image}`}
                 ></img>

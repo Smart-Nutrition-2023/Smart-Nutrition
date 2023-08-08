@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Camera from '../components/Camera';
 import Modal from '../components/Modal';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccessAction } from '../reducers/user';
 import axios from 'axios';
 import UpLoadImg from '../components/community/writeboard/uploadimg';
 import CaptureUpLoad from '../components/captureupload';
@@ -13,6 +15,9 @@ function capture() {
   const [nutrition, setNutrition] = useState();
 
   const [isLogined, setIsLogined] = useState(false);
+
+  const { accessToken, me } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const imageRef = useRef(null);
 
@@ -90,6 +95,16 @@ function capture() {
       .then((json) => {
         if (json.isLogin === 'True') {
           setIsLogined(true);
+          dispatch(
+            loginSuccessAction({
+              email: json.email,
+              name: json.name,
+              nickname: json.nickname,
+              phonenumber: json.phonenumber,
+              taste: json.taste,
+              profile_img: json.profile_img,
+            }),
+          );
         } else {
           setIsLogined(false);
           router.push({

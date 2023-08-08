@@ -122,32 +122,11 @@ function foodinfo(props) {
     for (var pair of input.entries()) console.log(pair);
   };
 
-  const getAuth = () => {
-    fetch('http://localhost:5000/auth', {
-      credentials: 'include',
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.isLogin == 'True') {
-          dispatch(
-            loginSuccessAction({
-              email: json.email,
-              name: json.name,
-              nickname: json.nickname,
-              phonenumber: json.phonenumber,
-              taste: json.taste,
-              profile_img: json.profile_img,
-            }),
-          );
-        } else {
-          router.push('/main');
-        }
-      });
-  };
-
   useEffect(() => {
-    // getAuth();
-  }, []);
+    if (!me) {
+      router.push('/capture');
+    }
+  }, [me]);
 
   return (
     <div className="container mx-auto h-screen bg-slate-50 rounded-3xl">

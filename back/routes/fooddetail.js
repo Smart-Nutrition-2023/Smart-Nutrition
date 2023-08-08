@@ -75,10 +75,9 @@ router.post('/delete', async (req, res) => {
     console.log('successfully deleted image file.');
   });
 
-  const [rows, fields] = await conn.query(
-    'DELETE FROM todayFood WHERE id = ?',
-    [id],
-  );
+  await conn.query('DELETE FROM foodNutrition WHERE id = ?', [id]);
+  await conn.query('DELETE FROM todayFood WHERE id = ?', [id]);
+
   const sendData = { isDeleted: true };
   res.json(sendData);
   conn.release();

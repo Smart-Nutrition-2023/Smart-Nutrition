@@ -16,7 +16,7 @@ const ImageZoomModal = ({ isSetImageZoomModal, foodImage }) => {
         onClick={(e) => {
           isSetImageZoomModal(false);
         }}
-        className="w-screen h-screen inset-0 absolute bg-gray-200 bg-opacity-75"
+        className="z-50 w-screen h-screen inset-0 absolute bg-gray-200 bg-opacity-75"
       >
         <div className="w-100 h-100">
           <div className="h-4/6">

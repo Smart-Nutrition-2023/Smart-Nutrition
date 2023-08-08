@@ -89,7 +89,7 @@ export default function MyInfo() {
         } else {
           setIsLogined(false);
           router.push({
-            pathname: '/main',
+            pathname: '/login',
           });
         }
       });
@@ -279,12 +279,12 @@ export default function MyInfo() {
               placeholder={`${me['phonenumber']}`}
             ></input>
           )}
+        </div>
 
-          <div className="flex flex-col items-center">
-            <button className="bg-yellow1 mx-8 mt-8 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-              회원정보 저장
-            </button>
-          </div>
+        <div className="flex flex-col items-center">
+          <button className="bg-yellow1 mx-8 mt-8 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            회원정보 저장
+          </button>
         </div>
       </form>
     </div>

@@ -33,10 +33,10 @@ export default function Home({}) {
     if (me == null) {
       router.push({
         pathname: '/login',
-        query: { url: '/myInfo' },
+        query: { url: '/myinfo' },
       });
     } else {
-      router.push('/myInfo');
+      router.push('/myinfo');
     }
   };
 
@@ -166,7 +166,9 @@ export default function Home({}) {
         ) : (
           <TodayEatFood todayFoodInfo={todayFoodInfo} />
         )}
-        <div className="font-bold px-8 pt-8 text-xl">달력</div>
+        <div id="calendar" className="font-bold px-8 pt-8 text-xl">
+          달력
+        </div>
         <div className="mt-0">
           <Calendar className="mt-0" />
         </div>

@@ -21,7 +21,7 @@ const HamburgerMenu = ({ bgColor }) => {
     });
   };
   const handleCalendarClick = () => {
-    console.log('Calendar Clicked');
+    router.push('/main');
   };
 
   return (

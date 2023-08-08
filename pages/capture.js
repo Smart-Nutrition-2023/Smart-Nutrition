@@ -93,7 +93,7 @@ function capture() {
         } else {
           setIsLogined(false);
           router.push({
-            pathname: '/main',
+            pathname: '/login',
           });
         }
       });
@@ -103,8 +103,8 @@ function capture() {
     <div className="container mx-auto lg:w-[500px] h-screen bg-slate-50 rounded-3xl">
       <div className="">
         {showModal ? <Modal closeModal={closeModal} /> : null}
-        <div className="h-screen text-white bg-main/30 p-2 pd-8 rounded-3xl">
-          <div className="mt-10">
+        <div className="flex flex-col items-center h-screen text-white bg-main/30 p-2 pd-8 rounded-3xl">
+          <div className="mt-5">
             <Camera className="" />
             {/* <input type="file" id="file" ref={imageRef} className="file" accept='jpg, jpeg, png, gif' onChange={onLoadFile}/> */}
             <CaptureUpLoad onLoadFile={onLoadFile} />

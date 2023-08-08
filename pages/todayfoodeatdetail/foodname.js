@@ -77,7 +77,7 @@ function FoodInFoFoodName({ response }) {
         } else {
           setIsLogined(false);
           router.push({
-            pathname: '/main',
+            pathname: '/login',
           });
         }
       });

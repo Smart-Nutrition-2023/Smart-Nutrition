@@ -75,7 +75,7 @@ const Modify = (props) => {
         } else {
           setIsLogined(false);
           router.push({
-            pathname: '/main',
+            pathname: '/login',
           });
         }
       });

@@ -52,7 +52,7 @@ function FoodInFo({ response }) {
         } else {
           setIsLogined(false);
           router.push({
-            pathname: '/main',
+            pathname: '/login',
           });
         }
       });

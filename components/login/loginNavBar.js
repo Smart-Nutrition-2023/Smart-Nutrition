@@ -40,6 +40,7 @@ export default function LoginNavbar() {
               profile_img: userProfileImg,
             }),
           );
+          router.push('/main');
         } else {
           alert(json.isLogin);
         }
@@ -59,12 +60,6 @@ export default function LoginNavbar() {
     dispatch(loginRequestAction({ email, password }));
     postLogin(email, password);
   }, [password, email]);
-
-  useEffect(() => {
-    if (logInDone) {
-      router.push('/main');
-    }
-  }, [logInDone]);
 
   useEffect(() => {
     console.log('userinfo - dispatch', accessToken);

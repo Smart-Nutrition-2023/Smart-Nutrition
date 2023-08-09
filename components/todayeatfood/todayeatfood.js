@@ -7,6 +7,7 @@ const settings = {
   className: ' ',
   centerMode: true,
   infinite: true,
+  dots: true,
   centerPadding: '30px',
   slidesToShow: 1,
   speed: 500,

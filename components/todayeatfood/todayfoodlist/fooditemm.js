@@ -14,6 +14,7 @@ const settings = {
   className: 'w-full h-5/6  pt-1',
   centerMode: true,
   infinite: true,
+  dots: true,
   centerPadding: '5px',
   slidesToShow: 1,
   speed: 500,
@@ -72,7 +73,7 @@ const FoodItemm = ({ foodData, testData }) => {
       ) : (
         <div className="flex">
           {/* {console.log(foodData)} */}
-          <div className="w-2/6 mt-2 flex flex-col items-center justify-center">
+          <div className="w-2/6 flex flex-col items-center justify-center">
             <div className="col-span-1 rounded-full w-4/6 min-h-[50px] min-w-[50px] flex justify-center items-center relative">
               <SmileClick />
             </div>
@@ -84,7 +85,7 @@ const FoodItemm = ({ foodData, testData }) => {
             </div>
           </div>
 
-          <div className="w-4/6 flex justify-end mt-2">
+          <div className="w-4/6 flex justify-end mb-4">
             <div className="rounded-2xl w-4/6 min-h-[200px] h-full mx-16 flex items-center justify-center">
               {
                 <Slider {...settings}>

@@ -58,7 +58,7 @@ function Search({
                       key={index}
                       type="button"
                       value={food['음식']}
-                      className="rounded-3xl text-black bg-white text-sm border-2 border-solid border-main hover:bg-main hover:text-white"
+                      className="h-[25px] rounded-3xl text-black bg-white text-sm border-2 border-solid border-main hover:bg-main hover:text-white"
                       onClick={selectFood}
                     />
                   );

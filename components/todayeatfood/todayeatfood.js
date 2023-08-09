@@ -42,16 +42,16 @@ const TodayEatFood = ({ todayFoodInfo }) => {
       <div className="font-bold px-8 pt-6 pb-2 mt-6 text-xl animate-pulse  ">
         <p>오늘 먹은 음식</p>
       </div>
-      <div
-        className="px-8 ml-5 mr-5 rounded-2xl"
-        onClick={(e) => {
-          routeTodayFoodEatDetail();
-        }}
-      >
+      <div className="px-8 ml-5 mr-5 rounded-2xl">
         <Slider {...settings}>
           {todayFoodInfo &&
             todayFoodInfo.map((images) => (
-              <div key={images.id}>
+              <div
+                key={images.id}
+                onClick={(e) => {
+                  routeTodayFoodEatDetail();
+                }}
+              >
                 <img
                   className="w-full rounded-t-3xl px-2 h-[155px]"
                   layout="fill"
@@ -62,7 +62,7 @@ const TodayEatFood = ({ todayFoodInfo }) => {
                     <p className="font-bold text-lg pt-2 ">
                       {images.food_name}
                     </p>
-                    <p className="text-lg h-1/2 break-all   p-1 w-full overflow-y-hidden">
+                    <p className="text-md h-1/2 break-all p-1 w-full overflow-y-hidden">
                       {images.memo}
                     </p>
                   </div>

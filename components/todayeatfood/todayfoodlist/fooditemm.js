@@ -19,17 +19,6 @@ const settings = {
   slidesToShow: 1,
   speed: 500,
 };
-// let date = new Date(testData[0]["date"]);
-// let formatDate = format(date, "H시 mm분");
-// const [testData1, setTestData1] = useState(testData)
-
-// const routeFoodname = () => {
-//   router.push({
-//     pathname : `/todayfoodeatdetail/foodname`,
-//     query: { "data" : testData1 }
-// });
-// }
-// const router = useRouter();
 
 const FoodItemm = ({ foodData, testData }) => {
   console.log('FoodItemm prop(testData):', testData);
@@ -64,6 +53,7 @@ const FoodItemm = ({ foodData, testData }) => {
   // useEffect(()=>{
   //   setLoading()
   // }, [formDate]);
+
   return (
     <>
       {loading ? (

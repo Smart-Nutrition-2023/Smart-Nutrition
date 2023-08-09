@@ -65,7 +65,9 @@ export default function Camera(props) {
       body: input,
     })
       .then((res) => res.json())
-      .then((json) => setNutrition(json));
+      .then((json) => {
+        setNutrition(json);
+      });
   };
 
   return (

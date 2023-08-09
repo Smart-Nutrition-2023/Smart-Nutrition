@@ -92,6 +92,7 @@ function foodinfo(props) {
   };
   const selectFood = (e) => {
     setFoodName(e.target.value);
+    changeFood(e.target.value);
   };
   const moveMain = () => {
     async function fetchData() {
@@ -120,6 +121,25 @@ function foodinfo(props) {
       body: input,
     });
     for (var pair of input.entries()) console.log(pair);
+  };
+
+  const changeFood = (input) => {
+    fetch(
+      'http://localhost:5000/foodinfo/change?' +
+        new URLSearchParams({
+          food: input,
+        }),
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        for (const key in json) {
+          if (key === '음식') {
+            setFoodName(json[key]);
+          } else {
+            nutrition[key] = json[key];
+          }
+        }
+      });
   };
 
   useEffect(() => {

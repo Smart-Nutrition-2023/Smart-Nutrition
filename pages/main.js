@@ -162,12 +162,16 @@ export default function Home({}) {
             </div>
           </button>
         </div>
-        {!todayFoodInfo || todayFoodInfo.length <= 0 ? (
-          <TodayEatFoodNull />
-        ) : (
-          <TodayEatFood todayFoodInfo={todayFoodInfo} />
-        )}
-        <div id="calendar" className="font-bold px-8 pt-8 text-xl">
+
+        <div className="mt-6">
+          {!todayFoodInfo || todayFoodInfo.length <= 0 ? (
+            <TodayEatFoodNull />
+          ) : (
+            <TodayEatFood todayFoodInfo={todayFoodInfo} />
+          )}
+        </div>
+
+        <div id="calendar" className="font-bold px-8 pt-8 mt-6 text-xl">
           달력
         </div>
         <div className="mt-0">

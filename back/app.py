@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, jsonify
 from flask_restx import Api, Resource
 import torch
 from PIL import Image
@@ -34,9 +34,15 @@ class ObjectDetection(Resource):
         with open('detected.json', mode='r+', encoding='utf8') as j:
             json_data = json.load(j)
 
-            # 탐지된 객체 없을 경우 -1 반환
+           # 탐지된 객체 없을 경우 -1 반환
             if len(json_data) == 0:
-                return -1
+                with open('nofood.json', mode='r+', encoding='utf8') as n:
+                    nofood = json.load(n)
+                nofood = make_response(nofood)
+                nofood.headers.add("Access-Control-Allow-Origin", "*")
+                nofood.headers.add("Access-Control-Allow-Headers", "*")
+                nofood.headers.add("Access-Control-Allow-Methods", "*")
+                return nofood
 
             max_conf = 0
             max_conf_idx = 0

@@ -72,4 +72,21 @@ router.get('/search', async (req, res) => {
   res.json(searchResult);
 });
 
+router.get('/change', async (req, res) => {
+  const change = req.query.food;
+  const changeResult = [];
+
+  const foodList = xlsx.readFile(__dirname + '/../db1.xlsx');
+  const firstSheetName = foodList.SheetNames[0];
+  const firstSheet = foodList.Sheets[firstSheetName];
+  const firstSheetJson = xlsx.utils.sheet_to_json(firstSheet);
+
+  firstSheetJson.forEach(function (food) {
+    if (food['음식'] == change) {
+      changeResult.push(food);
+    }
+  });
+  res.json(changeResult[0]);
+});
+
 module.exports = router;

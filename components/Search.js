@@ -21,7 +21,6 @@ function Search({
 
   const search = () => {
     async function fetchData() {
-      console.log('WORD:', searchResult);
       fetch(
         'http://localhost:5000/foodinfo/search?' +
           new URLSearchParams({
@@ -51,7 +50,7 @@ function Search({
             />
             <SearchIcon className="ml-2" onClick={search} />
           </div>
-          <div className="h-[150px] overflow-auto grid grid-cols-2 gap-2 mt-4 mx-2">
+          <div className="h-[125px] overflow-auto grid grid-cols-2 gap-2 mt-4 mx-2">
             {foodList
               ? foodList.map(function (food, index) {
                   return (

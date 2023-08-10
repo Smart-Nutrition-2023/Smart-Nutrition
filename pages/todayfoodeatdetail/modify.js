@@ -104,7 +104,7 @@ const Modify = (props) => {
           <div className="flex mt-12 mb-[-16px] justify-end mr-5 items-center">
             <div className=" rounded-3xl relative w-[30px] h-[30px]">
               <Image
-                className=" rounded-3xl"
+                className="rounded-3xl"
                 src={`http://localhost:5000/${me['profile_img']}`}
                 layout={'fill'}
                 objectFit="cover"

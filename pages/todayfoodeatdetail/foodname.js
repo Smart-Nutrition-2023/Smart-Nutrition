@@ -186,7 +186,7 @@ function FoodInFoFoodName({ response }) {
       </div>
 
       <div className="flex-col item justify-center bg-neutral-200 mx-10 mb-10 px-4 py-2 rounded-2xl ml-5 mr-5">
-        <div className='items-center justify-center flex font-["Jalnan"]'>
+        <div className='items-center justify-center flex font-["Jalnan"] mb-4'>
           📌 Ya---M 일기
         </div>
         <div className="items-center justify-center flex">

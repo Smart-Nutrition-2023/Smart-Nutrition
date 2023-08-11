@@ -189,7 +189,7 @@ function FoodInFoFoodName({ response }) {
         <div className='items-center justify-center flex font-["Jalnan"] mb-4'>
           📌 Ya---M 일기
         </div>
-        <div className="items-center justify-center flex">
+        <div className="items-center justify-center flex break-all">
           {router.query['memo']}
         </div>
       </div>

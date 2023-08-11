@@ -62,11 +62,11 @@ const TodayEatFood = ({ todayFoodInfo }) => {
                 </div>
 
                 <div className="w-full absolute px-2 top-[155px]">
-                  <div className="w-100 h-20 pt-1 px-4 bg-main rounded-b-3xl break-all ">
+                  <div className="w-100 h-20 pt-1 px-4 bg-main rounded-b-3xl break-all">
                     <p className="font-bold text-lg pt-2 ">
                       {images.food_name}
                     </p>
-                    <p className="text-md h-1/2 break-all p-1 w-full overflow-y-hidden">
+                    <p className="text-md h-1/2 break-all py-2 w-full overflow-y-hidden">
                       {images.memo}
                     </p>
                   </div>

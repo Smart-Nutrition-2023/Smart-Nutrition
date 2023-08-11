@@ -47,18 +47,22 @@ const TodayEatFood = ({ todayFoodInfo }) => {
           {todayFoodInfo &&
             todayFoodInfo.map((images) => (
               <div
+                className="relative h-[235px]"
                 key={images.id}
                 onClick={(e) => {
                   routeTodayFoodEatDetail();
                 }}
               >
-                <img
-                  className="w-full rounded-t-3xl px-2 h-[155px]"
-                  layout="fill"
-                  src={`http://localhost:5000/${images.image}`}
-                ></img>
-                <div className="px-2">
-                  <div className="w-auto h-20 pt-1 px-4 bg-main rounded-b-3xl break-all ">
+                <div className="absolute h-[155px] overflow-hidden">
+                  <img
+                    className="w-100 h-100 rounded-t-3xl px-2"
+                    layout="fill"
+                    src={`http://localhost:5000/${images.image}`}
+                  ></img>
+                </div>
+
+                <div className="w-full absolute px-2 top-[155px]">
+                  <div className="w-100 h-20 pt-1 px-4 bg-main rounded-b-3xl break-all ">
                     <p className="font-bold text-lg pt-2 ">
                       {images.food_name}
                     </p>

@@ -90,6 +90,7 @@ const FoodItemm = ({ foodData, testData }) => {
                         className={'rounded-2xl shadow-2xl'}
                         src={`http://localhost:5000/${test['image']}`}
                         layout="fill"
+                        objectFit="cover"
                       />
                       <div className="absolute w-full bottom-0 px-2 bg-yellow1 rounded-b-2xl bg-opacity-90">
                         <p className="text-xs text-neutral-200 font-sans m-3 ml-[-2px]">

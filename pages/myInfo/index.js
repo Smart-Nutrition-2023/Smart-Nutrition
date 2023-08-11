@@ -15,10 +15,6 @@ export default function MyInfo() {
   const dispatch = useDispatch();
   const [isModifyMyInfoModal, isSetModifyMyInfoModal] = useState(undefined);
 
-  const handleMyInfoModifyClick = () => {
-    router.push('/myinfo/modify');
-  };
-
   const handleModifyMyInfoClick = () => {
     isSetModifyMyInfoModal(true);
   };

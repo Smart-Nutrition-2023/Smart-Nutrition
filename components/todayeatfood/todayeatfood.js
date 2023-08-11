@@ -53,7 +53,7 @@ const TodayEatFood = ({ todayFoodInfo }) => {
                   routeTodayFoodEatDetail();
                 }}
               >
-                <div className="absolute h-[155px] overflow-hidden">
+                <div className="absolute h-[175px] overflow-hidden">
                   <img
                     className="w-100 h-100 rounded-t-3xl px-2"
                     layout="fill"
@@ -61,12 +61,10 @@ const TodayEatFood = ({ todayFoodInfo }) => {
                   ></img>
                 </div>
 
-                <div className="w-full absolute px-2 top-[155px]">
-                  <div className="w-100 h-20 pt-1 px-4 bg-main rounded-b-3xl break-all">
-                    <p className="font-bold text-lg pt-2 ">
-                      {images.food_name}
-                    </p>
-                    <p className="text-md h-1/2 break-all py-2 w-full overflow-y-hidden">
+                <div className="w-full absolute px-2 top-[175px]">
+                  <div className="w-100 h-[60px] px-4 bg-main rounded-b-3xl break-all">
+                    <p className="font-bold text-lg pt-1">{images.food_name}</p>
+                    <p className="text-md h-1/2 break-all w-full overflow-y-hidden">
                       {images.memo}
                     </p>
                   </div>

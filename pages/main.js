@@ -113,7 +113,7 @@ export default function Home({}) {
 
   return (
     <>
-      <div className="container mx-auto lg:w-[500px] h-full bg-slate-50 rounded-3xl">
+      <div className="container mx-auto w-[500px] h-full bg-slate-50 rounded-3xl">
         <div className="h-40 p-8 text-left w-full">
           {isLogined == false ? (
             <span

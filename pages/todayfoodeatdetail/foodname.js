@@ -137,7 +137,7 @@ function FoodInFoFoodName({ response }) {
   }, [tanDanGi]);
 
   return (
-    <div className="container mx-auto lg:w-[500px] h-full rounded-3xl">
+    <div className="container mx-auto w-[500px] h-full rounded-3xl">
       <TopNav />
       <div className="flex justify-end mx-5 mt-8">
         <div

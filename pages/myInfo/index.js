@@ -51,7 +51,7 @@ export default function MyInfo() {
   }, []);
 
   return (
-    <div className="container mx-auto lg:w-[500px] h-full pb-8 rounded-3xl">
+    <div className="container mx-auto w-[500px] h-full pb-8 rounded-3xl">
       <TopNav />
       <div className="p-8 text-left w-full">
         {isLogined === false ? null : (

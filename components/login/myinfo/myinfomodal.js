@@ -84,7 +84,7 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
           onClick={(e) => {
             e.stopPropagation();
           }}
-          className="bg-white lg:w-[500px] h-3/6 shadow-md px-8 pt-6 pb-8 mb-4 overflow-auto fixed p-5 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          className="bg-white lg:w-[450px] h-3/6 shadow-md px-8 pt-6 pb-8 mb-4 overflow-auto fixed p-5 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
         >
           <div className="mb-4">
             <label
@@ -151,7 +151,7 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:border-yellow1 focus:ring-yellow1 focus:border-2  focus:shadow-outline"
               id="name"
               type="text"
-              maxLength={30}
+              maxLength={20}
               value={inputValue.name}
             ></input>
           </div>
@@ -169,7 +169,7 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
               className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="nickname"
               type="text"
-              maxLength={30}
+              maxLength={20}
               value={inputValue.nickname}
             ></input>
           </div>
@@ -204,7 +204,7 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
               className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="taste"
               type="text"
-              maxLength={30}
+              maxLength={20}
               value={inputValue.taste}
             ></input>
           </div>

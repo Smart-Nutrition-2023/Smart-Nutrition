@@ -51,13 +51,13 @@ export default function MyInfo() {
   }, []);
 
   return (
-    <div className="container mx-auto pb-8 lg:w-[500px] h-full bg-slate-50 rounded-3xl">
+    <div className="container mx-auto lg:w-[500px] h-full pb-8 rounded-3xl">
       <TopNav />
       <div className="p-8 text-left w-full">
         {isLogined === false ? null : (
-          <div className=" w-full font-bold text-3xl text-yellow1 ">
+          <div className="w-full font-bold text-3xl text-yellow1">
             <div className="flex justify-end  items-center">
-              "<span className='font-["Jalnan"] '>{me['nickname']}</span>" 님
+              "<span className='font-["Jalnan"]'>{me['nickname']}</span>" 님
             </div>
           </div>
         )}
@@ -66,7 +66,7 @@ export default function MyInfo() {
         </div>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-4">
         <div className="w-[200px] h-[200px] relative">
           {me == null ? null : (
             <Image
@@ -81,55 +81,55 @@ export default function MyInfo() {
 
       <div className="flex flex-col justify-center items-center mb-5">
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
             이메일
           </div>
           {me == null ? null : (
-            <div className="block w-[300px]">{`${me['email']}`}</div>
+            <div className="block w-[200px]">{`${me['email']}`}</div>
           )}
         </div>
 
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
           {' '}
-          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
             이름
           </div>
           {me == null ? null : (
-            <div className="block w-[300px]">{`${me['name']}`}</div>
+            <div className="block w-[200px]">{`${me['name']}`}</div>
           )}
         </div>
 
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
             닉네임
           </div>
           {me == null ? null : (
-            <div className="block w-[300px]">{`${me['nickname']}`}</div>
+            <div className="block w-[200px]">{`${me['nickname']}`}</div>
           )}
         </div>
 
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
             음식 취향
           </div>
           {me == null ? null : (
-            <div className="block w-[300px]">{`${me['taste']}`}</div>
+            <div className="block w-[200px]">{`${me['taste']}`}</div>
           )}
         </div>
 
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[300px] text-gray-700 font-bold">
+          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
             휴대폰 번호
           </div>
           {me == null ? null : (
-            <div className="block w-[300px]">{`${me['phonenumber']}`}</div>
+            <div className="block w-[200px]">{`${me['phonenumber']}`}</div>
           )}
         </div>
       </div>
 
       <div className="flex flex-col items-center">
         <button
-          className="bg-yellow1 mx-8 mt-8 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-yellow1 mx-8 mt-10 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           onClick={handleModifyMyInfoClick}
         >
           회원정보 수정

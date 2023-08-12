@@ -69,7 +69,7 @@ export default function LoginNavbar() {
   return (
     <div className="container mx-auto lg:w-[500px] h-full rounded-3xl">
       <TopNav />
-      <div className=" mt-36"></div>
+      <div className="mt-36"></div>
       {
         <LoginForm
           onSubmit={onSubmit}

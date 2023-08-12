@@ -2,52 +2,47 @@ import Slider from 'react-slick';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
-import { useRef } from 'react';
-import { ArrowRightOutlined, ArrowLeftOutlined } from '@mui/icons-material';
+import { useState } from 'react';
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 const Prev = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div
+    <ArrowBackIos
       className={className}
-      style={{ ...style, color: 'black' }}
+      style={{ ...style, display: 'block', color: 'black' }}
       onClick={onClick}
-    >
-      <ArrowLeftOutlined fontSize="large" />
-    </div>
+    />
   );
 };
 
 const Next = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div
+    <ArrowForwardIos
       className={className}
-      style={{ ...style, color: 'black' }}
+      style={{ ...style, display: 'block', color: 'black' }}
       onClick={onClick}
-    >
-      <ArrowRightOutlined fontSize="large" />
-    </div>
+    />
   );
 };
 
 const TodayEatFood = ({ todayFoodInfo }) => {
   const router = useRouter();
   const { user } = useSelector((state) => state.user);
-
-  const slickRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const settings = {
     centerMode: true,
     infinite: true,
-    dots: true,
-    centerPadding: '0px', // centerPadding: '30px',
+    centerPadding: '0px',
     slidesToShow: 1,
     slidesToScroll: 1,
     speed: 500,
     autoplay: true,
     prevArrow: <Prev />,
     nextArrow: <Next />,
+    beforeChange: (slide, newSlide) => setCurrentSlide(newSlide),
   };
 
   const routeTodayFoodEatDetail = () => {
@@ -69,12 +64,13 @@ const TodayEatFood = ({ todayFoodInfo }) => {
   };
 
   return (
-    <div className="">
-      <div className="font-bold px-8 pt-6 pb-2 mt-6 text-xl animate-pulse">
+    <div>
+      <div className="font-bold px-8 pt-6 pb-2 mt-10 text-xl animate-pulse">
         <p>오늘 먹은 음식</p>
       </div>
+
       <div className="px-8 ml-5 mr-5 rounded-2xl">
-        <Slider {...settings} ref={slickRef}>
+        <Slider {...settings}>
           {todayFoodInfo &&
             todayFoodInfo.map((images) => (
               <div
@@ -92,7 +88,7 @@ const TodayEatFood = ({ todayFoodInfo }) => {
                 />
 
                 <div className="absolute w-full bottom-0 px-6 bg-yellow1 rounded-b-3xl bg-opacity-90">
-                  <p className="text-md font-bold font-sans mt-1 mb-1 ml-[-2px] break-all">
+                  <p className="text-md font-bold font-sans mt-2 mb-1 ml-[-2px] break-all">
                     {images.food_name}
                   </p>
                   <p className="mb-2 flex justify-first text-xs font-sans overflow-hidden break-all h-[16px]">
@@ -102,6 +98,10 @@ const TodayEatFood = ({ todayFoodInfo }) => {
               </div>
             ))}
         </Slider>
+      </div>
+
+      <div className="flex justify-center">
+        {currentSlide + 1} / {todayFoodInfo.length}
       </div>
     </div>
   );

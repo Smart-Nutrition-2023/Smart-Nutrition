@@ -150,7 +150,7 @@ export default function Home({}) {
           </div>
         </div>
 
-        <div className="font-bold px-8 py-2 text-xl">사진 업로드</div>
+        <div className="font-bold px-8 pt-4 pb-2 text-xl">사진 업로드</div>
         <div className="flex justify-center px-8">
           <button
             className="w-full h-48 top-1/2 bg-slate-800 rounded-3xl flex flex-col items-center text-white"
@@ -171,7 +171,7 @@ export default function Home({}) {
           )}
         </div>
 
-        <div id="calendar" className="font-bold px-8 pt-8 mt-6 text-xl">
+        <div id="calendar" className="font-bold px-8 pt-8 mt-10 text-xl">
           달력
         </div>
         <div className="mt-0">

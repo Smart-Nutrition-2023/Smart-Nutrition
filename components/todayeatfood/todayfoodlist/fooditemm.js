@@ -9,25 +9,37 @@ import Link from 'next/link';
 import moment from 'moment';
 import ReactLoading from 'react-loading';
 import Router from 'next/router';
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const settings = {
-  className: 'w-full h-5/6  pt-1',
-  centerMode: true,
-  infinite: true,
-  dots: true,
-  centerPadding: '5px',
-  slidesToShow: 1,
-  speed: 500,
+const Prev = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <ArrowBackIos
+      className={className}
+      style={{ ...style, display: 'block', color: 'black' }}
+      onClick={onClick}
+    />
+  );
+};
+
+const Next = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <ArrowForwardIos
+      className={className}
+      style={{ ...style, display: 'block', color: 'black' }}
+      onClick={onClick}
+    />
+  );
 };
 
 const FoodItemm = ({ foodData, testData }) => {
-  console.log('FoodItemm prop(testData):', testData);
-
   const [loading, setLoading] = useState(true);
   const [formDate, setFormDate] = useState('');
   const router = useRouter();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const routeFoodname = (e) => {
-    console.log(testData, 'wewewew', e.currentTarget.id);
     Router.push({
       pathname: `/todayfoodeatdetail/foodname`,
       query: {
@@ -40,6 +52,18 @@ const FoodItemm = ({ foodData, testData }) => {
     });
   };
   let date = '';
+
+  const settings = {
+    className: 'w-full h-5/6 pt-1',
+    centerMode: true,
+    infinite: true,
+    centerPadding: '0px',
+    slidesToShow: 1,
+    speed: 500,
+    prevArrow: <Prev />,
+    nextArrow: <Next />,
+    beforeChange: (slide, newSlide) => setCurrentSlide(newSlide),
+  };
 
   useEffect(() => {
     if (testData != undefined) {
@@ -62,7 +86,6 @@ const FoodItemm = ({ foodData, testData }) => {
         </div>
       ) : (
         <div className="flex">
-          {/* {console.log(foodData)} */}
           <div className="w-2/6 flex flex-col items-center justify-center">
             <div className="col-span-1 rounded-full w-4/6 min-h-[50px] min-w-[50px] flex justify-center items-center relative">
               <SmileClick />
@@ -75,8 +98,8 @@ const FoodItemm = ({ foodData, testData }) => {
             </div>
           </div>
 
-          <div className="w-4/6 flex justify-end mb-4">
-            <div className="rounded-2xl w-4/6 min-h-[200px] h-full mx-16 flex items-center justify-center">
+          <div className="w-4/6 flex justify-end flex-col items-center mb-4">
+            <div className="rounded-2xl w-4/6 min-h-[190px] h-full mx-16 flex items-center justify-center">
               {
                 <Slider {...settings}>
                   {testData.map((test, i) => (
@@ -102,6 +125,10 @@ const FoodItemm = ({ foodData, testData }) => {
                   ))}
                 </Slider>
               }
+            </div>
+
+            <div className="text-xs">
+              {currentSlide + 1} / {testData.length}
             </div>
           </div>
         </div>

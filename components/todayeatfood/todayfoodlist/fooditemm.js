@@ -102,7 +102,7 @@ const FoodItemm = ({ foodData, testData }) => {
           </div>
 
           <div className="w-4/6 flex justify-end flex-col items-center mb-4">
-            <div className="rounded-2xl w-4/6 min-h-[190px] h-full mx-16 flex items-center justify-center">
+            <div className="rounded-2xl w-4/6 min-h-[185px] h-full mx-16 flex items-center justify-center">
               {
                 <Slider {...settings}>
                   {testData.map((test, i) => (
@@ -119,7 +119,7 @@ const FoodItemm = ({ foodData, testData }) => {
                         objectFit="cover"
                       />
                       <div className="absolute w-full bottom-0 px-2 bg-yellow1 rounded-b-2xl bg-opacity-90">
-                        <p className="text-xs text-neutral-200 font-sans m-3 ml-[-2px]">
+                        <p className="text-xs text-center text-white font-sans m-2 px-2">
                           {test['food_name']}
                         </p>
                         {/* <p className="mb-2 flex justify-first text-[4px] text-neutral-200 font-sans overflow-hidden h-[15px]">{""}</p> */}

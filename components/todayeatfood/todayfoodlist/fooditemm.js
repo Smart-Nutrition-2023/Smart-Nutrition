@@ -16,6 +16,7 @@ const Prev = (props) => {
   return (
     <ArrowBackIos
       className={className}
+      fontSize="small"
       style={{ ...style, display: 'block', color: 'black' }}
       onClick={onClick}
     />
@@ -27,6 +28,7 @@ const Next = (props) => {
   return (
     <ArrowForwardIos
       className={className}
+      fontSize="small"
       style={{ ...style, display: 'block', color: 'black' }}
       onClick={onClick}
     />
@@ -60,6 +62,7 @@ const FoodItemm = ({ foodData, testData }) => {
     centerPadding: '0px',
     slidesToShow: 1,
     speed: 500,
+    autoplay: true,
     prevArrow: <Prev />,
     nextArrow: <Next />,
     beforeChange: (slide, newSlide) => setCurrentSlide(newSlide),

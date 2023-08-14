@@ -96,12 +96,13 @@ function foodinfo(props) {
   };
   const moveMain = () => {
     async function fetchData() {
+      // const memoChange = memo.replace(/(?:\r\n|\r|\n)/g, '<br />');
       const formData = new FormData();
       formData.append('email', me['email']);
       formData.append('food_name', foodName);
       formData.append('image', foodImageFile);
       formData.append('date', todayDate + ' ' + time);
-      formData.append('memo', memo);
+      formData.append('memo', memo); //memo, memoChange
       formData.append('amount', nutrition['1회제공량(g)']);
       formData.append('natrium', nutrition['나트륨(mg)']);
       formData.append('protein', nutrition['단백질(g)']);

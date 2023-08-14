@@ -168,7 +168,7 @@ const Modify = (props) => {
           onChange={onChange}
           id="memo"
           className="h-[100px] focus:h-[170px] bg-white p-3 break-words w-11/12 placeholder:italic placeholder:text-center placeholder:text-slate-400 "
-          value={inputValue.memo}
+          value={inputValue.memo.replace('<br />', '\n')}
         ></textarea>
       </div>
 

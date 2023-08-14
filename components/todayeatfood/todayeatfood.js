@@ -91,8 +91,11 @@ const TodayEatFood = ({ todayFoodInfo }) => {
                   <p className="text-md font-bold font-sans mt-2 mb-1 ml-[-2px] break-all">
                     {images.food_name}
                   </p>
-                  <p className="mb-2 flex justify-first text-xs font-sans overflow-hidden break-all h-[16px]">
-                    {images.memo}
+                  <p
+                    id="foodMemo"
+                    className="mb-2 flex justify-first text-xs font-sans overflow-hidden break-all h-[16px]"
+                  >
+                    {images.memo.replace('<br />', ' ')}
                   </p>
                 </div>
               </div>

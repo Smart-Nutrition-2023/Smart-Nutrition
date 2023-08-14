@@ -136,6 +136,11 @@ function FoodInFoFoodName({ response }) {
     }
   }, [tanDanGi]);
 
+  useEffect(() => {
+    const foodMemo = document.querySelector('#foodMemo');
+    foodMemo.innerHTML = `<div>${router.query['memo']}</div>`;
+  }, []);
+
   return (
     <div className="container mx-auto w-[500px] h-full rounded-3xl">
       <TopNav />
@@ -189,8 +194,11 @@ function FoodInFoFoodName({ response }) {
         <div className='items-center justify-center flex font-["Jalnan"] mb-4'>
           📌 Ya---M 일기
         </div>
-        <div className="items-center justify-center flex break-all">
-          {router.query['memo']}
+        <div
+          id="foodMemo"
+          className="items-center justify-center flex break-all"
+        >
+          로딩중
         </div>
       </div>
 

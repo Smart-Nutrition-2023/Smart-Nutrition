@@ -95,7 +95,7 @@ const TodayEatFood = ({ todayFoodInfo }) => {
                     id="foodMemo"
                     className="mb-2 flex justify-first text-xs font-sans overflow-hidden break-all h-[16px]"
                   >
-                    {images.memo.replace('<br />', ' ')}
+                    {images.memo.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n')}
                   </p>
                 </div>
               </div>

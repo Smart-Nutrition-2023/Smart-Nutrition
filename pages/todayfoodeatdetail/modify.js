@@ -15,6 +15,7 @@ const Modify = (props) => {
   const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
+  const [foodMemo, setFoodMemo] = useState('');
   const [inputValue, setInputValue] = useState({
     id: '',
     date: '',
@@ -35,6 +36,9 @@ const Modify = (props) => {
   };
 
   const submitFuction = async (e) => {
+    const memoChange = inputValue.memo.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+    inputValue.memo = memoChange;
+
     fetch('http://localhost:5000/fooddetail/modify', {
       method: 'post',
       credentials: 'include',
@@ -84,13 +88,12 @@ const Modify = (props) => {
 
   useEffect(() => {
     if (Object.keys(router.query).length !== 0) {
-      console.log('QUQUUQ', router.query);
       setInputValue({
         ...inputValue,
         id: router.query.id,
         date: queryDate.substr(0, 10),
         food_name: router.query.name,
-        memo: router.query.memo,
+        memo: router.query.memo.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n'),
       });
     }
   }, [router.query]);
@@ -168,7 +171,7 @@ const Modify = (props) => {
           onChange={onChange}
           id="memo"
           className="h-[100px] focus:h-[170px] bg-white p-3 break-words w-11/12 placeholder:italic placeholder:text-center placeholder:text-slate-400 "
-          value={inputValue.memo.replace('<br />', '\n')}
+          value={inputValue.memo}
         ></textarea>
       </div>
 

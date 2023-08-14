@@ -9,7 +9,7 @@ const videoConstraints = {
   facingMode: 'user',
 };
 
-export default function Camera(props) {
+export default function Camera({ setShowLoadingModal }) {
   // const videoConstraints = {
   //     facingMode: { exact: "environment" }
   //   };
@@ -34,6 +34,7 @@ export default function Camera(props) {
 
   const capture = useCallback(() => {
     // console.log(webcamRef.current, "웹캡 ")
+    setShowLoadingModal(true);
     const imageSrc = webcamRef.current.getScreenshot();
     setFoodImg(imageSrc);
     localStorage.setItem('image', imageSrc);

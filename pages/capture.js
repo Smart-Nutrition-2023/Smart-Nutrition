@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Camera from '../components/Camera';
 import Modal from '../components/Modal';
+import LoadingModal from '../components/foodinfoLoading/LoadingModal';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccessAction } from '../reducers/user';
@@ -10,6 +11,7 @@ import CaptureUpLoad from '../components/captureupload';
 
 function capture() {
   const [showModal, setShowModal] = useState(true);
+  const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [files, setFiles] = useState();
   const [preview, setPreview] = useState('');
   const [nutrition, setNutrition] = useState();
@@ -72,6 +74,7 @@ function capture() {
   const onLoadFile = (e) => {
     const file = e.target.files[0];
     setFiles(file);
+    setShowLoadingModal(true);
   };
 
   const closeModal = () => {
@@ -120,11 +123,15 @@ function capture() {
         {showModal ? <Modal closeModal={closeModal} /> : null}
         <div className="flex flex-col items-center h-screen text-white bg-main/30 p-2 pd-8 rounded-3xl">
           <div className="mt-5">
-            <Camera className="" />
+            <Camera className="" setShowLoadingModal={setShowLoadingModal} />
             {/* <input type="file" id="file" ref={imageRef} className="file" accept='jpg, jpeg, png, gif' onChange={onLoadFile}/> */}
-            <CaptureUpLoad onLoadFile={onLoadFile} />
+            <CaptureUpLoad
+              onLoadFile={onLoadFile}
+              setShowLoadingModal={setShowLoadingModal}
+            />
           </div>
         </div>
+        {showLoadingModal ? <LoadingModal /> : null}
       </div>
     </div>
   );

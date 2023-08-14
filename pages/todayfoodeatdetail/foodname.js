@@ -194,10 +194,7 @@ function FoodInFoFoodName({ response }) {
         <div className='items-center justify-center flex font-["Jalnan"] mb-4'>
           📌 Ya---M 일기
         </div>
-        <div
-          id="foodMemo"
-          className="items-center justify-center flex break-all"
-        >
+        <div id="foodMemo" className="items-center text-center break-all px-2">
           로딩중
         </div>
       </div>

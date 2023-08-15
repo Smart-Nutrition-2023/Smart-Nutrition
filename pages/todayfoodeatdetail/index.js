@@ -8,6 +8,7 @@ import TopNav from '../../components/login/topnav';
 import { useRouter, withRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccessAction } from '../../reducers/user';
+import CheckDeleteAllModal from '../../components/delete/checkDeleteAll';
 
 function FoodInFo({ response }) {
   const router = useRouter();
@@ -22,6 +23,7 @@ function FoodInFo({ response }) {
   const nowTimeAPI = moment().format('YYYY-MM-DD');
   const [dataNull, setDataNull] = useState(false);
   const [eatFoodData, setEatFoodData] = useState([]);
+  const [isCheckDeleteModal, isSetCheckDeleteModal] = useState(undefined);
 
   const [tanDanGiAPI, setTanDanGiAPI] = useState({
     totolKcal: 0,
@@ -105,21 +107,7 @@ function FoodInFo({ response }) {
   };
 
   const handleClickDelete = () => {
-    console.log('DELETE CLICK');
-    fetch('http://localhost:5000/fooddetail/deleteall', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ year, month, date }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.isDeleted === true) {
-          router.push('/main');
-        }
-      });
+    isSetCheckDeleteModal(true);
   };
 
   useEffect(() => {
@@ -164,6 +152,15 @@ function FoodInFo({ response }) {
           </div>
           <TodayFoodList eatFoodData={eatFoodData} />
         </>
+      )}
+
+      {isCheckDeleteModal && (
+        <CheckDeleteAllModal
+          isSetCheckDeleteModal={isSetCheckDeleteModal}
+          year={year}
+          month={month}
+          date={date}
+        />
       )}
     </div>
   );

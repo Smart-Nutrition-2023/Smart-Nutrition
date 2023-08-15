@@ -102,7 +102,7 @@ const Modify = (props) => {
     <div className="container mx-auto w-[500px] h-full rounded-3xl">
       <TopNav />
 
-      {me == null ? null : (
+      {/* {me == null ? null : (
         <div className="w-full font-bold text-3xl text-yellow1 ">
           <div className="flex mt-12 mb-[-16px] justify-end mr-5 items-center">
             <div className=" rounded-3xl relative w-[30px] h-[30px]">
@@ -117,9 +117,9 @@ const Modify = (props) => {
             <div>{me['nickname']}</div>
           </div>
         </div>
-      )}
+      )} */}
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-12">
         <div className="w-[200px] h-[200px] relative">
           {me == null ? null : (
             <Image
@@ -166,7 +166,7 @@ const Modify = (props) => {
         </div>
       </div>
 
-      <div className=" mt-8 rounded-xl bg-neutral-200 flex items-center justify-center ml-5 mr-5 p-3">
+      <div className="mt-6 rounded-xl bg-neutral-200 flex items-center justify-center ml-5 mr-5 p-3">
         <textarea
           onChange={onChange}
           id="memo"
@@ -175,7 +175,7 @@ const Modify = (props) => {
         ></textarea>
       </div>
 
-      <div className="flex flex-col items-center justify-center my-10 ml-5 mr-5 bg-yellow1 rounded-md">
+      <div className="flex flex-col items-center justify-center mt-10 ml-5 mr-5 bg-yellow1 rounded-md">
         <button
           onClick={submitFuction}
           className="bg-yellow1 w-full active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

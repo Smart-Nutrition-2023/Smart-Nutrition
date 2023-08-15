@@ -131,7 +131,7 @@ function FoodInFo({ response }) {
         dataNull={dataNull}
       />
       {eatFoodData.length == 0 ? (
-        <div className=" mt-20 justify-center flex">
+        <div className="mt-20 justify-center flex">
           <ReactLoading type="spin" color="#EDA345" />
         </div>
       ) : (

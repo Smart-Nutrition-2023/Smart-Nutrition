@@ -63,6 +63,19 @@ const TodayEatFood = ({ todayFoodInfo }) => {
     }
   };
 
+  const routeFoodname = (e) => {
+    router.push({
+      pathname: `/todayfoodeatdetail/foodname`,
+      query: {
+        id: todayFoodInfo[e.currentTarget.id]['id'],
+        img: todayFoodInfo[e.currentTarget.id]['image'],
+        name: todayFoodInfo[e.currentTarget.id]['food_name'],
+        memo: todayFoodInfo[e.currentTarget.id]['memo'],
+        date: todayFoodInfo[e.currentTarget.id]['date'],
+      },
+    });
+  };
+
   return (
     <div>
       <div className="font-bold px-8 pt-6 pb-2 mt-10 text-xl animate-pulse">
@@ -72,13 +85,12 @@ const TodayEatFood = ({ todayFoodInfo }) => {
       <div className="px-8 ml-5 mr-5 rounded-2xl">
         <Slider {...settings}>
           {todayFoodInfo &&
-            todayFoodInfo.map((images) => (
+            todayFoodInfo.map((images, i) => (
               <div
                 className="relative h-[235px]"
                 key={images.id}
-                onClick={(e) => {
-                  routeTodayFoodEatDetail();
-                }}
+                onClick={routeFoodname}
+                id={i}
               >
                 <Image
                   className="rounded-3xl"

@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
   const today_string = `${today}%`;
 
   const [rows, fields] = await conn.query(
-    'SELECT food_name, image, date, memo FROM todayFood WHERE email = ? and date like ?',
+    'SELECT id, food_name, image, date, memo FROM todayFood WHERE email = ? and date like ?',
     [email, today_string],
   );
 

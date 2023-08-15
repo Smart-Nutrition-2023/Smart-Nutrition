@@ -4,7 +4,6 @@ const CheckDeleteModal = ({ isSetCheckDeleteModal, foodId }) => {
   const router = useRouter();
 
   const handleDeleteClick = () => {
-    console.log('delete', foodId);
     fetch('http://localhost:5000/fooddetail/delete', {
       method: 'post',
       credentials: 'include',

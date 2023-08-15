@@ -104,6 +104,24 @@ function FoodInFo({ response }) {
       });
   };
 
+  const handleClickDelete = () => {
+    console.log('DELETE CLICK');
+    fetch('http://localhost:5000/fooddetail/deleteall', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ year, month, date }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.isDeleted === true) {
+          router.push('/main');
+        }
+      });
+  };
+
   useEffect(() => {
     getAuth();
   }, []);
@@ -135,7 +153,17 @@ function FoodInFo({ response }) {
           <ReactLoading type="spin" color="#EDA345" />
         </div>
       ) : (
-        <TodayFoodList eatFoodData={eatFoodData} />
+        <>
+          <div className="mt-10 flex justify-end">
+            <button
+              className="rounded-2xl mr-5 mb-1 px-2 flex justify-center items-center bg-red-600 text-xs text-white"
+              onClick={handleClickDelete}
+            >
+              오늘 음식 모두 삭제
+            </button>
+          </div>
+          <TodayFoodList eatFoodData={eatFoodData} />
+        </>
       )}
     </div>
   );

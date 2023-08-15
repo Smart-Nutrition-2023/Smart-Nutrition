@@ -37,6 +37,36 @@ router.post('/nutrition', async (req, res) => {
   conn.release();
 });
 
+router.post('/deleteall', async (req, res) => {
+  const email = req.session.email;
+  const { year, month, date } = req.body;
+  const day = `${year}-${String(month).padStart(2, '0')}-${String(
+    date,
+  ).padStart(2, '0')}%`;
+
+  const conn = await mysql.getConnection(async (conn) => conn);
+
+  const [dayFood, f] = await conn.query(
+    'SELECT id, image FROM todayFood WHERE email = ? and date like ?',
+    [email, day],
+  );
+  console.log('rows', dayFood);
+
+  for (var i = 0; i < dayFood.length; i++) {
+    fs.unlink(dayFood[i].image, function (err) {
+      if (err) throw err;
+      console.log(i, 'successfully deleted image file.');
+    });
+
+    await conn.query('DELETE FROM foodNutrition WHERE id = ?', [dayFood[i].id]);
+    await conn.query('DELETE FROM todayFood WHERE id = ?', [dayFood[i].id]);
+  }
+
+  const sendData = { isDeleted: true };
+  res.json(sendData);
+  conn.release();
+});
+
 router.post('/foodname', async (req, res) => {
   const id = req.body.id;
 

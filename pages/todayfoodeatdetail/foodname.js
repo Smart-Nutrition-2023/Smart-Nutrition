@@ -145,19 +145,18 @@ function FoodInFoFoodName({ response }) {
     <div className="container mx-auto w-[500px] h-full rounded-3xl">
       <TopNav />
       <div className="flex justify-end mx-5 mt-8">
-        <div
+        <button
           onClick={routeFoodname}
           className="rounded-2xl w-[60px] mr-1 flex justify-center items-center bg-red-600 text-white"
-          id="testForm"
         >
           수정
-        </div>
-        <div
+        </button>
+        <button
           onClick={handleDeleteClick}
           className="rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white"
         >
           삭제
-        </div>
+        </button>
       </div>
 
       <div className='mt-5 mr-5 ml-5 flex justify-end font-["Jalnan"] text-xs'>

@@ -21,7 +21,7 @@ const TodayFoodList = ({ eatFoodData }) => {
 
   return (
     <div>
-      <div className="mt-10 ml-5 mr-5 bg-slate-100 rounded-2xl shadow-2xl">
+      <div className="ml-5 mr-5 bg-slate-100 rounded-2xl shadow-2xl">
         <div className="rounded-2xl">
           <FoodItemm testData={eatFoodData} />
           {/* <div className="bg-yellow1 pt-[1px] bg-opacity-50"></div> */}

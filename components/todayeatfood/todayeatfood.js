@@ -100,7 +100,7 @@ const TodayEatFood = ({ todayFoodInfo }) => {
                 />
 
                 <div className="absolute w-full bottom-0 px-6 bg-yellow1 rounded-b-3xl bg-opacity-90">
-                  <div className="flex justify-between my-1">
+                  <div className="flex justify-between my-2">
                     <p className="text-md font-bold font-sans ml-[-2px] break-all">
                       {images.food_name}
                     </p>

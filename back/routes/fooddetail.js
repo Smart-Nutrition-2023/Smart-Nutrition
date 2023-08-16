@@ -54,7 +54,6 @@ router.post('/deleteall', async (req, res) => {
   for (var i = 0; i < dayFood.length; i++) {
     fs.unlink(dayFood[i].image, function (err) {
       if (err) throw err;
-      console.log(i, 'successfully deleted image file from server.');
     });
 
     await conn.query('DELETE FROM foodNutrition WHERE id = ?', [dayFood[i].id]);
@@ -101,7 +100,6 @@ router.post('/delete', async (req, res) => {
 
   fs.unlink(r[0].image, function (err) {
     if (err) throw err;
-    console.log('successfully deleted image file from server.');
   });
 
   await conn.query('DELETE FROM foodNutrition WHERE id = ?', [id]);

@@ -24,10 +24,10 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
     <div className="mt-12 mr-5 ml-5">
       <div className='flex justify-end font-["Jalnan"] text-xs'>{nowTime}</div>
 
-      <div className="flex justify-center mt-6 ">
-        <div className=" w-11/12  items-end">
+      <div className="flex justify-center mt-6">
+        <div className="w-11/12 items-end">
           {dataNull && (
-            <div className=" flex justify-center text-lg text-red1 mb-4">
+            <div className="flex justify-center text-lg text-red1 mb-4">
               " 해당날짜의 먹은 음식이 없습니다 "
             </div>
           )}
@@ -37,7 +37,7 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
           </div>
 
           <div className="flex justify-center mt-2">
-            <div className=" h-[8px] flex justify-start w-full bg-blue-300 rounded-2xl">
+            <div className="h-[8px] flex justify-start w-full bg-blue-300 rounded-2xl">
               <div
                 className={percentBarChange}
                 style={{ width: `${percentBar}%` }}
@@ -45,27 +45,21 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
             </div>
           </div>
 
-          <div className="flex justify-between mt-2 ">
+          <div className="flex justify-between mt-2">
             <CircleGraph
               name={'탄수화물'}
               weight={tanDanGiAPI['carb']}
-              percentage={parseInt(
-                (tanDanGiAPI['carb'] / tanDanGiAPI['calorie']) * 100,
-              )}
+              percentage={parseInt((tanDanGiAPI['carb'] / 1200) * 100)}
             />
             <CircleGraph
               name={'단백질'}
               weight={tanDanGiAPI['protein']}
-              percentage={parseInt(
-                (tanDanGiAPI['protein'] / tanDanGiAPI['calorie']) * 100,
-              )}
+              percentage={parseInt((tanDanGiAPI['protein'] / 55) * 100)}
             />
             <CircleGraph
               name={'지방'}
               weight={tanDanGiAPI['fat']}
-              percentage={parseInt(
-                (tanDanGiAPI['fat'] / tanDanGiAPI['calorie']) * 100,
-              )}
+              percentage={parseInt((tanDanGiAPI['fat'] / 51) * 100)}
             />
           </div>
         </div>

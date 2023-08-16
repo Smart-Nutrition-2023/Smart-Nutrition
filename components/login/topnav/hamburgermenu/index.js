@@ -20,8 +20,8 @@ const HamburgerMenu = ({ bgColor }) => {
       },
     });
   };
-  const handleCalendarClick = () => {
-    router.push('/main');
+  const handleMyInfoClick = () => {
+    router.push('/myinfo');
   };
 
   return (
@@ -48,9 +48,9 @@ const HamburgerMenu = ({ bgColor }) => {
           </div>
           <div
             className=" bg-yellow1 border-b-[1px] rounded-xl border-dashed border-white flex justify-center p-10 text-white active:bg-red1 "
-            onClick={handleCalendarClick}
+            onClick={handleMyInfoClick}
           >
-            Calendar
+            마이페이지
           </div>
         </div>
       </div>

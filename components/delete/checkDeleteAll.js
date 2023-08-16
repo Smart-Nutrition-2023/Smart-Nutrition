@@ -37,20 +37,20 @@ const CheckDeleteAllModal = ({ isSetCheckDeleteModal, year, month, date }) => {
           <div className="flex justify-center">정말 모두 삭제하시겠습니까?</div>
 
           <div className="flex justify-center mx-5 mt-6">
-            <div
+            <button
               className="rounded-2xl w-[60px] mr-3 flex justify-center items-center bg-red-600 text-white"
               onClick={handleDeleteClick}
             >
               예
-            </div>
-            <div
+            </button>
+            <button
               className="rounded-2xl w-[60px] flex justify-center items-center bg-red-600 text-white"
               onClick={(e) => {
                 isSetCheckDeleteModal(false);
               }}
             >
               아니오
-            </div>
+            </button>
           </div>
         </div>
       </div>

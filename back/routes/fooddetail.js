@@ -50,7 +50,6 @@ router.post('/deleteall', async (req, res) => {
     'SELECT id, image FROM todayFood WHERE email = ? and date like ?',
     [email, day],
   );
-  console.log('rows', dayFood);
 
   for (var i = 0; i < dayFood.length; i++) {
     fs.unlink(dayFood[i].image, function (err) {

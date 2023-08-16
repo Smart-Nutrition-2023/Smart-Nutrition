@@ -45,10 +45,6 @@ function FoodInFoFoodName({ response }) {
     isSetImageZoomModal(true);
   };
 
-  const routeBackFuntion = () => {
-    router.push('/todayfoodeatdetail');
-  };
-
   const routeFoodname = (e) => {
     Router.push({
       pathname: `/todayfoodeatdetail/modify`,

@@ -118,20 +118,18 @@ const FoodItemm = ({ foodData, testData }) => {
                         layout="fill"
                         objectFit="cover"
                       />
-                      <div className="absolute w-full bottom-0 px-2 bg-yellow1 rounded-b-2xl bg-opacity-90">
-                        <p className="text-xs text-center text-white font-sans m-2 px-2">
+                      <div className="absolute flex justify-between w-full bottom-0 py-1 px-2 bg-yellow1 rounded-b-2xl bg-opacity-90">
+                        <p className="text-xs font-sans px-2">
                           {test['food_name']}
                         </p>
-                        {/* <p className="mb-2 flex justify-first text-[4px] text-neutral-200 font-sans overflow-hidden h-[15px]">{""}</p> */}
+                        <p className="text-xs text-white font-sans px-2">
+                          {currentSlide + 1} / {testData.length}
+                        </p>
                       </div>
                     </div>
                   ))}
                 </Slider>
               }
-            </div>
-
-            <div className="text-xs">
-              {currentSlide + 1} / {testData.length}
             </div>
           </div>
         </div>

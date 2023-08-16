@@ -46,10 +46,10 @@ const TopNav = () => {
 
   return (
     <>
-      <div className="flex justify-between ">
+      <div className="flex justify-between">
         <div
           onClick={(e) => router.back()}
-          className="  relative h-[30px] w-[30px] mt-[28px] ml-[28px] dur"
+          className="relative h-[30px] w-[30px] mt-[28px] ml-[28px] dur"
         >
           <Image src={'/Arrow2.svg'} layout={'fill'} />
         </div>

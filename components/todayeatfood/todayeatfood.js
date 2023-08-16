@@ -100,23 +100,22 @@ const TodayEatFood = ({ todayFoodInfo }) => {
                 />
 
                 <div className="absolute w-full bottom-0 px-6 bg-yellow1 rounded-b-3xl bg-opacity-90">
-                  <p className="text-md font-bold font-sans mt-2 mb-1 ml-[-2px] break-all">
+                  <p className="text-md font-bold font-sans my-1 ml-[-2px] break-all">
                     {images.food_name}
                   </p>
                   <p
                     id="foodMemo"
-                    className="mb-2 flex justify-first text-xs font-sans overflow-hidden break-all h-[16px]"
+                    className="mb-1 flex justify-first text-xs font-sans overflow-hidden break-all h-[16px]"
                   >
                     {images.memo.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n')}
+                  </p>
+                  <p className="mb-1 flex justify-end text-white text-xs">
+                    {currentSlide + 1} / {todayFoodInfo.length}
                   </p>
                 </div>
               </div>
             ))}
         </Slider>
-      </div>
-
-      <div className="flex justify-center">
-        {currentSlide + 1} / {todayFoodInfo.length}
       </div>
     </div>
   );

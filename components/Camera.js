@@ -84,10 +84,16 @@ export default function Camera({ setShowLoadingModal }) {
       />
       <div className="pt-8 text-center">
         <button
-          className="p-4 mt-12 rounded-3xl bg-main drop-shadow-xl"
+          className="p-4 mx-4 mt-8 mb-4 rounded-3xl bg-main drop-shadow-xl"
           onClick={capture}
         >
           사진 촬영
+        </button>
+        <button
+          className="p-4 mx-4 mt-8 mb-4 rounded-3xl bg-neutral-400 drop-shadow-xl"
+          onClick={() => router.push('/main')}
+        >
+          촬영 취소
         </button>
       </div>
     </>

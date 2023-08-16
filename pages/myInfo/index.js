@@ -7,6 +7,7 @@ import { loginSuccessAction } from '../../reducers/user';
 import TopNav from '../../components/login/topnav';
 import styles from '../../styles/Home.module.css';
 import ModifyMyInfoModal from '../../components/login/myinfo/myinfomodal';
+import ModifyProfileModal from '../../components/login/myinfo/profilemodify';
 
 export default function MyInfo() {
   const router = useRouter();
@@ -14,9 +15,14 @@ export default function MyInfo() {
   const [isLogined, setIsLogined] = useState(false);
   const dispatch = useDispatch();
   const [isModifyMyInfoModal, isSetModifyMyInfoModal] = useState(undefined);
+  const [isModifyProfileModal, isSetModifyProfileModal] = useState(undefined);
 
   const handleModifyMyInfoClick = () => {
     isSetModifyMyInfoModal(true);
+  };
+
+  const handleModifyProfileClick = () => {
+    isSetModifyProfileModal(true);
   };
 
   const getAuth = () => {
@@ -66,20 +72,28 @@ export default function MyInfo() {
         </div>
       </div>
 
-      <div className="flex justify-center mt-4">
+      <div className="flex flex-col items-center justify-center">
         <div className="w-[200px] h-[200px] relative">
           {me == null ? null : (
-            <Image
-              className="rounded-3xl"
-              src={`http://localhost:5000/${me['profile_img']}`}
-              layout="fill"
-              objectFit="cover"
-            />
+            <div>
+              <Image
+                className="rounded-full"
+                src={`http://localhost:5000/${me['profile_img']}`}
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
           )}
         </div>
+        <button
+          className="text-gray-400 font-bold text-s"
+          onClick={handleModifyProfileClick}
+        >
+          변경
+        </button>
       </div>
 
-      <div className="flex flex-col justify-center items-center mb-5">
+      <div className="flex flex-col justify-center items-center mt-4 mb-4">
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
           <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
             이메일
@@ -90,7 +104,6 @@ export default function MyInfo() {
         </div>
 
         <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          {' '}
           <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
             이름
           </div>
@@ -139,6 +152,13 @@ export default function MyInfo() {
       {isModifyMyInfoModal && (
         <ModifyMyInfoModal
           isSetModifyMyInfoModal={isSetModifyMyInfoModal}
+          me={me}
+        />
+      )}
+
+      {isModifyProfileModal && (
+        <ModifyProfileModal
+          isSetModifyProfileModal={isSetModifyProfileModal}
           me={me}
         />
       )}

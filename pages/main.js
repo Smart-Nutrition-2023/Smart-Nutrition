@@ -123,10 +123,7 @@ export default function Home({}) {
               안녕하세요. --- 님
             </span>
           ) : (
-            <div
-              className="w-full font-bold text-3xl text-yellow1"
-              onClick={moveMyInfo}
-            >
+            <div className="w-full font-bold text-3xl text-yellow1">
               <div className="flex justify-end items-center">
                 안녕하세요 &nbsp;
                 <div className="rounded-3xl relative w-[30px] h-[30px]">
@@ -135,6 +132,7 @@ export default function Home({}) {
                     src={`http://localhost:5000/${me['profile_img']}`}
                     layout={'fill'}
                     objectFit="cover"
+                    onClick={moveMyInfo}
                   />
                 </div>
               </div>

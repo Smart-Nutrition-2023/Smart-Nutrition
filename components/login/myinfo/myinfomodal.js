@@ -13,14 +13,16 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
     fetch('http://localhost:5000/myinfo/modify', {
       method: 'post',
       credentials: 'include',
-      body: input,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inputValue),
     })
       .then((res) => res.json())
       .then((json) => {
         if (json.isSuccess === 'True') {
           dispatch(loginSuccessAction(formData));
           setIsModified(true);
-          // router.push('/main');
         } else {
           alert(json.isSuccess);
         }
@@ -28,6 +30,7 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
   };
 
   const [inputValue, setInputValue] = useState({
+    email: me['email'],
     password1: '',
     password2: '',
     name: me['name'],
@@ -43,9 +46,6 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
     });
   };
 
-  const [imageFile, setImageFile] = useState(null);
-  const handleImage = (event) => setImageFile(event.target.files[0]);
-
   const formData = new FormData();
 
   const submitFuction = async (e) => {
@@ -58,10 +58,9 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
     formData.append('nickname', inputValue['nickname']);
     formData.append('phonenumber', inputValue['phonenumber']);
     formData.append('taste', inputValue['taste']);
-    formData.append('profile_img', imageFile);
+    formData.append('profile_img', me['profile_img']);
 
-    for (var pair of formData.entries()) console.log(pair);
-    postMyInfoModify(formData);
+    postMyInfoModify(inputValue);
   };
 
   useEffect(() => {
@@ -80,7 +79,6 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
       >
         <form
           onSubmit={submitFuction}
-          encType="multipart/form-data"
           onClick={(e) => {
             e.stopPropagation();
           }}
@@ -171,23 +169,6 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
               type="text"
               maxLength={20}
               value={inputValue.nickname}
-            ></input>
-          </div>
-
-          <div className="mb-4">
-            <label
-              className="block after:content-['*'] after:ml-0.5 after:text-red-500 text-gray-700 text-sm font-bold mb-2"
-              htmlFor="image"
-            >
-              프로필 사진
-            </label>
-            <input
-              onChange={handleImage}
-              name="image"
-              className="shadow appearance-none border focus:border-yellow1 focus:ring-yellow1 focus:border-2 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="image"
-              type="file"
-              placeholder="사진을 입력해 주세요"
             ></input>
           </div>
 

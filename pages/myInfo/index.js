@@ -93,60 +93,62 @@ export default function MyInfo() {
         </button>
       </div>
 
-      <div className="flex flex-col justify-center items-center mt-4 mb-4">
-        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
-            이메일
+      <div className="mx-5 mt-8 mb-2 bg-slate-100 rounded-2xl shadow-2xl">
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex mt-4 mb-[-20px] ml-5 mr-5 gap-8">
+            <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+              이메일
+            </div>
+            {me == null ? null : (
+              <div className="block w-[200px]">{`${me['email']}`}</div>
+            )}
           </div>
-          {me == null ? null : (
-            <div className="block w-[200px]">{`${me['email']}`}</div>
-          )}
+
+          <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
+            <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+              이름
+            </div>
+            {me == null ? null : (
+              <div className="block w-[200px]">{`${me['name']}`}</div>
+            )}
+          </div>
+
+          <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
+            <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+              닉네임
+            </div>
+            {me == null ? null : (
+              <div className="block w-[200px]">{`${me['nickname']}`}</div>
+            )}
+          </div>
+
+          <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
+            <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+              음식 취향
+            </div>
+            {me == null ? null : (
+              <div className="block w-[200px]">{`${me['taste']}`}</div>
+            )}
+          </div>
+
+          <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
+            <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
+              휴대폰 번호
+            </div>
+            {me == null ? null : (
+              <div className="block w-[200px]">{`${me['phonenumber']}`}</div>
+            )}
+          </div>
         </div>
 
-        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
-            이름
-          </div>
-          {me == null ? null : (
-            <div className="block w-[200px]">{`${me['name']}`}</div>
-          )}
+        <div className="flex flex-col items-center">
+          <button
+            className="bg-yellow1 mx-8 mt-12 mb-4 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={handleModifyMyInfoClick}
+          >
+            회원정보 수정
+          </button>
         </div>
-
-        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
-            닉네임
-          </div>
-          {me == null ? null : (
-            <div className="block w-[200px]">{`${me['nickname']}`}</div>
-          )}
-        </div>
-
-        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
-            음식 취향
-          </div>
-          {me == null ? null : (
-            <div className="block w-[200px]">{`${me['taste']}`}</div>
-          )}
-        </div>
-
-        <div className="flex mt-7 mb-[-20px] ml-5 mr-5 gap-8">
-          <div className="flex justify-end block w-[200px] text-gray-700 font-bold">
-            휴대폰 번호
-          </div>
-          {me == null ? null : (
-            <div className="block w-[200px]">{`${me['phonenumber']}`}</div>
-          )}
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center">
-        <button
-          className="bg-yellow1 mx-8 mt-10 active:bg-red1 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          onClick={handleModifyMyInfoClick}
-        >
-          회원정보 수정
-        </button>
       </div>
 
       {isModifyMyInfoModal && (

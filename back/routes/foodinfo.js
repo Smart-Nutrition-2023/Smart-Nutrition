@@ -59,16 +59,16 @@ router.get('/search', async (req, res) => {
   const search = req.query.food;
   const searchResult = [];
 
-  const foodList = xlsx.readFile(__dirname + '/../foodList.xlsx');
+  const foodList = xlsx.readFile(__dirname + '/../db.xlsx');
   const firstSheetName = foodList.SheetNames[0];
   const firstSheet = foodList.Sheets[firstSheetName];
   const firstSheetJson = xlsx.utils.sheet_to_json(firstSheet);
 
-  firstSheetJson.forEach(function (food) {
-    if (food['음식'].includes(search)) {
-      searchResult.push(food);
+  for (var i = 0; i < firstSheetJson.length - 3; i++) {
+    if (firstSheetJson[i]['음식'].includes(search)) {
+      searchResult.push(firstSheetJson[i]['음식']);
     }
-  });
+  }
   res.json(searchResult);
 });
 

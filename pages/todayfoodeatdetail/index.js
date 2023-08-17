@@ -24,7 +24,6 @@ function FoodInFo({ response }) {
   const [dataNull, setDataNull] = useState(false);
   const [eatFoodData, setEatFoodData] = useState([]);
   const [isCheckDeleteModal, isSetCheckDeleteModal] = useState(undefined);
-
   const [tanDanGiAPI, setTanDanGiAPI] = useState({
     totolKcal: 0,
     calorie: '',
@@ -32,6 +31,18 @@ function FoodInFo({ response }) {
     fat: '',
     protein: '',
   });
+  const [recommendation, setRecommendation] = useState({
+    nutrition: '',
+    food: '',
+    calorie: '',
+    carb: '',
+    protein: '',
+    fat: '',
+  });
+
+  const handleClickDelete = () => {
+    isSetCheckDeleteModal(true);
+  };
 
   const getAuth = () => {
     fetch('http://localhost:5000/auth', {
@@ -103,11 +114,31 @@ function FoodInFo({ response }) {
           ['fat']: nutritionData.fat,
           ['protein']: nutritionData.protein,
         });
+        fetchPercentTanDanGi(
+          nutritionData.carb,
+          nutritionData.protein,
+          nutritionData.fat,
+        );
       });
   };
 
-  const handleClickDelete = () => {
-    isSetCheckDeleteModal(true);
+  const fetchPercentTanDanGi = (tan, dan, gi) => {
+    fetch(
+      'http://localhost:5000/fooddetail/recommendation?' +
+        new URLSearchParams({ carb: tan, protein: dan, fat: gi }),
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        setRecommendation({
+          ...recommendation,
+          ['nutrition']: json.nutrition,
+          ['food']: json.food['음식'],
+          ['calorie']: json.food['에너지(kcal)'],
+          ['carb']: json.food['탄수화물(g)'],
+          ['protein']: json.food['단백질(g)'],
+          ['fat']: json.food['지방(g)'],
+        });
+      });
   };
 
   useEffect(() => {
@@ -142,7 +173,31 @@ function FoodInFo({ response }) {
         </div>
       ) : (
         <>
-          <div className="mt-10 flex justify-end">
+          {/* bg-slate-100 rounded-2xl shadow-lg */}
+          <div className="mt-8 mx-5">
+            <div className="flex justify-center text-sm font-sans">
+              '<p className="font-bold">{recommendation.nutrition}</p>'이
+              부족하시네요!
+            </div>
+            <div className="mt-2 py-2 grid grid-cols-2 gap-2 border-2 border-[#ece06f88] rounded-2xl">
+              <div className="flex flex-col items-center ml-10">
+                <div className='font-["Jalnan"] text-sm text-gray-500'>
+                  🥄 추천 음식 🍴
+                </div>
+                <div className='mt-2 font-["Jalnan"]'>
+                  {recommendation.food}
+                </div>
+              </div>
+              <div className="flex justify-center mr-10">
+                <p className="text-xs font-sans">
+                  - 칼로리 {recommendation.calorie} kcal <br />- 탄수화물{' '}
+                  {recommendation.carb} g <br />- 단백질{' '}
+                  {recommendation.protein} g <br />- 지방 {recommendation.fat} g
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 flex justify-end">
             <button
               className="rounded-2xl mr-5 mb-1 px-2 flex justify-center items-center bg-red-600 text-xs text-white"
               onClick={handleClickDelete}

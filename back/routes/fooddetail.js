@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('../config/database');
 const fs = require('fs');
+const xlsx = require('xlsx');
 
 const router = express.Router();
 
@@ -35,6 +36,74 @@ router.post('/nutrition', async (req, res) => {
   }
   res.json(foodNutrition);
   conn.release();
+});
+
+router.get('/recommendation', async (req, res) => {
+  const tanDanGiName = ['탄수화물', '단백질', '지방'];
+  const carb = parseInt(req.query.carb);
+  const protein = parseInt(req.query.protein);
+  const fat = parseInt(req.query.fat);
+
+  const percentage = [
+    Math.floor((carb / 130) * 100),
+    Math.floor((protein / 55) * 100),
+    Math.floor((fat / 51) * 100),
+  ];
+  let min = percentage[0];
+  let minIndex = 0;
+  for (var i = 1; i < percentage.length; i++) {
+    if (percentage[i] < min) {
+      min = percentage[i];
+      minIndex = i;
+    }
+  }
+  const recommendNutrition = tanDanGiName[minIndex];
+
+  const foodList = xlsx.readFile(__dirname + '/../db.xlsx');
+  const firstSheetName = foodList.SheetNames[0];
+  const firstSheet = foodList.Sheets[firstSheetName];
+  const firstSheetJson = xlsx.utils.sheet_to_json(firstSheet);
+
+  let maxNut = 0;
+  let maxNutFood = '';
+  switch (recommendNutrition) {
+    case '탄수화물':
+      const remainCarb = 130 - carb;
+      for (var i = 0; i < firstSheetJson.length - 3; i++) {
+        const xlsxCarb = firstSheetJson[i]['탄수화물(g)'];
+        if (remainCarb >= xlsxCarb && xlsxCarb > maxNut) {
+          maxNut = xlsxCarb;
+          maxNutFood = firstSheetJson[i];
+        }
+      }
+      break;
+    case '단백질':
+      const remainProtein = 55 - protein;
+      for (var i = 0; i < firstSheetJson.length - 3; i++) {
+        const xlsxProtein = firstSheetJson[i]['단백질(g)'];
+        if (remainProtein >= xlsxProtein && xlsxProtein > maxNut) {
+          maxNut = xlsxProtein;
+          maxNutFood = firstSheetJson[i];
+        }
+      }
+      break;
+    case '지방':
+      const remainFat = 51 - fat;
+      for (var i = 0; i < firstSheetJson.length - 3; i++) {
+        const xlsxFat = firstSheetJson[i]['지방(g)'];
+        if (remainFat >= xlsxFat && xlsxFat > maxNut) {
+          maxNut = xlsxFat;
+          maxNutFood = firstSheetJson[i];
+        }
+      }
+      break;
+  }
+
+  const sendData = {
+    nutrition: recommendNutrition,
+    food: maxNutFood,
+  };
+  res.json(sendData);
 });
 
 router.post('/deleteall', async (req, res) => {

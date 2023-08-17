@@ -7,6 +7,9 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
     'w-[30%] rounded-2xl bg-yellow-100 ease-linear duration-500',
   );
   const percentBar = parseInt((tanDanGiAPI['calorie'] / 2000) * 100);
+  const percentCarb = parseInt((tanDanGiAPI['carb'] / 130) * 100);
+  const percentProtein = parseInt((tanDanGiAPI['protein'] / 55) * 100);
+  const percentFat = parseInt((tanDanGiAPI['fat'] / 51) * 100);
 
   const totalPercent = useEffect(() => {
     console.log(percentBar, 'percentbar');
@@ -49,17 +52,17 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
             <CircleGraph
               name={'탄수화물'}
               weight={tanDanGiAPI['carb']}
-              percentage={parseInt((tanDanGiAPI['carb'] / 1200) * 100)}
+              percentage={percentCarb}
             />
             <CircleGraph
               name={'단백질'}
               weight={tanDanGiAPI['protein']}
-              percentage={parseInt((tanDanGiAPI['protein'] / 55) * 100)}
+              percentage={percentProtein}
             />
             <CircleGraph
               name={'지방'}
               weight={tanDanGiAPI['fat']}
-              percentage={parseInt((tanDanGiAPI['fat'] / 51) * 100)}
+              percentage={percentFat}
             />
           </div>
         </div>

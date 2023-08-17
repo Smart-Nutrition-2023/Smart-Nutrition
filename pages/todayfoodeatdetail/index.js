@@ -173,7 +173,6 @@ function FoodInFo({ response }) {
         </div>
       ) : (
         <>
-          {/* bg-slate-100 rounded-2xl shadow-lg */}
           <div className="mt-8 mx-5">
             <div className="flex justify-center text-sm font-sans">
               '<p className="font-bold">{recommendation.nutrition}</p>'이
@@ -189,11 +188,12 @@ function FoodInFo({ response }) {
                 </div>
               </div>
               <div className="flex justify-center mr-10">
-                <p className="text-xs font-sans">
-                  - 칼로리 {recommendation.calorie} kcal <br />- 탄수화물{' '}
-                  {recommendation.carb} g <br />- 단백질{' '}
-                  {recommendation.protein} g <br />- 지방 {recommendation.fat} g
-                </p>
+                <ul className="text-xs font-sans">
+                  <li>칼로리 {recommendation.calorie} kcal</li>
+                  <li>탄수화물 {recommendation.carb} g</li>
+                  <li>단백질 {recommendation.protein} g</li>
+                  <li>지방 {recommendation.fat} g</li>
+                </ul>
               </div>
             </div>
           </div>

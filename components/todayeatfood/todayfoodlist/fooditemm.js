@@ -90,19 +90,21 @@ const FoodItemm = ({ foodData, testData }) => {
       ) : (
         <div className="flex">
           <div className="w-2/6 flex flex-col items-center justify-center">
-            <div className="col-span-1 rounded-full w-4/6 min-h-[50px] min-w-[50px] flex justify-center items-center relative">
+            {/* font-["Jalnan"] */}
+            <div className="font-bold font-sans">오늘 먹은 음식</div>
+            {/* <div className="col-span-1 rounded-full w-4/6 min-h-[50px] min-w-[50px] flex justify-center items-center relative">
               <SmileClick />
             </div>
+            <div className="flex items-center justify-center text-xs">
+              <div>좋아요</div>
+            </div> */}
             {/* <div className="flexitems-center justify-center text-xs mt-1">
               <div>{formDate}</div>
             </div> */}
-            <div className="flex items-center justify-center text-xs">
-              <div>좋아요</div>
-            </div>
           </div>
 
           <div className="w-4/6 flex justify-end flex-col items-center mb-4">
-            <div className="rounded-2xl w-4/6 min-h-[185px] h-full mx-16 flex items-center justify-center">
+            <div className="rounded-2xl w-5/6 min-h-[185px] h-full mx-16 flex items-center justify-center">
               {
                 <Slider {...settings}>
                   {testData.map((test, i) => (
@@ -113,7 +115,7 @@ const FoodItemm = ({ foodData, testData }) => {
                       id={i}
                     >
                       <Image
-                        className={'rounded-2xl shadow-2xl'}
+                        className={'rounded-2xl'}
                         src={`http://localhost:5000/${test['image']}`}
                         layout="fill"
                         objectFit="cover"

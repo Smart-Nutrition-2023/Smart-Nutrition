@@ -50,7 +50,7 @@ function Search({
             />
             <SearchIcon className="ml-2" onClick={search} />
           </div>
-          <div className="h-[125px] overflow-auto grid grid-cols-2 gap-2 mt-4 mx-2">
+          <div className="max-h-[125px] overflow-auto grid grid-cols-2 gap-2 mt-4 mx-2">
             {foodList
               ? foodList.map(function (food, index) {
                   return (

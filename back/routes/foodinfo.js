@@ -76,7 +76,7 @@ router.get('/change', async (req, res) => {
   const change = req.query.food;
   const changeResult = [];
 
-  const foodList = xlsx.readFile(__dirname + '/../db1.xlsx');
+  const foodList = xlsx.readFile(__dirname + '/../db.xlsx');
   const firstSheetName = foodList.SheetNames[0];
   const firstSheet = foodList.Sheets[firstSheetName];
   const firstSheetJson = xlsx.utils.sheet_to_json(firstSheet);

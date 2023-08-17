@@ -174,11 +174,11 @@ function FoodInFo({ response }) {
       ) : (
         <>
           <div className="mt-8 mx-5">
-            <div className="flex justify-center text-sm font-sans">
+            <div className="flex justify-center pt-1 text-sm font-sans bg-[#ece06f88] rounded-t-2xl">
               '<p className="font-bold">{recommendation.nutrition}</p>'이
               부족하시네요!
             </div>
-            <div className="mt-2 py-2 grid grid-cols-2 gap-2 border-2 border-[#ece06f88] rounded-2xl">
+            <div className="py-2 grid grid-cols-2 border-2 border-[#ece06f88] rounded-b-2xl">
               <div className="flex flex-col items-center ml-10">
                 <div className='font-["Jalnan"] text-sm text-gray-500'>
                   🥄 추천 음식 🍴

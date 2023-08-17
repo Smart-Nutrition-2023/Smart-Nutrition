@@ -16,14 +16,14 @@ export default function LoginLinks() {
               <FontTitle marginTop="" textSize="text-sm" />
             </div>
 
-            <div
+            <button
               className="col-span-2 flex justify-center"
               onClick={(e) => {
                 isSetSignUpModal(true);
               }}
             >
               회원가입
-            </div>
+            </button>
           </div>
         </div>
       </div>

@@ -4,11 +4,8 @@ import FoodItemm from './fooditemm';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Loader from './loader';
-import { testData } from './datacuthook';
 
 const TodayFoodList = ({ eatFoodData }) => {
-  const [data, setData] = useState([]);
-
   return (
     <div>
       <div className="ml-5 mr-5 bg-slate-100 rounded-2xl shadow-xl">

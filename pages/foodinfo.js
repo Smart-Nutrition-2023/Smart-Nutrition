@@ -74,14 +74,6 @@ function foodinfo(props) {
   }, []);
 
   const toggleSearch = () => setSearchFoodName((prev) => !prev);
-
-  useEffect(() => {
-    console.log(foodName);
-    console.log(foodImageFile);
-    console.log(todayDate + ' ' + time);
-    console.log(memo);
-  }, [foodName, foodImageFile, todayDate, time, memo]);
-
   const toggleMemo = () => setWriteMemo((prev) => !prev);
   const changeDate = (e) => setTodayDate(e.target.value);
   const changeTime = (e) => setTime(e.target.value);
@@ -118,7 +110,6 @@ function foodinfo(props) {
       method: 'post',
       body: input,
     });
-    for (var pair of input.entries()) console.log(pair);
   };
 
   const changeFood = (input) => {

@@ -36,9 +36,6 @@ const CaptureUpLoad = ({ onLoadFile }) => {
               </label>
             </div>
           </div>
-          {/* <div className="flex justify-center p-2">
-                        <button  className="w-full px-4 py-2 text-white bg-yellow1 rounded shadow-xl">제출</button>
-                    </div> */}
         </div>
       </div>
     </div>

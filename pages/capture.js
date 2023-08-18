@@ -29,7 +29,6 @@ function capture() {
 
   useEffect(() => {
     if (files) {
-      console.log(files, '여기에 file 들어가는지 확인');
       const reader = new FileReader();
       reader.onload = () => {
         setPreview(reader.result);

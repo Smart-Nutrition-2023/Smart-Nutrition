@@ -12,7 +12,6 @@ import { loginSuccessAction } from '../../reducers/user';
 import TopNav from '../../components/login/topnav';
 import CheckDeleteModal from '../../components/delete/checkDelete';
 import ImageZoomModal from '../../components/image/imageZoom';
-// withRouter 사용법 알아 둘 것!!
 
 function FoodInFoFoodName({ response }) {
   const router = useRouter();
@@ -90,7 +89,6 @@ function FoodInFoFoodName({ response }) {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log('NUTRTION TEST', json);
         setTanDanGi({
           ...tanDanGi,
           ['calorie']: json.energy,

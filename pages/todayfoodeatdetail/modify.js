@@ -28,7 +28,6 @@ const Modify = (props) => {
     .split('T')[0];
 
   const onChange = (e) => {
-    console.log(e.target.id, e.target.value);
     setInputValue({
       ...inputValue,
       [e.target.id]: e.target.value,

@@ -12,7 +12,6 @@ const CalorieGraph = ({ tanDanGiAPI, nowTime, dataNull }) => {
   const percentFat = parseInt((tanDanGiAPI['fat'] / 51) * 100);
 
   const totalPercent = useEffect(() => {
-    console.log(percentBar, 'percentbar');
     if (percentBar > 100)
       setPercentBarChange(
         ' rounded-2xl bg-red1 ease-linear duration-500 delay-1000',

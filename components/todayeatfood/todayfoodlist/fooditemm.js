@@ -71,15 +71,10 @@ const FoodItemm = ({ foodData, testData }) => {
   useEffect(() => {
     if (testData != undefined) {
       date = new Date(testData[0]['date']);
-      // formtDate = format(date, "H시 mm분");
       setFormDate(format(date, 'H시 mm분'));
     }
     setLoading(false);
   }, [testData]);
-
-  // useEffect(()=>{
-  //   setLoading()
-  // }, [formDate]);
 
   return (
     <>
@@ -90,18 +85,8 @@ const FoodItemm = ({ foodData, testData }) => {
       ) : (
         <div className="flex">
           <div className="w-2/6 flex flex-col items-center justify-center">
-            {/* font-["Jalnan"] */}
             <div className="font-bold font-sans pl-2">먹은 음식</div>
             <div className="text-4xl">🍽️</div>
-            {/* <div className="col-span-1 rounded-full w-4/6 min-h-[50px] min-w-[50px] flex justify-center items-center relative">
-              <SmileClick />
-            </div>
-            <div className="flex items-center justify-center text-xs">
-              <div>좋아요</div>
-            </div> */}
-            {/* <div className="flexitems-center justify-center text-xs mt-1">
-              <div>{formDate}</div>
-            </div> */}
           </div>
 
           <div className="w-4/6 flex justify-end flex-col items-center mb-4">

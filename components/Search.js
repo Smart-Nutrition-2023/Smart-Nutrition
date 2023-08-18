@@ -15,7 +15,6 @@ function Search({
   const enterKey = () => {
     if (window.event.keyCode == 13) {
       search();
-      console.log('성공');
     }
   };
 
@@ -29,7 +28,6 @@ function Search({
       )
         .then((res) => res.json())
         .then((json) => {
-          console.log(json);
           setFoodList(json);
         });
     }

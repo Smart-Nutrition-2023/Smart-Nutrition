@@ -95,24 +95,21 @@ function foodinfo(props) {
     changeFood(e.target.value);
   };
   const moveMain = () => {
-    async function fetchData() {
-      const memoChange = memo.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-      const formData = new FormData();
-      formData.append('email', me['email']);
-      formData.append('food_name', foodName);
-      formData.append('image', foodImageFile);
-      formData.append('date', todayDate + ' ' + time);
-      formData.append('memo', memoChange);
-      formData.append('amount', nutrition['1회제공량(g)']);
-      formData.append('natrium', nutrition['나트륨(mg)']);
-      formData.append('protein', nutrition['단백질(g)']);
-      formData.append('sugar', nutrition['당류(g)']);
-      formData.append('energy', nutrition['에너지(kcal)']);
-      formData.append('fat', nutrition['지방(g)']);
-      formData.append('carbohydrate', nutrition['탄수화물(g)']);
-      postFoodinfo(formData);
-    }
-    fetchData();
+    const memoChange = memo.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+    const formData = new FormData();
+    formData.append('email', me['email']);
+    formData.append('food_name', foodName);
+    formData.append('image', foodImageFile);
+    formData.append('date', todayDate + ' ' + time);
+    formData.append('memo', memoChange);
+    formData.append('amount', nutrition['1회제공량(g)']);
+    formData.append('natrium', nutrition['나트륨(mg)']);
+    formData.append('protein', nutrition['단백질(g)']);
+    formData.append('sugar', nutrition['당류(g)']);
+    formData.append('energy', nutrition['에너지(kcal)']);
+    formData.append('fat', nutrition['지방(g)']);
+    formData.append('carbohydrate', nutrition['탄수화물(g)']);
+    postFoodinfo(formData);
     router.push('/main');
   };
 

@@ -23,6 +23,10 @@ const Modify = (props) => {
     memo: '',
   });
 
+  const nowDate = new Date(+new Date() + 3240 * 10000)
+    .toISOString()
+    .split('T')[0];
+
   const onChange = (e) => {
     console.log(e.target.id, e.target.value);
     setInputValue({
@@ -142,12 +146,21 @@ const Modify = (props) => {
             날짜
           </label>
           <input
+            type="date"
+            id="date"
+            value={inputValue.date}
+            min="0000-00-00"
+            max={nowDate}
+            className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
+            onChange={onChange}
+          />
+          {/* <input
             onChange={onChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none  focus:border-yellow1 focus:ring-yellow1 focus:border-2 focus:shadow-outline"
             id="date"
             type="text"
             value={inputValue.date}
-          ></input>
+          ></input> */}
         </div>
         <div className="mb-4">
           <label

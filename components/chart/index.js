@@ -16,7 +16,7 @@ ChartJS.register(
   LineElement,
   Filler,
   Tooltip,
-  Legend
+  Legend,
 );
 
 // export const data = {
@@ -33,7 +33,6 @@ ChartJS.register(
 // };
 
 export default function Chart({ data }) {
-  // console.log(tanDanGiData, data, tanDanGiData===data, "weere")
-  // return <></>
+  console.log('DATA:', data);
   return <Radar data={data} />;
 }

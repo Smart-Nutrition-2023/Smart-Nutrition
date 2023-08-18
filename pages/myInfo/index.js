@@ -93,7 +93,7 @@ export default function MyInfo() {
         </button>
       </div>
 
-      <div className="mx-5 mt-8 mb-2 bg-slate-100 rounded-2xl shadow-2xl">
+      <div className="mx-5 mt-8 mb-2 bg-slate-100 rounded-2xl shadow-lg">
         <div className="flex flex-col justify-center items-center">
           <div className="flex mt-4 mb-[-20px] ml-5 mr-5 gap-8">
             <div className="flex justify-end block w-[200px] text-gray-700 font-bold">

@@ -8,7 +8,7 @@ import Loader from './loader';
 const TodayFoodList = ({ eatFoodData }) => {
   return (
     <div>
-      <div className="ml-5 mr-5 bg-slate-100 rounded-2xl shadow-xl">
+      <div className="ml-5 mr-5 bg-slate-100 rounded-2xl shadow-lg">
         <div className="rounded-2xl">
           <FoodItemm testData={eatFoodData} />
         </div>

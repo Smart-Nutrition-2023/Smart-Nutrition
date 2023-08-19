@@ -195,10 +195,9 @@ function FoodInFoFoodName({ response }) {
       {isImageZoomModal && (
         <ImageZoomModal
           isSetImageZoomModal={isSetImageZoomModal}
-          foodImage={router.query.img}
+          image={router.query.img}
         />
       )}
-
       {isCheckDeleteModal && (
         <CheckDeleteModal
           isSetCheckDeleteModal={isSetCheckDeleteModal}

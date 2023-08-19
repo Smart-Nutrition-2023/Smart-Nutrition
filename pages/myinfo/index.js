@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccessAction } from '../../reducers/user';
 import TopNav from '../../components/login/topnav';
 import styles from '../../styles/Home.module.css';
+import ImageZoomModal from '../../components/image/imageZoom';
 import ModifyMyInfoModal from '../../components/login/myinfo/myinfomodal';
 import ModifyProfileModal from '../../components/login/myinfo/profilemodify';
 
@@ -13,9 +14,15 @@ export default function MyInfo() {
   const router = useRouter();
   const { accessToken, me } = useSelector((state) => state.user);
   const [isLogined, setIsLogined] = useState(false);
+  const [isImageZoomModal, isSetImageZoomModal] = useState(undefined);
   const dispatch = useDispatch();
   const [isModifyMyInfoModal, isSetModifyMyInfoModal] = useState(undefined);
   const [isModifyProfileModal, isSetModifyProfileModal] = useState(undefined);
+
+  const handleImageClick = () => {
+    console.log('CLICK IMAGE');
+    isSetImageZoomModal(true);
+  };
 
   const handleModifyMyInfoClick = () => {
     isSetModifyMyInfoModal(true);
@@ -81,6 +88,7 @@ export default function MyInfo() {
                 src={`http://localhost:5000/${me['profile_img']}`}
                 layout="fill"
                 objectFit="cover"
+                onClick={handleImageClick}
               />
             </div>
           )}
@@ -151,13 +159,18 @@ export default function MyInfo() {
         </div>
       </div>
 
+      {isImageZoomModal && (
+        <ImageZoomModal
+          isSetImageZoomModal={isSetImageZoomModal}
+          image={me['profile_img']}
+        />
+      )}
       {isModifyMyInfoModal && (
         <ModifyMyInfoModal
           isSetModifyMyInfoModal={isSetModifyMyInfoModal}
           me={me}
         />
       )}
-
       {isModifyProfileModal && (
         <ModifyProfileModal
           isSetModifyProfileModal={isSetModifyProfileModal}

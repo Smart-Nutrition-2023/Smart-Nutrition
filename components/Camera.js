@@ -82,7 +82,7 @@ export default function Camera({ setShowLoadingModal }) {
         />
       </div>
 
-      <div className="pt-4 text-center">
+      <div className="pt-4 text-center text-white">
         <button
           className="p-4 mx-4 mt-8 mb-4 rounded-3xl bg-main drop-shadow-xl"
           onClick={capture}

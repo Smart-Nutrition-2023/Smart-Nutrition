@@ -122,7 +122,7 @@ function capture() {
         {showModal ? <Modal closeModal={closeModal} /> : null}
         <div className="flex flex-col items-center">
           <div>
-            <Camera className="" setShowLoadingModal={setShowLoadingModal} />
+            <Camera setShowLoadingModal={setShowLoadingModal} />
             <CaptureUpLoad
               onLoadFile={onLoadFile}
               setShowLoadingModal={setShowLoadingModal}

@@ -26,7 +26,7 @@ const CheckDeleteAllModal = ({ isSetCheckDeleteModal, year, month, date }) => {
         onClick={(e) => {
           isSetCheckDeleteModal(false);
         }}
-        className="inset-0 absolute"
+        className="z-50 inset-0 fixed bg-black/50"
       >
         <div
           className="bg-white w-[300px] shadow-lg border-2 border-slate-200 px-8 py-6 mb-4 fixed rounded-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"

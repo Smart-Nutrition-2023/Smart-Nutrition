@@ -86,7 +86,7 @@ const FoodItemm = ({ foodData, testData }) => {
         <div className="flex">
           <div className="w-2/6 flex flex-col items-center justify-center">
             <div className="font-bold font-sans pl-2">먹은 음식</div>
-            <div className="text-5xl">🍽️</div>
+            {/* <div className="text-5xl">🍽️</div> */}
           </div>
 
           <div className="w-4/6 flex justify-end flex-col items-center mb-4">

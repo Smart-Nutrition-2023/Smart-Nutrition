@@ -5,3 +5,7 @@
 profile/
 uploads/
 FlaskUpload/
+
+# flask data
+/detected.json
+/food_info.json

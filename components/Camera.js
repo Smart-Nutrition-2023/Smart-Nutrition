@@ -70,16 +70,19 @@ export default function Camera({ setShowLoadingModal }) {
 
   return (
     <>
-      <Webcam
-        className="rounded-3xl"
-        audio={false}
-        width={500}
-        height={700}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        videoConstraints={videoConstraints}
-      />
-      <div className="pt-8 text-center">
+      <div className="flex flex-col items-center h-full text-white bg-main/30 py-6 px-4 rounded-3xl">
+        <Webcam
+          className="rounded-3xl"
+          audio={false}
+          width={500}
+          height={700}
+          ref={webcamRef}
+          screenshotFormat="image/jpeg"
+          videoConstraints={videoConstraints}
+        />
+      </div>
+
+      <div className="pt-4 text-center">
         <button
           className="p-4 mx-4 mt-8 mb-4 rounded-3xl bg-main drop-shadow-xl"
           onClick={capture}

@@ -57,7 +57,7 @@ router.get('/recommendation', async (req, res) => {
       minIndex = i;
     }
   }
-  const recommendNutrition = tanDanGiName[minIndex];
+  const recommendNutrition = min >= 100 ? 'none' : tanDanGiName[minIndex];
 
   const foodList = xlsx.readFile(__dirname + '/../db.xlsx');
   const firstSheetName = foodList.SheetNames[0];
@@ -96,6 +96,9 @@ router.get('/recommendation', async (req, res) => {
           maxNutFood = firstSheetJson[i];
         }
       }
+      break;
+    case 'none':
+      maxNutFood = 'none';
       break;
   }
 

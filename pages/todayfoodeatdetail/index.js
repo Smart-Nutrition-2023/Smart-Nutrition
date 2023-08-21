@@ -128,15 +128,23 @@ function FoodInFo({ response }) {
     )
       .then((res) => res.json())
       .then((json) => {
-        setRecommendation({
-          ...recommendation,
-          ['nutrition']: json.nutrition,
-          ['food']: json.food['음식'],
-          ['calorie']: json.food['에너지(kcal)'],
-          ['carb']: json.food['탄수화물(g)'],
-          ['protein']: json.food['단백질(g)'],
-          ['fat']: json.food['지방(g)'],
-        });
+        console.log('NUT TEST ', json);
+        if (json.nutrition == 'none') {
+          setRecommendation({
+            ...recommendation,
+            ['nutrition']: json.nutrition,
+          });
+        } else {
+          setRecommendation({
+            ...recommendation,
+            ['nutrition']: json.nutrition,
+            ['food']: json.food['음식'],
+            ['calorie']: json.food['에너지(kcal)'],
+            ['carb']: json.food['탄수화물(g)'],
+            ['protein']: json.food['단백질(g)'],
+            ['fat']: json.food['지방(g)'],
+          });
+        }
       });
   };
 
@@ -173,28 +181,32 @@ function FoodInFo({ response }) {
       ) : (
         <>
           <div className="mt-8 mx-5">
-            <div className="flex justify-center pt-1 text-sm font-sans bg-[#ece06f88] rounded-t-2xl">
-              '<p className="font-bold">{recommendation.nutrition}</p>'이
-              부족하시네요!
-            </div>
-            <div className="py-2 grid grid-cols-2 border-2 border-[#ece06f88] rounded-b-2xl">
-              <div className="flex flex-col items-center ml-10">
-                <div className='font-["Jalnan"] text-sm text-gray-500'>
-                  🥄 추천 음식 🍴
+            {recommendation.nutrition == 'none' ? null : (
+              <>
+                <div className="flex justify-center pt-1 text-sm font-sans bg-[#ece06f88] rounded-t-2xl">
+                  '<p className="font-bold">{recommendation.nutrition}</p>'이
+                  부족하시네요!
                 </div>
-                <div className='mt-2 font-["Jalnan"]'>
-                  {recommendation.food}
+                <div className="py-2 grid grid-cols-2 border-2 border-[#ece06f88] rounded-b-2xl">
+                  <div className="flex flex-col items-center ml-10">
+                    <div className='font-["Jalnan"] text-sm text-gray-500'>
+                      🥄 추천 음식 🍴
+                    </div>
+                    <div className='mt-2 font-["Jalnan"]'>
+                      {recommendation.food}
+                    </div>
+                  </div>
+                  <div className="flex justify-center mr-10">
+                    <ul className="text-xs font-sans">
+                      <li>칼로리 {recommendation.calorie} kcal</li>
+                      <li>탄수화물 {recommendation.carb} g</li>
+                      <li>단백질 {recommendation.protein} g</li>
+                      <li>지방 {recommendation.fat} g</li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-center mr-10">
-                <ul className="text-xs font-sans">
-                  <li>칼로리 {recommendation.calorie} kcal</li>
-                  <li>탄수화물 {recommendation.carb} g</li>
-                  <li>단백질 {recommendation.protein} g</li>
-                  <li>지방 {recommendation.fat} g</li>
-                </ul>
-              </div>
-            </div>
+              </>
+            )}
           </div>
           <div className="mt-8 flex justify-end">
             <button

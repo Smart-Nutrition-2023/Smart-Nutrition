@@ -110,9 +110,9 @@ const reducer = (state = initialState, action) =>
         draft.logInDone = false;
         break;
       case LOG_IN_SUCCESS:
-        {
-          console.log(action.data, 'test-loginSuccess');
-        }
+        // {
+        //   console.log(action.data, 'test-loginSuccess');
+        // }
         draft.logInLoading = false;
         draft.logInDone = true;
         draft.accessToken = action.data['access_token'];

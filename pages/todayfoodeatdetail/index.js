@@ -128,7 +128,6 @@ function FoodInFo({ response }) {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log('NUT TEST ', json);
         if (json.nutrition == 'none') {
           setRecommendation({
             ...recommendation,

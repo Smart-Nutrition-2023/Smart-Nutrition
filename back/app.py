@@ -11,7 +11,7 @@ app.config['DEBUG'] = True
 
 # 커스텀 학습 모델
 pt_file_path = 'best.pt'
-model = torch.hub.load('./Ultralytics/yolov5', 'custom', pt_file_path, force_reload=True, source='local', trust_repo=True)
+model = torch.hub.load('./yolov5', 'custom', pt_file_path, force_reload=True, source='local', trust_repo=True)
 xl = pd.read_excel('db.xlsx', sheet_name="Sheet1")
 
 @api.route('/foodimage', methods = ['POST'])

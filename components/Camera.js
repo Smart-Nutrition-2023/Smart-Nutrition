@@ -58,7 +58,7 @@ export default function Camera({ setShowLoadingModal }) {
   };
 
   const postFoodImageFlask = (input) => {
-    fetch('http://localhost:5001/foodimage', {
+    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5001/foodimage', {
       method: 'post',
       body: input,
     })

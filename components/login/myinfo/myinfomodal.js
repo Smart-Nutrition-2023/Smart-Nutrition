@@ -10,14 +10,17 @@ const ModifyMyInfoModal = ({ isSetModifyMyInfoModal, me }) => {
   const dispatch = useDispatch();
 
   const postMyInfoModify = (input) => {
-    fetch('http://localhost:5000/myinfo/modify', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    fetch(
+      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/myinfo/modify',
+      {
+        method: 'post',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(inputValue),
       },
-      body: JSON.stringify(inputValue),
-    })
+    )
       .then((res) => res.json())
       .then((json) => {
         if (json.isSuccess === 'True') {

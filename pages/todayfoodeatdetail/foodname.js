@@ -52,7 +52,7 @@ function FoodInFoFoodName({ response }) {
   };
 
   const getAuth = () => {
-    fetch('http://localhost:5000/auth', {
+    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/auth', {
       credentials: 'include',
     })
       .then((res) => res.json())
@@ -79,14 +79,17 @@ function FoodInFoFoodName({ response }) {
   };
 
   const fetchNutrition = (id) => {
-    fetch('http://localhost:5000/fooddetail/foodname', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    fetch(
+      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/fooddetail/foodname',
+      {
+        method: 'post',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
       },
-      body: JSON.stringify({ id }),
-    })
+    )
       .then((res) => res.json())
       .then((json) => {
         setTanDanGi({
@@ -165,7 +168,7 @@ function FoodInFoFoodName({ response }) {
         <div className="w-[250px] h-[250px] relative">
           <Image
             className={'rounded-2xl shadow-2xl'}
-            src={`http://localhost:5000/${router.query.img}`}
+            src={`http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/${router.query.img}`}
             layout="fill"
             objectFit="cover"
             onClick={handleImageClick}

@@ -21,7 +21,7 @@ function Search({
   const search = () => {
     async function fetchData() {
       fetch(
-        'http://localhost:5000/foodinfo/search?' +
+        'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/foodinfo/search?' +
           new URLSearchParams({
             food: searchResult,
           }),

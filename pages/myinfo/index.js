@@ -33,7 +33,7 @@ export default function MyInfo() {
   };
 
   const getAuth = () => {
-    fetch('http://localhost:5000/auth', {
+    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/auth', {
       credentials: 'include',
     })
       .then((res) => res.json())
@@ -85,7 +85,7 @@ export default function MyInfo() {
             <div>
               <Image
                 className="rounded-full"
-                src={`http://localhost:5000/${me['profile_img']}`}
+                src={`http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/${me['profile_img']}`}
                 layout="fill"
                 objectFit="cover"
                 onClick={handleImageClick}

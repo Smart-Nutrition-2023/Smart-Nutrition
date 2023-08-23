@@ -7,7 +7,7 @@ const ImageZoomModal = ({ isSetImageZoomModal, image }) => {
       >
         <img
           className="object-contain fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          src={`http://localhost:5000/${image}`}
+          src={`http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/${image}`}
         />
       </div>
     </>

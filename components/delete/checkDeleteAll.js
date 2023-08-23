@@ -4,14 +4,17 @@ const CheckDeleteAllModal = ({ isSetCheckDeleteModal, year, month, date }) => {
   const router = useRouter();
 
   const handleDeleteClick = () => {
-    fetch('http://localhost:5000/fooddetail/deleteall', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    fetch(
+      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/fooddetail/deleteall',
+      {
+        method: 'post',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ year, month, date }),
       },
-      body: JSON.stringify({ year, month, date }),
-    })
+    )
       .then((res) => res.json())
       .then((json) => {
         if (json.isDeleted === true) {

@@ -47,7 +47,7 @@ export default function Home({}) {
   };
 
   const clickLogout = () => {
-    fetch('http://localhost:5000/auth/logout', {
+    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/auth/logout', {
       credentials: 'include',
     })
       .then((res) => res.json())
@@ -60,7 +60,7 @@ export default function Home({}) {
 
   const getTodayEatFood = (t) => {
     fetch(
-      'http://localhost:5000/main?' +
+      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/main?' +
         new URLSearchParams({
           today: t,
         }),
@@ -75,7 +75,7 @@ export default function Home({}) {
   };
 
   const getAuth = () => {
-    fetch('http://localhost:5000/auth', {
+    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/auth', {
       credentials: 'include',
     })
       .then((res) => res.json())
@@ -129,7 +129,7 @@ export default function Home({}) {
                 <div className="rounded-3xl relative w-[30px] h-[30px]">
                   <Image
                     className="rounded-3xl"
-                    src={`http://localhost:5000/${me['profile_img']}`}
+                    src={`http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/${me['profile_img']}`}
                     layout={'fill'}
                     objectFit="cover"
                     onClick={moveMyInfo}

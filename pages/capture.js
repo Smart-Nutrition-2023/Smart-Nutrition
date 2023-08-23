@@ -50,7 +50,7 @@ function capture() {
   }, [nutrition]);
 
   const postFoodImageFlask = (input) => {
-    fetch('http://localhost:5001/foodimage', {
+    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5001/foodimage', {
       method: 'post',
       body: input,
     })
@@ -90,7 +90,7 @@ function capture() {
   };
 
   const getAuth = () => {
-    fetch('http://localhost:5000/auth', {
+    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/auth', {
       credentials: 'include',
     })
       .then((res) => res.json())

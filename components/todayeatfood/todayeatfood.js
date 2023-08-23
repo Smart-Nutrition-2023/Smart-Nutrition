@@ -94,7 +94,7 @@ const TodayEatFood = ({ todayFoodInfo }) => {
               >
                 <Image
                   className="rounded-3xl"
-                  src={`http://localhost:5000/${images.image}`}
+                  src={`http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/${images.image}`}
                   layout="fill"
                   objectFit="cover"
                 />

@@ -102,7 +102,7 @@ const FoodItemm = ({ foodData, testData }) => {
                     >
                       <Image
                         className={'rounded-2xl'}
-                        src={`http://localhost:5000/${test['image']}`}
+                        src={`http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/${test['image']}`}
                         layout="fill"
                         objectFit="cover"
                       />

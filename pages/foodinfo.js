@@ -106,7 +106,7 @@ function foodinfo(props) {
   };
 
   const postFoodinfo = (input) => {
-    fetch('http://localhost:5000/foodinfo', {
+    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/foodinfo', {
       method: 'post',
       body: input,
     });
@@ -114,7 +114,7 @@ function foodinfo(props) {
 
   const changeFood = (input) => {
     fetch(
-      'http://localhost:5000/foodinfo/change?' +
+      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/foodinfo/change?' +
         new URLSearchParams({
           food: input,
         }),

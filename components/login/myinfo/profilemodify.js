@@ -10,14 +10,11 @@ const ModifyProfileModal = ({ isSetModifyProfileModal, me }) => {
   const dispatch = useDispatch();
 
   const postProfileModify = (input) => {
-    fetch(
-      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/myinfo/modifyprofile',
-      {
-        method: 'post',
-        credentials: 'include',
-        body: input,
-      },
-    )
+    fetch('http://localhost:5000/myinfo/modifyprofile', {
+      method: 'post',
+      credentials: 'include',
+      body: input,
+    })
       .then((res) => res.json())
       .then((json) => {
         if (json.isSuccess === 'True') {

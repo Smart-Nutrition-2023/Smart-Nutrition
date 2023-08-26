@@ -55,7 +55,7 @@ const SignUpModal = ({ isSetSignUpModal }) => {
   };
 
   const postSignUp = (input) => {
-    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/auth/signup', {
+    fetch('http://localhost:5000/auth/signup', {
       method: 'post',
       body: input,
     })

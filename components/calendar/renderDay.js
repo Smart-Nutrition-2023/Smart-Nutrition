@@ -5,7 +5,7 @@ let totalDay = [];
 let checkFinish = true;
 
 const getTotalFoodEatDay = () => {
-  fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/main/calendar', {
+  fetch('http://localhost:5000/main/calendar', {
     credentials: 'include',
   })
     .then((res) => res.json())

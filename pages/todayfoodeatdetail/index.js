@@ -45,7 +45,7 @@ function FoodInFo({ response }) {
   };
 
   const getAuth = () => {
-    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/auth', {
+    fetch('http://localhost:5000/auth', {
       credentials: 'include',
     })
       .then((res) => res.json())
@@ -73,7 +73,7 @@ function FoodInFo({ response }) {
 
   const fetchFoodList = () => {
     fetch(
-      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/fooddetail/todayeatfood?' +
+      'http://localhost:5000/fooddetail/todayeatfood?' +
         new URLSearchParams({ year, month, date }),
       {
         credentials: 'include',
@@ -86,17 +86,14 @@ function FoodInFo({ response }) {
   };
 
   const fetchNutrition = (id) => {
-    fetch(
-      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/fooddetail/nutrition',
-      {
-        method: 'post',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id }),
+    fetch('http://localhost:5000/fooddetail/nutrition', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
+      body: JSON.stringify({ id }),
+    })
       .then((res) => res.json())
       .then((json) => {
         const nutritionData = { calorie: 0, carb: 0, fat: 0, protein: 0 };
@@ -126,7 +123,7 @@ function FoodInFo({ response }) {
 
   const fetchPercentTanDanGi = (tan, dan, gi) => {
     fetch(
-      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/fooddetail/recommendation?' +
+      'http://localhost:5000/fooddetail/recommendation?' +
         new URLSearchParams({ carb: tan, protein: dan, fat: gi }),
     )
       .then((res) => res.json())

@@ -42,17 +42,14 @@ const Modify = (props) => {
     const memoChange = inputValue.memo.replace(/(?:\r\n|\r|\n)/g, '<br/>');
     inputValue.memo = memoChange;
 
-    fetch(
-      'http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/fooddetail/modify',
-      {
-        method: 'post',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(inputValue),
+    fetch('http://localhost:5000/fooddetail/modify', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
+      body: JSON.stringify(inputValue),
+    })
       .then((res) => res.json())
       .then((json) => {
         if (json.isModified === true) {
@@ -62,7 +59,7 @@ const Modify = (props) => {
   };
 
   const getAuth = () => {
-    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/auth', {
+    fetch('http://localhost:5000/auth', {
       credentials: 'include',
     })
       .then((res) => res.json())
@@ -113,7 +110,7 @@ const Modify = (props) => {
           {me == null ? null : (
             <Image
               className="rounded-3xl"
-              src={`http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/${router.query.img}`}
+              src={`http://localhost:5000/${router.query.img}`}
               layout="fill"
               objectFit="cover"
               onClick={handleImageClick}

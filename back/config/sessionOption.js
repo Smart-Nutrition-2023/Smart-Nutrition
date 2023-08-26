@@ -2,7 +2,7 @@ var options = {
   host: 'localhost',
   port: '3306',
   user: 'testid',
-  password: 'test01!',
+  password: 'test2023!',
   database: 'testDB',
 
   clearExpired: true, // 만료된 세션 자동 확인 및 지우기 여부

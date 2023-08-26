@@ -14,7 +14,7 @@ import axios from 'axios';
 
 export default function LoginNavbar() {
   const postLogin = (email, password) => {
-    fetch('http://ec2-34-204-76-11.compute-1.amazonaws.com:5000/auth/login', {
+    fetch('http://localhost:5000/auth/login', {
       method: 'post',
       credentials: 'include',
       headers: {
